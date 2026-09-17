@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { ChevronDown, ArrowRight } from 'lucide-react';
 
 interface HeroSectionProps {
   onOpenVisitModal: () => void;
@@ -205,31 +204,49 @@ export default function HeroSection({ onOpenVisitModal, onExploreBikes }: HeroSe
     return () => window.removeEventListener('scroll', handleScroll);
   }, [renderFrame]);
 
-  // Calculate smooth cinematic opacity curves for the 3 text states
-  // State 1: 0.00 -> 0.33
-  const state1Opacity =
-    scrollProgress < 0.25
-      ? 1
-      : scrollProgress > 0.33
-      ? 0
-      : 1 - (scrollProgress - 0.25) / (0.33 - 0.25);
+  // Calculate smooth cinematic opacity curves for the visual stages:
+  // Stage 1 (0.00 - 0.26): Exterior View (Start) -> "Ready to Ride"
+  // Stage 2 (0.26 - 0.52): Moving Towards Entrance -> "Ready to Ride"
+  // Stage 3 (0.52 - 0.78): Inside Showroom -> "Feel the Ride"
+  // Stage 4 (0.78 - 1.00): At Reception (Final) -> "Your Ride\nStarts Here"
 
-  // State 2: 0.34 -> 0.66
-  const state2Opacity =
-    scrollProgress < 0.32 || scrollProgress > 0.67
+  let currentStage = 1;
+  let stageName = 'External View (Start)';
+  if (scrollProgress >= 0.78) {
+    currentStage = 4;
+    stageName = 'At Reception (Final)';
+  } else if (scrollProgress >= 0.52) {
+    currentStage = 3;
+    stageName = 'Inside Showroom';
+  } else if (scrollProgress >= 0.26) {
+    currentStage = 2;
+    stageName = 'Moving Towards Entrance';
+  }
+
+  // Text 1: "Ready to Ride" (Active across Stage 1 and Stage 2)
+  const text1Opacity =
+    scrollProgress < 0.48
+      ? 1
+      : scrollProgress > 0.54
       ? 0
-      : scrollProgress < 0.40
-      ? (scrollProgress - 0.32) / (0.40 - 0.32)
-      : scrollProgress > 0.59
-      ? 1 - (scrollProgress - 0.59) / (0.67 - 0.59)
+      : 1 - (scrollProgress - 0.48) / (0.54 - 0.48);
+
+  // Text 2: "Feel the Ride" (Active in Stage 3)
+  const text2Opacity =
+    scrollProgress < 0.50 || scrollProgress > 0.78
+      ? 0
+      : scrollProgress < 0.55
+      ? (scrollProgress - 0.50) / (0.55 - 0.50)
+      : scrollProgress > 0.73
+      ? 1 - (scrollProgress - 0.73) / (0.78 - 0.73)
       : 1;
 
-  // State 3: 0.68 -> 1.00
-  const state3Opacity =
-    scrollProgress < 0.66
+  // Text 3: "Your Ride\nStarts Here" (Active in Stage 4)
+  const text3Opacity =
+    scrollProgress < 0.75
       ? 0
-      : scrollProgress < 0.74
-      ? (scrollProgress - 0.66) / (0.74 - 0.66)
+      : scrollProgress < 0.81
+      ? (scrollProgress - 0.75) / (0.81 - 0.75)
       : 1;
 
   return (
@@ -246,115 +263,75 @@ export default function HeroSection({ onOpenVisitModal, onExploreBikes }: HeroSe
         <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-black/75 via-black/25 to-transparent pointer-events-none z-10" />
 
         {/* Subtle Ambient Bottom Vignette for scene grounding */}
-        <div className="absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-black/80 via-black/25 to-transparent pointer-events-none z-10" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none z-10" />
 
         {/* ========================================================================= */}
-        {/* COMPACT CINEMATIC HERO TEXT OVERLAY (MATCHING REFERENCE POSITION & SCALE) */}
-        {/* Normalized Placement: Horizontally 60-75% of viewport, Vertically 55-70% */}
+        {/* CENTER CINEMATIC HERO TITLE OVERLAY (1:1 MATCHING REFERENCE COMPOSITION) */}
         {/* ========================================================================= */}
-        <div className="absolute left-[8%] sm:left-[12%] md:left-[62%] lg:left-[64%] top-[60%] sm:top-[62%] md:top-[58%] lg:top-[60%] -translate-y-1/2 z-20 pointer-events-none select-none max-w-[280px] sm:max-w-[320px]">
-          {/* STATE 1: READY / TO RIDE */}
+        <div className="absolute left-1/2 top-[53.5%] sm:top-[54%] -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none select-none text-center w-full max-w-3xl px-4">
+          {/* STAGE 1 & 2: Ready to Ride */}
           <div
             className="transition-opacity duration-300 ease-out"
             style={{
-              opacity: state1Opacity,
-              transform: `translateY(${(1 - state1Opacity) * 5}px)`,
-              display: state1Opacity <= 0.01 ? 'none' : 'block',
+              opacity: text1Opacity,
+              transform: `translateY(${(1 - text1Opacity) * 5}px)`,
+              display: text1Opacity <= 0.005 ? 'none' : 'block',
             }}
           >
-            <h1 className="font-automotive text-3xl sm:text-4xl md:text-[2.25rem] lg:text-[2.5rem] font-black uppercase text-white leading-[0.9] tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
-              READY<br />
-              TO RIDE
+            <h1 className="font-hero-title text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold md:font-extrabold text-white tracking-[-0.02em] leading-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]">
+              Ready to Ride
             </h1>
-            <p className="mt-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white/55 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
-              Scroll to enter showroom
-            </p>
           </div>
 
-          {/* STATE 2: FEEL / THE RIDE */}
+          {/* STAGE 3: Feel the Ride */}
           <div
             className="transition-opacity duration-300 ease-out"
             style={{
-              opacity: state2Opacity,
-              transform: `translateY(${(1 - state2Opacity) * 5}px)`,
-              display: state2Opacity <= 0.01 ? 'none' : 'block',
+              opacity: text2Opacity,
+              transform: `translateY(${(1 - text2Opacity) * 5}px)`,
+              display: text2Opacity <= 0.005 ? 'none' : 'block',
             }}
           >
-            <h2 className="font-automotive text-3xl sm:text-4xl md:text-[2.25rem] lg:text-[2.5rem] font-black uppercase text-white leading-[0.9] tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
-              FEEL<br />
-              THE RIDE
+            <h2 className="font-hero-title text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold md:font-extrabold text-white tracking-[-0.02em] leading-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]">
+              Feel the Ride
             </h2>
-            <p className="mt-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white/55 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
-              Pure Yamaha MotoGP DNA
-            </p>
           </div>
 
-          {/* STATE 3: YOUR RIDE / STARTS HERE */}
+          {/* STAGE 4: Your Ride / Starts Here */}
           <div
             className="transition-opacity duration-300 ease-out"
             style={{
-              opacity: state3Opacity,
-              transform: `translateY(${(1 - state3Opacity) * 5}px)`,
-              display: state3Opacity <= 0.01 ? 'none' : 'block',
-              pointerEvents: state3Opacity > 0.5 ? 'auto' : 'none',
+              opacity: text3Opacity,
+              transform: `translateY(${(1 - text3Opacity) * 5}px)`,
+              display: text3Opacity <= 0.005 ? 'none' : 'block',
             }}
           >
-            <h2 className="font-automotive text-3xl sm:text-4xl md:text-[2.25rem] lg:text-[2.5rem] font-black uppercase text-white leading-[0.9] tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
-              YOUR RIDE<br />
-              STARTS HERE
+            <h2 className="font-hero-title text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold md:font-extrabold text-white tracking-[-0.02em] leading-[1.04] drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]">
+              Your Ride<br />
+              Starts Here
             </h2>
-            <p className="mt-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-white/55 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
-              Hira Auto Agency • Mahagama
-            </p>
-            <div className="mt-3.5 flex items-center gap-3">
-              <button
-                onClick={onExploreBikes}
-                className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-white/90 hover:text-white border-b border-white/30 hover:border-yamaha-cyan pb-0.5 transition-colors cursor-pointer"
-              >
-                <span>Explore Models</span>
-                <ArrowRight className="w-3 h-3 text-yamaha-cyan" />
-              </button>
-            </div>
           </div>
         </div>
 
-        {/* SUBTLE STAT PILLS (Bottom Right - Matching Reference Video Frames) */}
-        <div className="hidden lg:flex items-center gap-2 absolute right-8 bottom-6 z-20 pointer-events-none opacity-70">
-          <div className="px-3 py-1 rounded-lg bg-black/40 border border-white/10 backdrop-blur-md text-[10px] uppercase font-bold tracking-wider text-white/70">
-            <span className="text-yamaha-cyan font-black mr-1">100%</span> Genuine Yamaha
-          </div>
-          <div className="px-3 py-1 rounded-lg bg-black/40 border border-white/10 backdrop-blur-md text-[10px] uppercase font-bold tracking-wider text-white/70">
-            <span className="text-emerald-400 font-black mr-1">Authorized</span> Mahagama
-          </div>
-        </div>
-
-        {/* MINIMAL SUBTLE SCROLL CUE (Active in State 1 & 2) */}
-        {scrollProgress < 0.65 && (
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none opacity-50 transition-opacity">
-            <span className="text-[9px] uppercase font-bold tracking-[0.25em] text-white/60 mb-0.5">
-              Scroll
-            </span>
-            <ChevronDown className="w-3.5 h-3.5 text-white/60 animate-bounce" />
-          </div>
-        )}
-
-        {/* ULTRA-SLIM CINEMATIC TICKER (Bottom Edge - Matching Reference Video) */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 bg-black/85 border-t border-white/5 py-1 overflow-hidden pointer-events-none">
-          <div className="flex whitespace-nowrap animate-marquee text-[10px] font-semibold tracking-widest uppercase text-white/40">
-            <div className="flex items-center gap-8 px-4">
-              <span>★ HIRA AUTO AGENCY MAHAGAMA</span>
-              <span>• OFFICIAL YAMAHA DEALERSHIP</span>
-              <span>• R15 V4 & MT-15 READY STOCK</span>
-              <span>• FESTIVE EXCHANGE BONUS AVAILABLE</span>
-              <span>• KECHUA CHOWK, MAHAGAMA MAIN ROAD, GODDA</span>
-            </div>
-            <div className="flex items-center gap-8 px-4" aria-hidden="true">
-              <span>★ HIRA AUTO AGENCY MAHAGAMA</span>
-              <span>• OFFICIAL YAMAHA DEALERSHIP</span>
-              <span>• R15 V4 & MT-15 READY STOCK</span>
-              <span>• FESTIVE EXCHANGE BONUS AVAILABLE</span>
-              <span>• KECHUA CHOWK, MAHAGAMA MAIN ROAD, GODDA</span>
-            </div>
+        {/* ========================================================================= */}
+        {/* BOTTOM-LEFT JOURNEY STAGE INDICATOR (1:1 MATCHING REFERENCE STORYBOARD)  */}
+        {/* ========================================================================= */}
+        <div className="absolute left-6 sm:left-10 md:left-12 bottom-6 sm:bottom-8 z-20 flex items-center gap-3 pointer-events-none select-none">
+          <span className="text-[11px] sm:text-xs font-semibold text-white/85 tracking-normal drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
+            <span className="text-white/50 mr-1.5">{String(currentStage).padStart(2, '0')}</span>
+            {stageName}
+          </span>
+          <div className="flex items-center gap-1 sm:gap-1.5">
+            {[1, 2, 3, 4].map((step) => (
+              <div
+                key={step}
+                className={`h-1 rounded-full transition-all duration-300 ${
+                  step <= currentStage
+                    ? 'w-6 sm:w-8 bg-[#0050d8] shadow-[0_0_8px_rgba(0,80,216,0.6)]'
+                    : 'w-4 sm:w-6 bg-white/20'
+                }`}
+              />
+            ))}
           </div>
         </div>
       </div>
