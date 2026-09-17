@@ -8,6 +8,9 @@ const __dirname = path.dirname(__filename);
 const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['better-sqlite3'],
+    outputFileTracingIncludes: {
+      '/**': ['./data/hira_yamaha.db'],
+    },
   },
   webpack: (config) => {
     config.resolve.alias['@'] = path.resolve(__dirname);

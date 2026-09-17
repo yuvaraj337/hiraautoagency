@@ -1,23 +1,66 @@
 import Database from 'better-sqlite3';
 import path from 'path';
 import fs from 'fs';
-
-const DB_PATH = path.join(process.cwd(), 'data', 'hira_yamaha.db');
-
-// Ensure data directory exists
-const dataDir = path.dirname(DB_PATH);
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
-}
+import { seedDatabase } from './seed';
 
 let dbInstance: Database.Database | null = null;
 
+function resolveDbPath(): string {
+  const isServerless = Boolean(
+    process.env.VERCEL ||
+    process.env.AWS_LAMBDA_FUNCTION_NAME ||
+    process.env.LAMBDA_TASK_ROOT
+  );
+
+  if (isServerless) {
+    const tmpDbPath = path.join('/tmp', 'hira_yamaha.db');
+    const bundledDbPath = path.join(process.cwd(), 'data', 'hira_yamaha.db');
+
+    if (!fs.existsSync(tmpDbPath)) {
+      if (fs.existsSync(bundledDbPath)) {
+        try {
+          fs.copyFileSync(bundledDbPath, tmpDbPath);
+          console.log('[DB] Copied bundled database to /tmp/hira_yamaha.db');
+        } catch (err) {
+          console.warn('[DB] Failed copying bundled database, will initialize fresh in /tmp:', err);
+        }
+      }
+    }
+    return tmpDbPath;
+  }
+
+  // Local development: ensure data directory exists
+  const localDataDir = path.join(process.cwd(), 'data');
+  if (!fs.existsSync(localDataDir)) {
+    fs.mkdirSync(localDataDir, { recursive: true });
+  }
+  return path.join(localDataDir, 'hira_yamaha.db');
+}
+
 export function getDb(): Database.Database {
   if (!dbInstance) {
-    dbInstance = new Database(DB_PATH);
-    dbInstance.pragma('journal_mode = WAL');
+    const dbPath = resolveDbPath();
+    dbInstance = new Database(dbPath);
+
+    try {
+      dbInstance.pragma('journal_mode = WAL');
+    } catch {
+      dbInstance.pragma('journal_mode = DELETE');
+    }
     dbInstance.pragma('foreign_keys = ON');
+
     initTables(dbInstance);
+
+    // Ensure database contains essential seed data (especially on Vercel cold starts)
+    try {
+      const adminRow = (dbInstance.prepare('SELECT COUNT(*) as count FROM admin_users').get() as { count: number })?.count || 0;
+      if (adminRow === 0) {
+        console.log('[DB] Initializing seed data in database...');
+        seedDatabase(dbInstance);
+      }
+    } catch (e) {
+      console.warn('[DB] Auto-seed check notice:', e);
+    }
   }
   return dbInstance;
 }

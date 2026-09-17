@@ -1,30 +1,37 @@
 import { getDb } from './index';
 import bcrypt from 'bcryptjs';
 
-export function seedDatabase() {
-  const db = getDb();
+export function seedDatabase(passedDb?: any) {
+  const db = passedDb || getDb();
+
+  // 1. Admin Users (ensure default admin accounts exist)
+  try {
+    const adminCount = (db.prepare('SELECT COUNT(*) as count FROM admin_users').get() as { count: number })?.count || 0;
+    if (adminCount === 0) {
+      const salt = bcrypt.genSaltSync(10);
+      const adminPasswordHash = bcrypt.hashSync('admin123', salt);
+
+      const insertAdmin = db.prepare(`
+        INSERT OR REPLACE INTO admin_users (id, name, email, password_hash, role, status)
+        VALUES (?, ?, ?, ?, ?, ?)
+      `);
+
+      insertAdmin.run('usr_super_admin', 'Hira Agency Admin', 'admin@hiraauto.com', adminPasswordHash, 'Super Admin', 'active');
+      insertAdmin.run('usr_sales_manager', 'Sales Manager Mahagama', 'sales@hiraauto.com', adminPasswordHash, 'Sales', 'active');
+      insertAdmin.run('usr_service_lead', 'Service Head Mahagama', 'service@hiraauto.com', adminPasswordHash, 'Service', 'active');
+    }
+  } catch (e) {
+    console.warn('Error checking admin users:', e);
+  }
 
   // Check if bikes already seeded
-  const bikeCount = db.prepare('SELECT COUNT(*) as count FROM bikes').get() as { count: number };
-  if (bikeCount.count > 0) {
+  const bikeCount = (db.prepare('SELECT COUNT(*) as count FROM bikes').get() as { count: number })?.count || 0;
+  if (bikeCount > 0) {
     console.log('Database already seeded with bikes. Skipping bike seeding.');
     return;
   }
 
   console.log('Seeding initial database data...');
-
-  // 1. Admin Users
-  const salt = bcrypt.genSaltSync(10);
-  const adminPasswordHash = bcrypt.hashSync('admin123', salt);
-
-  const insertAdmin = db.prepare(`
-    INSERT OR REPLACE INTO admin_users (id, name, email, password_hash, role, status)
-    VALUES (?, ?, ?, ?, ?, ?)
-  `);
-
-  insertAdmin.run('usr_super_admin', 'Hira Agency Admin', 'admin@hiraauto.com', adminPasswordHash, 'Super Admin', 'active');
-  insertAdmin.run('usr_sales_manager', 'Sales Manager Mahagama', 'sales@hiraauto.com', adminPasswordHash, 'Sales', 'active');
-  insertAdmin.run('usr_service_lead', 'Service Head Mahagama', 'service@hiraauto.com', adminPasswordHash, 'Service', 'active');
 
   // 2. Bikes and Exact Variants (23 Variants matching verified client price list)
   const insertBike = db.prepare(`
