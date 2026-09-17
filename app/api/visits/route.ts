@@ -94,9 +94,19 @@ export async function POST(request: Request) {
 
     // 6. Schedule automated reminders (24h and 2h)
     try {
-      const visitDateTime = new Date(`${visitDate}T${visitTime.includes(':') ? visitTime.replace(/ (AM|PM)/, '') : '11:00'}:00`);
-      const reminder24h = new Date(visitDateTime.getTime() - 24 * 60 * 60 * 1000);
-      const reminder2h = new Date(visitDateTime.getTime() - 2 * 60 * 60 * 1000);
+      let hour = 11;
+      const match = (visitTime || '').match(/(\d+):?(\d+)?\s*(AM|PM)?/i);
+      if (match) {
+        let h = parseInt(match[1], 10);
+        const isPM = match[3]?.toUpperCase() === 'PM';
+        if (isPM && h < 12) h += 12;
+        if (!isPM && h === 12) h = 0;
+        hour = h;
+      }
+      const visitDateTime = new Date(`${visitDate}T${String(hour).padStart(2, '0')}:00:00`);
+      const validTime = !isNaN(visitDateTime.getTime()) ? visitDateTime.getTime() : Date.now() + 24 * 3600 * 1000;
+      const reminder24h = new Date(validTime - 24 * 60 * 60 * 1000);
+      const reminder2h = new Date(validTime - 2 * 60 * 60 * 1000);
 
       const insertReminder = db.prepare(`
         INSERT INTO whatsapp_reminders (id, visit_id, customer_id, reminder_type, scheduled_for, status)
