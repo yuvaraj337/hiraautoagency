@@ -188,68 +188,73 @@ export default function FeaturedSection({ onSelectBike }: FeaturedSectionProps) 
         {/* ========================================================================= */}
         {/* LEFT CONTENT HUD (1:1 MATCHING REFERENCE STORYBOARD)                      */}
         {/* ========================================================================= */}
-        <div className="absolute left-6 sm:left-12 md:left-16 lg:left-20 top-1/2 -translate-y-1/2 z-20 max-w-xs sm:max-w-sm md:max-w-md pointer-events-auto">
-          {/* Vertical Progress Pill Counters (01 / 05) */}
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-xs sm:text-sm font-black text-white tracking-widest">
-              {currentBike.indexStr} <span className="text-white/40 font-medium">/ 05</span>
-            </span>
-            <div className="flex items-center gap-1">
+        <div className="absolute left-6 sm:left-10 md:left-14 lg:left-16 top-1/2 -translate-y-1/2 z-20 flex items-start gap-3 sm:gap-5 pointer-events-auto">
+          {/* Vertical Progress Column (01 / 05 + 5 Vertical Dashes) */}
+          <div className="flex flex-col items-start pt-1">
+            <div className="text-[11px] sm:text-xs font-black text-white tracking-widest mb-3 whitespace-nowrap">
+              {currentBike.indexStr} <span className="text-white/40 font-medium text-[10px]">/ 05</span>
+            </div>
+            <div className="flex flex-col items-center gap-1.5 pl-1.5">
               {[0, 1, 2, 3, 4].map((step) => (
                 <div
                   key={step}
-                  className={`h-4 w-1 rounded-full transition-all duration-300 ${
+                  className={`w-[3px] rounded-full transition-all duration-300 ${
                     step === activeBikeIndex
-                      ? 'bg-[#0088FF] h-6 shadow-[0_0_10px_rgba(0,136,255,0.8)]'
-                      : 'bg-white/20'
+                      ? 'bg-[#0088FF] h-6 shadow-[0_0_8px_#0088FF]'
+                      : 'bg-white/20 h-4'
                   }`}
                 />
               ))}
             </div>
-            <div className="h-4 w-px bg-white/20 ml-1" />
           </div>
 
-          {/* Category Tag */}
-          <p className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.25em] text-[#0088FF] mb-1">
-            {currentBike.category}
-          </p>
+          {/* Elegant Vertical Separator Line */}
+          <div className="w-[1.5px] bg-gradient-to-b from-[#0066FF]/70 via-[#0066FF]/30 to-transparent self-stretch min-h-[180px]" />
 
-          {/* Model Name Heading */}
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-none mb-2">
-            {currentBike.namePrefix}{' '}
-            {currentBike.nameSuffix && (
-              <span
-                className={
-                  currentBike.nameSuffixGradient
-                    ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0066FF] to-[#00E5FF]'
-                    : 'text-[#0088FF]'
-                }
-              >
-                {currentBike.nameSuffix}
-              </span>
-            )}
-          </h2>
+          {/* Text Content Block */}
+          <div className="max-w-xs sm:max-w-sm md:max-w-md">
+            {/* Category Tag */}
+            <p className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.25em] text-[#0088FF] mb-1">
+              {currentBike.category}
+            </p>
 
-          {/* Subtitle */}
-          <p className="text-xs sm:text-sm font-extrabold uppercase text-white tracking-wider mb-2">
-            {currentBike.subtitle}
-          </p>
+            {/* Model Name Heading */}
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-none mb-2">
+              {currentBike.namePrefix}{' '}
+              {currentBike.nameSuffix && (
+                <span
+                  className={
+                    currentBike.nameSuffixGradient
+                      ? 'bg-clip-text text-transparent bg-gradient-to-r from-[#0066FF] to-[#00E5FF]'
+                      : 'text-[#0088FF]'
+                  }
+                >
+                  {currentBike.nameSuffix}
+                </span>
+              )}
+            </h2>
 
-          {/* Description */}
-          <p className="text-xs sm:text-[13px] text-white/70 leading-relaxed max-w-sm mb-6 font-normal">
-            {currentBike.description}
-          </p>
+            {/* Subtitle */}
+            <p className="text-xs sm:text-sm font-extrabold uppercase text-white tracking-wider mb-2">
+              {currentBike.subtitle}
+            </p>
 
-          {/* Watch Story Action Control */}
-          <button
-            onClick={() => onSelectBike(currentBike.slug)}
-            className="inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-widest text-white hover:text-[#00E5FF] group cursor-pointer transition-colors"
-          >
-            <div className="w-8 h-8 rounded-full border border-white/40 flex items-center justify-center group-hover:border-[#00E5FF] group-hover:scale-105 transition-all">
-              <Play className="w-3.5 h-3.5 fill-white text-white group-hover:fill-[#00E5FF] group-hover:text-[#00E5FF] ml-0.5 transition-colors" />
-            </div>
-            <span>WATCH THE STORY</span>
-          </button>
+            {/* Description */}
+            <p className="text-xs sm:text-[13px] text-white/70 leading-relaxed max-w-sm mb-6 font-normal">
+              {currentBike.description}
+            </p>
+
+            {/* Watch Story Action Control */}
+            <button
+              onClick={() => onSelectBike(currentBike.slug)}
+              className="inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-widest text-white hover:text-[#00E5FF] group cursor-pointer transition-colors"
+            >
+              <div className="w-8 h-8 rounded-full border border-white/50 flex items-center justify-center group-hover:border-[#00E5FF] group-hover:scale-105 transition-all">
+                <Play className="w-3.5 h-3.5 fill-white text-white group-hover:fill-[#00E5FF] group-hover:text-[#00E5FF] ml-0.5 transition-colors" />
+              </div>
+              <span>WATCH THE STORY</span>
+            </button>
+          </div>
         </div>
 
         {/* ========================================================================= */}

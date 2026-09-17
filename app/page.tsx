@@ -9,7 +9,6 @@ import CatalogSection from '@/components/CatalogSection';
 import BikeConfiguratorModal, { Bike } from '@/components/BikeConfiguratorModal';
 import BookingModal from '@/components/BookingModal';
 import VisitModal from '@/components/VisitModal';
-import FinanceExchange from '@/components/FinanceExchange';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import ServiceSection from '@/components/ServiceSection';
 import LocationSection from '@/components/LocationSection';
@@ -111,10 +110,7 @@ export default function HomePage() {
         onBookVisit={() => handleOpenVisitModal()}
       />
 
-      {/* 6. FINANCE & BIKE EXCHANGE */}
-      <FinanceExchange onOpenVisitModal={handleOpenVisitModal} />
-
-      {/* 7. WHY CHOOSE HIRA AUTO AGENCY */}
+      {/* 6. WHY CHOOSE HIRA AUTO AGENCY */}
       <WhyChooseUs onOpenVisitModal={handleOpenVisitModal} />
 
       {/* 8. AUTHORIZED SERVICE CARE */}
