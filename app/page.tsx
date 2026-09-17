@@ -5,7 +5,6 @@ import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import FeaturedSection from '@/components/FeaturedSection';
 import EngineeringSection from '@/components/EngineeringSection';
-import CatalogSection from '@/components/CatalogSection';
 import BikeConfiguratorModal, { Bike } from '@/components/BikeConfiguratorModal';
 import BookingModal from '@/components/BookingModal';
 import VisitModal from '@/components/VisitModal';
@@ -82,15 +81,11 @@ export default function HomePage() {
         onExploreBikes={handleExploreBikes}
       />
 
-      {/* 3. SECTION 2 — Pinned 4-Bike Cinematic Campaign */}
+      {/* 3. SECTION 2 — Pinned 4-Bike Showcase + XSR Transition + Full Yamaha Catalog */}
       <FeaturedSection
+        bikes={bikes}
         onSelectBike={handleSelectBikeForConfigurator}
-        onOpenBookingModal={(slug) => {
-          const found = bikes.find((b) => b.slug === slug);
-          if (found && found.variants?.[0]) {
-            handleOpenBookingForBike(found.id, found.variants[0].id);
-          }
-        }}
+        onOpenBookingModal={(bikeId, variantId) => handleOpenBookingForBike(bikeId, variantId)}
         onOpenVisitModal={handleOpenVisitModal}
       />
 
@@ -100,14 +95,6 @@ export default function HomePage() {
           const r15 = bikes.find((b) => b.slug.includes('r15'));
           if (r15) handleSelectBikeForConfigurator(r15);
         }}
-      />
-
-      {/* 5. COMPLETE CLIENT CATALOG (23 Exact Variants & Real Prices) */}
-      <CatalogSection
-        bikes={bikes}
-        onSelectBike={(bike) => setConfiguratorBike(bike)}
-        onBookBike={(bikeId, variantId) => handleOpenBookingForBike(bikeId, variantId)}
-        onBookVisit={() => handleOpenVisitModal()}
       />
 
       {/* 6. WHY CHOOSE HIRA AUTO AGENCY */}
