@@ -131,7 +131,7 @@ async function runVerification() {
       },
       {
         name: 'Amit Hansda',
-        phone: '82105823' + Math.floor(Math.random() * 90 + 10),
+        phone: '62012384' + Math.floor(Math.random() * 90 + 10),
         email: 'amit@gmail.com',
         bike_id: 'bike_mt15',
         variant_id: 'var_mt15_dlx_tft',
