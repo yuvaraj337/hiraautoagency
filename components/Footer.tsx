@@ -121,7 +121,6 @@ export default function Footer({ onOpenVisitModal, onExploreBikes }: FooterProps
                   Book Showroom Visit
                 </button>
               </li>
-              <li><a href="#service" className="hover:text-yamaha-cyan transition-colors">Authorized Service</a></li>
               <li><a href="#location" className="hover:text-yamaha-cyan transition-colors">Showroom Location</a></li>
               <li><a href="#location" className="hover:text-yamaha-cyan transition-colors">Contact Us</a></li>
             </ul>

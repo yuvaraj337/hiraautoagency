@@ -8,8 +8,6 @@ import EngineeringSection from '@/components/EngineeringSection';
 import BikeConfiguratorModal, { Bike } from '@/components/BikeConfiguratorModal';
 import BookingModal from '@/components/BookingModal';
 import VisitModal from '@/components/VisitModal';
-import WhyChooseUs from '@/components/WhyChooseUs';
-import ServiceSection from '@/components/ServiceSection';
 import LocationSection from '@/components/LocationSection';
 import Footer from '@/components/Footer';
 
@@ -97,16 +95,10 @@ export default function HomePage() {
         }}
       />
 
-      {/* 6. WHY CHOOSE HIRA AUTO AGENCY */}
-      <WhyChooseUs onOpenVisitModal={handleOpenVisitModal} />
-
-      {/* 8. AUTHORIZED SERVICE CARE */}
-      <ServiceSection />
-
-      {/* 9. VERIFIED MAHAGAMA LOCATION & MAP */}
+      {/* 5. VERIFIED MAHAGAMA LOCATION & MAP */}
       <LocationSection onOpenVisitModal={handleOpenVisitModal} />
 
-      {/* 10. FINAL CTA & FOOTER */}
+      {/* 6. FINAL CTA & FOOTER */}
       <Footer
         onOpenVisitModal={handleOpenVisitModal}
         onExploreBikes={handleExploreBikes}

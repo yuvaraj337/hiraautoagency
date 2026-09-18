@@ -25,10 +25,9 @@ interface ShowcaseBikeData {
   specs: { value: string; label: string }[];
   catalogSubtitle: string;
   catalogPrice: string;
-  defaultPriceNumber: number;
 }
 
-// EXACT 4 MOTORCYCLES MATCHING 6-PANEL STORYBOARD (NO AEROX, NO 5TH BIKE)
+// EXACT FOUR MOTORCYCLES MATCHING 6-PANEL STORYBOARD (NO AEROX IN CINEMATIC SHOWCASE)
 const FOUR_SHOWCASE_BIKES: ShowcaseBikeData[] = [
   {
     id: 'bike_r15',
@@ -49,7 +48,6 @@ const FOUR_SHOWCASE_BIKES: ShowcaseBikeData[] = [
     ],
     catalogSubtitle: 'Racing DNA',
     catalogPrice: '₹1,75,650',
-    defaultPriceNumber: 175650,
   },
   {
     id: 'bike_mt15',
@@ -70,7 +68,6 @@ const FOUR_SHOWCASE_BIKES: ShowcaseBikeData[] = [
     ],
     catalogSubtitle: 'Dark Side of Japan',
     catalogPrice: '₹1,67,610',
-    defaultPriceNumber: 167610,
   },
   {
     id: 'bike_fzs',
@@ -91,7 +88,6 @@ const FOUR_SHOWCASE_BIKES: ShowcaseBikeData[] = [
     ],
     catalogSubtitle: 'Lord of the Streets',
     catalogPrice: '₹1,42,000',
-    defaultPriceNumber: 142000,
   },
   {
     id: 'bike_xsr',
@@ -112,7 +108,6 @@ const FOUR_SHOWCASE_BIKES: ShowcaseBikeData[] = [
     ],
     catalogSubtitle: 'Pure Japanese Character',
     catalogPrice: '₹1,63,900',
-    defaultPriceNumber: 163900,
   },
 ];
 
@@ -133,11 +128,12 @@ export default function FeaturedSection({
 }: FeaturedSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const card4TargetRef = useRef<HTMLDivElement>(null);
+  const showcaseStageRef = useRef<HTMLDivElement>(null);
 
   // Normalized scroll progress 0..1 across the pinned showcase container
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Dynamic geometry target for XSR transition into Card 4
+  // Dynamic geometry destination for XSR transition into Card 4
   const [targetOffset, setTargetOffset] = useState({ dx: 0, dy: 0, scale: 0.44 });
 
   // Catalog search and filter state
@@ -145,7 +141,7 @@ export default function FeaturedSection({
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'featured' | 'price_low' | 'price_high'>('featured');
 
-  // Preload the 4 transparent PNGs
+  // Preload all four motorcycle PNGs on mount
   useEffect(() => {
     FOUR_SHOWCASE_BIKES.forEach((bike) => {
       const img = new Image();
@@ -153,12 +149,14 @@ export default function FeaturedSection({
     });
   }, []);
 
-  // Update target geometry of Card 4 image slot
+  // Update real shared-element destination coordinates using getBoundingClientRect()
   const updateTargetGeometry = useCallback(() => {
     if (!card4TargetRef.current) return;
     const rect = card4TargetRef.current.getBoundingClientRect();
+    const isMobile = window.innerWidth < 768;
+
     const viewportCenterX = window.innerWidth / 2;
-    const viewportCenterY = window.innerHeight * 0.45;
+    const viewportCenterY = window.innerHeight * (isMobile ? 0.32 : 0.45);
 
     const targetCenterX = rect.left + rect.width / 2;
     const targetCenterY = rect.top + rect.height / 2;
@@ -166,13 +164,14 @@ export default function FeaturedSection({
     const dx = targetCenterX - viewportCenterX;
     const dy = targetCenterY - viewportCenterY;
 
-    const showcaseHeight = Math.min(window.innerHeight * 0.65, 480);
-    const scale = Math.max(0.35, Math.min(0.55, rect.height / showcaseHeight));
+    // Determine scale so XSR matches the target card image container dimensions
+    const showcaseHeight = Math.min(window.innerHeight * (isMobile ? 0.42 : 0.65), 480);
+    const scale = Math.max(0.32, Math.min(0.58, rect.height / showcaseHeight));
 
     setTargetOffset({ dx, dy, scale });
   }, []);
 
-  // Optimized Scroll Handling using requestAnimationFrame
+  // High performance scroll engine with single requestAnimationFrame loop
   useEffect(() => {
     let rafId: number;
 
@@ -188,7 +187,7 @@ export default function FeaturedSection({
         const progress = Math.max(0, Math.min(1, currentScroll / totalDist));
         setScrollProgress(progress);
 
-        if (progress >= 0.72) {
+        if (progress >= 0.70) {
           updateTargetGeometry();
         }
       });
@@ -206,8 +205,15 @@ export default function FeaturedSection({
     };
   }, [updateTargetGeometry]);
 
-  // Compute active bike in showcase (0..3)
-  // Range 0..0.80 is divided into 4 segments of 0.20
+  // =========================================================================
+  // SCROLL TIMELINE WITH REAL XSR HOLD & DEDICATED TRANSITION
+  // =========================================================================
+  // 0.00 - 0.20: R15 V4 dominant (State 01)
+  // 0.20 - 0.40: MT-15 dominant (State 02)
+  // 0.40 - 0.60: FZ-S V4 dominant (State 03)
+  // 0.60 - 0.74: XSR entrance
+  // 0.74 - 0.85: XSR HOLD PHASE (State 04 stable hold - NEVER SKIPPED)
+  // 0.85 - 1.00: XSR -> Catalog Card Transition
   const activeBikeIndex = useMemo(() => {
     if (scrollProgress >= 0.60) return 3; // XSR
     if (scrollProgress >= 0.40) return 2; // FZ-S V4
@@ -217,17 +223,20 @@ export default function FeaturedSection({
 
   const currentBike = FOUR_SHOWCASE_BIKES[activeBikeIndex];
 
-  // Click on vertical selector jumps smoothly to target bike
+  // Check if XSR has officially landed in Card 4 (progress >= 0.98)
+  const isXsrLanded = scrollProgress >= 0.98;
+
+  // Jump to specific bike via selector
   const handleSelectModel = (index: number) => {
     if (!containerRef.current) return;
     const totalDist = containerRef.current.offsetHeight - window.innerHeight;
-    // Map index 0..3 to centers: 0.08, 0.28, 0.48, 0.68
-    const targetProgress = index * 0.20 + 0.08;
+    // Map indices to generous center points: 0.10, 0.30, 0.50, 0.78 (XSR hold)
+    const targetProgress = index === 3 ? 0.78 : index * 0.20 + 0.10;
     const targetScroll = containerRef.current.offsetTop + targetProgress * totalDist;
     window.scrollTo({ top: targetScroll, behavior: 'smooth' });
   };
 
-  // Helper to open booking with correct pre-selected bike & variant
+  // Helper to open booking with pre-selected bike & default variant
   const handleBookBikeAction = (slugOrId: string) => {
     const found = bikes.find((b) => b.slug === slugOrId || b.id === slugOrId);
     if (found && found.variants?.[0]) {
@@ -238,109 +247,113 @@ export default function FeaturedSection({
   };
 
   // =========================================================================
-  // CONTINUOUS TRANSFORM & DEPTH CALCULATIONS FOR THE 4 INDEPENDENT PNGs
+  // GPU-OPTIMIZED TRANSFORM & OPACITY CALCULATIONS FOR 4 PERSISTENT PNGs
+  // (NO DYNAMIC BLUR / NO DYNAMIC DROP-SHADOW TO PREVENT ANY LAG)
   // =========================================================================
   const getBikeLayerStyle = (index: number) => {
-    // Transition to catalog happens between 0.80 and 0.98
-    const isTransitionPhase = scrollProgress >= 0.80;
-    const t = Math.max(0, Math.min(1, (scrollProgress - 0.82) / (0.97 - 0.82)));
-    const easedT = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const isTransitionPhase = scrollProgress >= 0.85;
 
-    // Special behavior for Bike 3 (XSR) during transition into catalog card
+    // Bike 3 (XSR) shared element transition
     if (index === 3) {
       if (isTransitionPhase) {
+        // Transition progress 0..1 between 0.85 and 0.97
+        const t = Math.max(0, Math.min(1, (scrollProgress - 0.85) / (0.97 - 0.85)));
+        const easedT = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
         const currX = targetOffset.dx * easedT;
         const currY = targetOffset.dy * easedT;
         const currScale = 1.0 + (targetOffset.scale - 1.0) * easedT;
+
+        // When landed (t >= 0.98), hide flying transition layer since card now reveals image
+        if (isXsrLanded) {
+          return {
+            opacity: 0,
+            transform: `translate3d(${targetOffset.dx}px, ${targetOffset.dy}px, 0) scale(${targetOffset.scale})`,
+            pointerEvents: 'none' as const,
+            zIndex: 50,
+          };
+        }
 
         return {
           opacity: 1,
           transform: `translate3d(${currX}px, ${currY}px, 0) scale(${currScale})`,
           zIndex: 50,
-          filter:
-            t > 0.05 && t < 0.95
-              ? `drop-shadow(0 0 ${12 + Math.sin(t * Math.PI) * 25}px rgba(0, 163, 255, ${0.6 + Math.sin(t * Math.PI) * 0.35}))`
-              : 'drop-shadow(0 20px 35px rgba(0,0,0,0.9))',
           pointerEvents: 'none' as const,
         };
       }
     }
 
-    // In transition phase, non-XSR bikes fade out completely
+    // In transition phase, ghost bikes fade away quickly
     if (isTransitionPhase) {
-      const fadeOut = Math.max(0, 1 - (scrollProgress - 0.80) / 0.08);
+      const fadeOut = Math.max(0, 1 - (scrollProgress - 0.85) / 0.05);
       return {
-        opacity: fadeOut * 0.18,
+        opacity: fadeOut * 0.16,
         transform: `translate3d(${index === 0 ? -160 : index === 1 ? 140 : -120}px, 0, 0) scale(0.68)`,
-        filter: 'brightness(0.35) blur(2px)',
         zIndex: 10,
         pointerEvents: 'none' as const,
       };
     }
 
-    // Normal 4-bike showcase progression (progress 0..0.80)
-    const slotCenter = 0.08 + index * 0.20;
-    const diff = scrollProgress - slotCenter;
+    // Normal 4-bike showcase progression (progress 0.00..0.85)
+    // Bike centers: R15=0.10, MT15=0.30, FZS=0.50, XSR=0.78
+    const center = index === 3 ? 0.78 : 0.10 + index * 0.20;
+    const diff = scrollProgress - center;
 
     // Active dominant bike
-    if (Math.abs(diff) <= 0.06) {
-      const sway = diff * 80;
+    if (Math.abs(diff) <= 0.07) {
+      const sway = diff * 50;
       return {
         opacity: 1,
         transform: `translate3d(${sway}px, 0, 0) scale(1.0)`,
-        filter: 'brightness(1.0) blur(0px)',
         zIndex: 30,
         pointerEvents: 'auto' as const,
       };
     }
 
     // Bike transitioning away (receding to ghost)
-    if (diff > 0.06 && diff < 0.18) {
-      const exitProgress = (diff - 0.06) / 0.12;
+    if (diff > 0.07 && diff < 0.20) {
+      const exitP = (diff - 0.07) / 0.13;
       return {
-        opacity: 1.0 - exitProgress * 0.82,
-        transform: `translate3d(${-exitProgress * 140}px, 0, 0) scale(${1.0 - exitProgress * 0.30})`,
-        filter: `brightness(${1.0 - exitProgress * 0.65}) blur(${exitProgress * 2}px)`,
+        opacity: 1.0 - exitP * 0.84, // down to 0.16
+        transform: `translate3d(${-exitP * 140}px, 0, 0) scale(${1.0 - exitP * 0.30})`,
         zIndex: 20,
         pointerEvents: 'none' as const,
       };
     }
 
-    // Bike transitioning in (coming from ghost into center)
-    if (diff < -0.06 && diff > -0.18) {
-      const enterProgress = (-diff - 0.06) / 0.12;
+    // Bike transitioning in (coming forward into center)
+    if (diff < -0.07 && diff > -0.20) {
+      const enterP = (-diff - 0.07) / 0.13;
       return {
-        opacity: 1.0 - enterProgress * 0.82,
-        transform: `translate3d(${enterProgress * 120}px, 0, 0) scale(${1.0 - enterProgress * 0.28})`,
-        filter: `brightness(${1.0 - enterProgress * 0.65}) blur(${enterProgress * 2}px)`,
+        opacity: 1.0 - enterP * 0.84, // down to 0.16
+        transform: `translate3d(${enterP * 120}px, 0, 0) scale(${1.0 - enterP * 0.28})`,
         zIndex: 20,
         pointerEvents: 'none' as const,
       };
     }
 
-    // Inactive ghost layers in showroom depth behind active bike
+    // Inactive ghost layers in showroom background depth behind active bike
     const ghostOffsets = [
-      { x: -160, y: -15, scale: 0.68 }, // R15 ghost
-      { x: 140, y: -10, scale: 0.70 }, // MT-15 ghost
-      { x: -120, y: 12, scale: 0.69 }, // FZ-S ghost
-      { x: 150, y: -15, scale: 0.68 }, // XSR ghost
+      { x: -160, y: -15, scale: 0.68 },
+      { x: 140, y: -10, scale: 0.70 },
+      { x: -120, y: 12, scale: 0.69 },
+      { x: 150, y: -15, scale: 0.68 },
     ];
     const offset = ghostOffsets[index];
 
     return {
-      opacity: 0.18,
+      opacity: 0.16,
       transform: `translate3d(${offset.x}px, ${offset.y}px, 0) scale(${offset.scale})`,
-      filter: 'brightness(0.35) blur(2px)',
       zIndex: 10,
       pointerEvents: 'none' as const,
     };
   };
 
-  // UI HUD Opacity (fades out as transition to catalog begins)
-  const showcaseUiOpacity = Math.max(0, 1 - Math.max(0, scrollProgress - 0.80) / 0.06);
+  // Showcase UI HUD Opacity (fades out as XSR begins traveling toward catalog)
+  const showcaseUiOpacity = Math.max(0, 1 - Math.max(0, scrollProgress - 0.85) / 0.04);
 
-  // Catalog Preview Opacity (fades in as XSR flies into card slot)
-  const catalogPreviewOpacity = Math.min(1, Math.max(0, (scrollProgress - 0.83) / 0.12));
+  // Catalog Preview Opacity (fades in as XSR flies into Card 4 slot)
+  const catalogPreviewOpacity = Math.min(1, Math.max(0, (scrollProgress - 0.87) / 0.08));
 
   // Filter & Sort for the full client catalog
   const filteredBikes = useMemo(() => {
@@ -376,9 +389,9 @@ export default function FeaturedSection({
   return (
     <section id="showcase-catalog-section" ref={containerRef} className="relative w-full bg-[#06080C] select-none">
       {/* ========================================================================= */}
-      {/* 1. SCROLL-PINNED SHOWCASE VIEWPORT (550vh SCROLL DISTANCE)                */}
+      {/* 1. SCROLL-PINNED SHOWCASE VIEWPORT (650vh SCROLL DISTANCE)                */}
       {/* ========================================================================= */}
-      <div className="relative w-full h-[550vh]">
+      <div className="relative w-full h-[650vh]">
         <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#06080C] flex flex-col justify-between">
           {/* DARK CORNERS RADIAL VIGNETTE (Center: Bright Showroom / Corners: Deep Black) */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_48%,transparent_30%,rgba(6,8,14,0.65)_70%,rgba(2,3,6,0.98)_100%)] pointer-events-none z-10" />
@@ -390,83 +403,86 @@ export default function FeaturedSection({
           {/* FLOATING FLOOR GLOW & CONTACT SHADOW (Beneath dominant bike)              */}
           {/* ========================================================================= */}
           <div
-            className="absolute bottom-[24%] left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-none z-10 transition-opacity duration-300"
+            className="absolute bottom-[24%] md:bottom-[22%] left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-none z-10 transition-opacity duration-300"
             style={{ opacity: showcaseUiOpacity }}
           >
             {/* Wide Elliptical Floor Glow */}
-            <div className="w-[500px] sm:w-[720px] md:w-[900px] h-[75px] sm:h-[105px] bg-[radial-gradient(ellipse_at_center,rgba(0,140,255,0.45)_0%,rgba(0,70,220,0.15)_50%,transparent_75%)] rounded-[100%] blur-xl" />
+            <div className="w-[450px] sm:w-[700px] md:w-[880px] h-[70px] sm:h-[100px] bg-[radial-gradient(ellipse_at_center,rgba(0,140,255,0.45)_0%,rgba(0,70,220,0.15)_50%,transparent_75%)] rounded-[100%] blur-xl" />
 
             {/* Glowing Light Ring */}
-            <div className="absolute w-[420px] sm:w-[600px] md:w-[760px] h-[55px] sm:h-[75px] rounded-[100%] border border-[#00A3FF]/40 shadow-[0_0_25px_rgba(0,163,255,0.35)]" />
+            <div className="absolute w-[380px] sm:w-[580px] md:w-[740px] h-[50px] sm:h-[70px] rounded-[100%] border border-[#00A3FF]/40 shadow-[0_0_25px_rgba(0,163,255,0.35)]" />
 
             {/* Soft Tire Contact Shadow */}
-            <div className="absolute w-[360px] sm:w-[520px] md:w-[650px] h-[30px] sm:h-[40px] bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.4)_50%,transparent_80%)] rounded-[100%] blur-sm" />
+            <div className="absolute w-[320px] sm:w-[500px] md:w-[620px] h-[25px] sm:h-[35px] bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.4)_50%,transparent_80%)] rounded-[100%] blur-sm" />
           </div>
 
           {/* ========================================================================= */}
-          {/* FOUR INDEPENDENT MOTORCYCLE PNG OBJECTS SIMULTANEOUSLY IN DOM             */}
-          {/* (NO IMAGE-SRC SWAPPING • CONTINUOUS 3D DEPTH TRANSFORMS)                 */}
+          {/* FOUR PERSISTENT MOTORCYCLE PNG OBJECTS SIMULTANEOUSLY IN DOM              */}
+          {/* (NO SRC SWAPPING • GPU TRANSFORM COMPOSITING • NO STUTTER)                */}
           {/* ========================================================================= */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20 px-4">
+          <div
+            ref={showcaseStageRef}
+            className="absolute inset-0 flex items-center justify-center pointer-events-none z-20 px-4"
+          >
             {/* 1. R15 V4 */}
             <div
-              className="bike-layer bike-r15 absolute inset-0 flex items-center justify-center"
+              className="bike-layer bike-r15 absolute inset-0 flex items-center justify-center will-change-transform"
               style={getBikeLayerStyle(0)}
             >
               <img
                 src="/bikes/r15-v4.png"
                 alt="Yamaha R15 V4"
-                className="w-full max-w-4xl max-h-[60vh] sm:max-h-[68vh] md:max-h-[74vh] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.9)]"
+                className="w-full max-w-4xl max-h-[56vh] sm:max-h-[66vh] md:max-h-[72vh] object-contain filter drop-shadow-[0_15px_35px_rgba(0,0,0,0.85)]"
               />
             </div>
 
             {/* 2. MT-15 V2 */}
             <div
-              className="bike-layer bike-mt15 absolute inset-0 flex items-center justify-center"
+              className="bike-layer bike-mt15 absolute inset-0 flex items-center justify-center will-change-transform"
               style={getBikeLayerStyle(1)}
             >
               <img
                 src="/bikes/mt-15-v2.png"
                 alt="Yamaha MT-15 V2"
-                className="w-full max-w-4xl max-h-[60vh] sm:max-h-[68vh] md:max-h-[74vh] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.9)]"
+                className="w-full max-w-4xl max-h-[56vh] sm:max-h-[66vh] md:max-h-[72vh] object-contain filter drop-shadow-[0_15px_35px_rgba(0,0,0,0.85)]"
               />
             </div>
 
             {/* 3. FZ-S V4 HYBRID */}
             <div
-              className="bike-layer bike-fzs absolute inset-0 flex items-center justify-center"
+              className="bike-layer bike-fzs absolute inset-0 flex items-center justify-center will-change-transform"
               style={getBikeLayerStyle(2)}
             >
               <img
                 src="/bikes/fz-s-v4-hybrid.png"
                 alt="Yamaha FZ-S V4 Hybrid"
-                className="w-full max-w-4xl max-h-[60vh] sm:max-h-[68vh] md:max-h-[74vh] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.9)]"
+                className="w-full max-w-4xl max-h-[56vh] sm:max-h-[66vh] md:max-h-[72vh] object-contain filter drop-shadow-[0_15px_35px_rgba(0,0,0,0.85)]"
               />
             </div>
 
-            {/* 4. XSR (Transitions physically into Card 4 image slot) */}
+            {/* 4. XSR (Hold phase, then transitions physically into Card 4 empty slot) */}
             <div
-              className="bike-layer bike-xsr absolute inset-0 flex items-center justify-center"
+              className="bike-layer bike-xsr absolute inset-0 flex items-center justify-center will-change-transform"
               style={getBikeLayerStyle(3)}
             >
               <img
                 src="/bikes/xsr.png"
                 alt="Yamaha XSR"
-                className="w-full max-w-4xl max-h-[60vh] sm:max-h-[68vh] md:max-h-[74vh] object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.9)]"
+                className="w-full max-w-4xl max-h-[56vh] sm:max-h-[66vh] md:max-h-[72vh] object-contain filter drop-shadow-[0_15px_35px_rgba(0,0,0,0.85)]"
               />
             </div>
           </div>
 
           {/* ========================================================================= */}
-          {/* LEFT CONTENT HUD (1:1 MATCHING 6-PANEL STORYBOARD)                        */}
+          {/* DESKTOP LEFT CONTENT HUD (1:1 MATCHING STORYBOARD)                        */}
           {/* ========================================================================= */}
           <div
-            className="absolute left-6 sm:left-10 md:left-14 lg:left-16 top-1/2 -translate-y-1/2 z-30 flex items-start pointer-events-auto transition-opacity duration-300"
+            className="hidden md:flex absolute left-8 sm:left-12 lg:left-16 top-1/2 -translate-y-1/2 z-30 items-start pointer-events-auto transition-opacity duration-300"
             style={{ opacity: showcaseUiOpacity }}
           >
             <div className="max-w-xs sm:max-w-sm md:max-w-md">
               {/* Category Tag */}
-              <p className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.25em] text-[#00E5FF] mb-1">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#00E5FF] mb-1">
                 {currentBike.category}
               </p>
 
@@ -489,7 +505,7 @@ export default function FeaturedSection({
               </p>
 
               {/* Action Buttons: SHOWROOM VISIT & BOOK NOW */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
+              <div className="flex flex-row items-center gap-2.5">
                 <button
                   onClick={onOpenVisitModal}
                   className="px-5 py-2.5 rounded-xl border border-[#0066FF]/60 hover:border-[#00E5FF] bg-black/40 hover:bg-[#0066FF]/20 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
@@ -510,10 +526,10 @@ export default function FeaturedSection({
           </div>
 
           {/* ========================================================================= */}
-          {/* RIGHT VERTICAL SELECTOR (EXACTLY 4 MOTORCYCLES WITH THUMBNAILS)          */}
+          {/* DESKTOP RIGHT VERTICAL SELECTOR (EXACTLY 4 MOTORCYCLES WITH THUMBNAILS)   */}
           {/* ========================================================================= */}
           <div
-            className="absolute right-6 sm:right-10 md:right-14 lg:right-16 top-1/2 -translate-y-1/2 z-30 hidden md:flex flex-col items-end pointer-events-auto transition-opacity duration-300"
+            className="hidden md:flex absolute right-8 sm:right-12 lg:right-16 top-1/2 -translate-y-1/2 z-30 flex-col items-end pointer-events-auto transition-opacity duration-300"
             style={{ opacity: showcaseUiOpacity }}
           >
             <div className="relative flex flex-col space-y-2.5 py-2 pr-4">
@@ -562,15 +578,15 @@ export default function FeaturedSection({
           </div>
 
           {/* ========================================================================= */}
-          {/* BOTTOM HUD: PROGRESS COUNTER + TECHNICAL SPECIFICATIONS STRIP             */}
+          {/* DESKTOP BOTTOM HUD: PROGRESS COUNTER + TECHNICAL SPECIFICATIONS STRIP     */}
           {/* ========================================================================= */}
           <div
-            className="absolute bottom-6 left-6 sm:left-10 md:left-14 lg:left-16 right-6 sm:right-10 md:right-14 lg:right-16 z-30 flex flex-col md:flex-row items-start md:items-end justify-between gap-4 pointer-events-auto transition-opacity duration-300"
+            className="hidden md:flex absolute bottom-6 left-8 sm:left-12 lg:left-16 right-8 sm:right-12 lg:right-16 z-30 items-end justify-between gap-4 pointer-events-auto transition-opacity duration-300"
             style={{ opacity: showcaseUiOpacity }}
           >
             {/* Counter and 4-Segment Progress Bar */}
             <div className="flex items-center gap-3">
-              <span className="text-xs sm:text-sm font-black text-white tracking-widest">
+              <span className="text-sm font-black text-white tracking-widest">
                 {currentBike.indexStr} <span className="text-white/40 font-medium">/ 04</span>
               </span>
               <div className="flex items-center gap-1.5">
@@ -587,11 +603,11 @@ export default function FeaturedSection({
               </div>
             </div>
 
-            {/* Verified Project Technical Specifications Strip */}
-            <div className="flex flex-wrap items-center gap-4 sm:gap-6 md:gap-8 bg-black/40 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/10">
+            {/* Verified Technical Specifications Strip */}
+            <div className="flex items-center gap-6 lg:gap-8 bg-black/40 backdrop-blur-md px-5 py-2.5 rounded-xl border border-white/10">
               {currentBike.specs.map((spec, i) => (
                 <div key={i} className="flex flex-col">
-                  <span className="text-xs sm:text-sm font-black text-white font-display">
+                  <span className="text-sm font-black text-white font-display">
                     {spec.value}
                   </span>
                   <span className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">
@@ -603,14 +619,96 @@ export default function FeaturedSection({
           </div>
 
           {/* ========================================================================= */}
-          {/* PINNED TRANSITION OVERLAY: REVEALING CATALOG CARDS AS XSR LANDS            */}
-          {/* (Fades in during scroll progress 0.82..0.98 as XSR flies into Card 4)     */}
+          {/* DEDICATED MOBILE SECTION 2 COMPOSITION (NO TEXT/BIKE OVERLAP)             */}
+          {/* ========================================================================= */}
+          <div
+            className="md:hidden flex flex-col justify-between h-full w-full pt-16 pb-4 px-4 pointer-events-auto z-30 transition-opacity duration-300"
+            style={{ opacity: showcaseUiOpacity }}
+          >
+            {/* Top Compact Horizontal Selector */}
+            <div className="flex items-center justify-center gap-2 py-1.5 z-30">
+              {FOUR_SHOWCASE_BIKES.map((bike, idx) => (
+                <button
+                  key={bike.id}
+                  onClick={() => handleSelectModel(idx)}
+                  className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all ${
+                    activeBikeIndex === idx
+                      ? 'bg-[#0088FF] text-white shadow-md shadow-blue-600/40 scale-105'
+                      : 'bg-white/10 text-white/60'
+                  }`}
+                >
+                  {bike.namePrefix}
+                </button>
+              ))}
+            </div>
+
+            {/* Spacer for Floating Motorcycle stage in middle */}
+            <div className="h-[36vh] w-full pointer-events-none" />
+
+            {/* Dedicated Mobile Text & Actions Area (Strictly Below Motorcycle) */}
+            <div className="flex flex-col justify-end bg-black/60 backdrop-blur-sm p-4 rounded-2xl border border-white/10 z-30">
+              <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#00E5FF] mb-0.5">
+                {currentBike.category}
+              </p>
+              <h2 className="text-2xl font-black text-white font-display leading-tight">
+                {currentBike.name}
+              </h2>
+              <p className="text-[11px] font-extrabold uppercase text-white/90 tracking-wider mt-0.5">
+                {currentBike.subtitle}
+              </p>
+              <p className="text-xs text-white/70 line-clamp-2 mt-1 leading-relaxed">
+                {currentBike.description}
+              </p>
+
+              {/* Action Buttons */}
+              <div className="grid grid-cols-2 gap-2 mt-3">
+                <button
+                  onClick={onOpenVisitModal}
+                  className="py-2 px-2 rounded-xl border border-[#0066FF]/60 bg-black/40 text-white font-bold text-[10px] uppercase tracking-wider flex items-center justify-center gap-1.5"
+                >
+                  <MapPin className="w-3 h-3 text-[#00E5FF]" />
+                  <span>SHOWROOM VISIT</span>
+                </button>
+                <button
+                  onClick={() => handleBookBikeAction(currentBike.slug)}
+                  className="py-2 px-2 rounded-xl bg-[#0066FF] text-white font-bold text-[10px] uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md shadow-blue-600/30"
+                >
+                  <Calendar className="w-3 h-3 text-white" />
+                  <span>BOOK NOW</span>
+                </button>
+              </div>
+
+              {/* Mobile Bottom Status Bar */}
+              <div className="flex items-center justify-between mt-3 pt-2 border-t border-white/10 text-[10px] font-bold text-white/80">
+                <div className="flex items-center gap-2">
+                  <span>{currentBike.indexStr} / 04</span>
+                  <div className="flex items-center gap-1">
+                    {[0, 1, 2, 3].map((step) => (
+                      <div
+                        key={step}
+                        className={`h-1 rounded-full ${
+                          step === activeBikeIndex ? 'w-4 bg-[#0088FF]' : 'w-2 bg-white/20'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <div className="text-gray-300">
+                  {currentBike.specs[0].value} • {currentBike.specs[1].value}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ========================================================================= */}
+          {/* PINNED TRANSITION OVERLAY: REVEALING CATALOG CARDS AS XSR FLIES IN         */}
+          {/* (Fades in during scroll progress 0.87..0.98. Card 4 image slot is EMPTY)  */}
           {/* ========================================================================= */}
           <div
             className="absolute inset-0 z-25 flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pointer-events-none"
             style={{
               opacity: catalogPreviewOpacity,
-              transform: `translateY(${(1 - catalogPreviewOpacity) * 30}px)`,
+              transform: `translateY(${(1 - catalogPreviewOpacity) * 25}px)`,
               transition: 'opacity 0.2s ease-out, transform 0.2s ease-out',
             }}
           >
@@ -636,20 +734,31 @@ export default function FeaturedSection({
                 return (
                   <div
                     key={bike.id}
-                    ref={isCard4Xsr ? card4TargetRef : undefined}
                     className="relative rounded-2xl bg-gradient-to-b from-[#0a1020]/90 to-[#050811]/95 border border-[#0055ff]/40 p-4 flex flex-col justify-between shadow-[0_10px_30px_rgba(0,0,0,0.8)] overflow-hidden"
                   >
                     {/* Large Bike Image Container with Blue Floor Reflection */}
-                    <div className="relative h-44 sm:h-48 w-full flex items-center justify-center overflow-hidden mb-3">
+                    <div
+                      ref={isCard4Xsr ? card4TargetRef : undefined}
+                      className="relative h-44 sm:h-48 w-full flex items-center justify-center overflow-hidden mb-3"
+                    >
                       <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-4/5 h-5 bg-[#0066FF]/25 rounded-full blur-md" />
-                      {/* For Card 4 (XSR), this placeholder receives the flying XSR */}
-                      <img
-                        src={bike.image}
-                        alt={bike.name}
-                        className={`max-h-full max-w-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)] transition-opacity duration-300 ${
-                          isCard4Xsr && scrollProgress < 0.96 ? 'opacity-0' : 'opacity-100'
-                        }`}
-                      />
+
+                      {/* CRITICAL: Card 4 Image Slot is COMPLETELY EMPTY before XSR lands! */}
+                      {isCard4Xsr ? (
+                        <img
+                          src={bike.image}
+                          alt={bike.name}
+                          className={`max-h-full max-w-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)] transition-opacity duration-300 ${
+                            isXsrLanded ? 'opacity-100' : 'opacity-0'
+                          }`}
+                        />
+                      ) : (
+                        <img
+                          src={bike.image}
+                          alt={bike.name}
+                          className="max-h-full max-w-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)] opacity-100"
+                        />
+                      )}
                     </div>
 
                     {/* Content below Image */}
@@ -674,14 +783,18 @@ export default function FeaturedSection({
                       <div className="space-y-2">
                         <button
                           onClick={onOpenVisitModal}
-                          className="w-full py-2 px-3 rounded-xl border border-[#0066FF]/60 bg-[#0c1427]/60 text-white font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all pointer-events-auto"
+                          className={`w-full py-2 px-3 rounded-xl border border-[#0066FF]/60 bg-[#0c1427]/60 text-white font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all ${
+                            isXsrLanded ? 'pointer-events-auto cursor-pointer hover:bg-[#0066FF]/20' : 'pointer-events-none opacity-60'
+                          }`}
                         >
                           <MapPin className="w-3 h-3 text-[#00E5FF]" />
                           <span>SHOWROOM VISIT</span>
                         </button>
                         <button
                           onClick={() => handleBookBikeAction(bike.slug)}
-                          className="w-full py-2 px-3 rounded-xl bg-[#0066FF] text-white font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md shadow-blue-600/30 transition-all pointer-events-auto"
+                          className={`w-full py-2 px-3 rounded-xl bg-[#0066FF] text-white font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md shadow-blue-600/30 transition-all ${
+                            isXsrLanded ? 'pointer-events-auto cursor-pointer hover:bg-[#0052cc]' : 'pointer-events-none opacity-60'
+                          }`}
                         >
                           <Calendar className="w-3 h-3 text-white" />
                           <span>BOOK NOW</span>
@@ -697,7 +810,7 @@ export default function FeaturedSection({
       </div>
 
       {/* ========================================================================= */}
-      {/* 2. COMPLETE YAMAHA CATALOG SECTION (#catalog ANCHOR)                      */}
+      {/* 2. ONE COMPLETE YAMAHA CATALOG SECTION (#catalog ANCHOR)                  */}
       {/* ========================================================================= */}
       <div id="catalog" className="relative py-20 bg-[#06080C] border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -767,7 +880,7 @@ export default function FeaturedSection({
                     />
                   </div>
 
-                  {/* Content Below Image */}
+                  {/* Content Below Image (Price is strictly BELOW image) */}
                   <div>
                     <h3 className="text-2xl font-black text-white font-display tracking-tight leading-none mb-1">
                       {bike.name}
@@ -837,7 +950,7 @@ export default function FeaturedSection({
             ))}
           </div>
 
-          {/* Complete Catalog Grid (All Models, Variants, Scooters, etc.) */}
+          {/* Complete Catalog Grid (All Models, Variants, Scooters from verified database) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredBikes.map((bike) => {
               const minPrice = Math.min(...(bike.variants?.map((v) => v.ex_showroom_price) || [0]));
@@ -897,7 +1010,7 @@ export default function FeaturedSection({
                       </div>
                     </div>
 
-                    {/* Price */}
+                    {/* Price strictly below image */}
                     <div className="flex items-baseline justify-between pt-3 border-t border-white/10 mb-4">
                       <span className="text-[11px] uppercase font-bold text-gray-400">Starting At</span>
                       <span className="text-xl font-black text-white font-display">

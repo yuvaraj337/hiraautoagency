@@ -278,7 +278,10 @@ export default function HeroSection({ onOpenVisitModal, onExploreBikes }: HeroSe
               display: text1Opacity <= 0.005 ? 'none' : 'block',
             }}
           >
-            <h1 className="font-hero-title text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold md:font-extrabold text-white tracking-[-0.02em] leading-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]">
+            <h1
+              className="font-hero-title text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold md:font-extrabold text-white tracking-[-0.02em] leading-none"
+              style={{ textShadow: '0 4px 18px rgba(0,0,0,0.65), 0 0 24px rgba(0,100,255,0.20)' }}
+            >
               Ready to Ride
             </h1>
           </div>
@@ -292,7 +295,10 @@ export default function HeroSection({ onOpenVisitModal, onExploreBikes }: HeroSe
               display: text2Opacity <= 0.005 ? 'none' : 'block',
             }}
           >
-            <h2 className="font-hero-title text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold md:font-extrabold text-white tracking-[-0.02em] leading-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]">
+            <h2
+              className="font-hero-title text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold md:font-extrabold text-white tracking-[-0.02em] leading-none"
+              style={{ textShadow: '0 4px 18px rgba(0,0,0,0.65), 0 0 24px rgba(0,100,255,0.20)' }}
+            >
               Feel the Ride
             </h2>
           </div>
@@ -306,7 +312,10 @@ export default function HeroSection({ onOpenVisitModal, onExploreBikes }: HeroSe
               display: text3Opacity <= 0.005 ? 'none' : 'block',
             }}
           >
-            <h2 className="font-hero-title text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold md:font-extrabold text-white tracking-[-0.02em] leading-[1.04] drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]">
+            <h2
+              className="font-hero-title text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold md:font-extrabold text-white tracking-[-0.02em] leading-[1.04]"
+              style={{ textShadow: '0 4px 18px rgba(0,0,0,0.65), 0 0 24px rgba(0,100,255,0.20)' }}
+            >
               Your Ride<br />
               Starts Here
             </h2>

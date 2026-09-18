@@ -26,7 +26,6 @@ export default function Navbar({ onOpenVisitModal, onOpenBookingModal }: NavbarP
     { name: 'Bikes', href: '#catalog' },
     { name: 'Showroom Visit', href: '#visit', onClick: onOpenVisitModal },
     { name: 'Engineering', href: '#engineering' },
-    { name: 'Service', href: '#service' },
     { name: 'Location', href: '#location' },
   ];
 
