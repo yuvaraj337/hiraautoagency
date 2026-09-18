@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Hira Auto Agency | Authorized Yamaha Dealership Mahagama, Godda",
-  description: "Experience Yamaha motorcycles & scooters at Hira Auto Agency, Mahagama, Godda. Official dealer for R15 V4, MT-15 V2, FZ-S V4 Hybrid, Aerox S, XSR 155, Ray ZR & Fascino. Book showroom test rides and genuine service.",
+  description: "Experience Yamaha motorcycles & scooters at Hira Auto Agency, Mahagama, Godda. Official dealer for R15 V4, MT-15 V2, FZ-S V4 Hybrid, Aerox S, XSR 155, Ray ZR & Fascino (Drum). Book showroom test rides and genuine service.",
   keywords: [
     "Yamaha showroom Mahagama",
     "Yamaha bikes Mahagama",

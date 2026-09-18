@@ -58,7 +58,7 @@ export default function Footer({ onOpenVisitModal }: FooterProps) {
               <li><a href="#catalog" className="hover:text-[#00E5FF] transition-colors">Yamaha FZ-S V4 Hybrid</a></li>
               <li><a href="#catalog" className="hover:text-[#00E5FF] transition-colors">Yamaha XSR 155</a></li>
               <li><a href="#catalog" className="hover:text-[#00E5FF] transition-colors">Yamaha Aerox S</a></li>
-              <li><a href="#catalog" className="hover:text-[#00E5FF] transition-colors">Ray ZR & Fascino</a></li>
+              <li><a href="#catalog" className="hover:text-[#00E5FF] transition-colors">Ray ZR & Fascino (Drum)</a></li>
             </ul>
           </div>
 

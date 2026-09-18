@@ -69,10 +69,16 @@ const MODEL_COLOR_ASSETS: Record<string, Record<string, string>> = {
     'Military Green': '/bikes/xsr.png',
   },
   'yamaha-fascino-125': {
-    'Dark Matte Blue': '/assets/bikes/clean/fascino_dark_matte_blue_disc.webp',
-    'Light Green': '/assets/bikes/clean/fascino_light_green_disc.webp',
-    'Metallic Black': '/assets/bikes/clean/fascino_metallic_black_drum.webp',
-    'Vivid Red': '/assets/bikes/clean/fascino_vived_red_drum.webp',
+    'Vivid Red': '/bikes/fascino-drum.png',
+    'Dark Matte Blue': '/bikes/fascino-drum.png',
+    'Light Green': '/bikes/fascino-drum.png',
+    'Metallic Black': '/bikes/fascino-drum.png',
+  },
+  'yamaha-fascino-drum': {
+    'Vivid Red': '/bikes/fascino-drum.png',
+    'Dark Matte Blue': '/bikes/fascino-drum.png',
+    'Light Green': '/bikes/fascino-drum.png',
+    'Metallic Black': '/bikes/fascino-drum.png',
   },
   'yamaha-rayzr-125': {
     'Matte Black': '/assets/bikes/clean/rayzr_rally_matte_black_lcd.webp',

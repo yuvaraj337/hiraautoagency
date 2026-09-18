@@ -231,7 +231,7 @@ const DEFAULT_CATALOG_BIKES: Bike[] = [
   {
     id: 'bike_fascino',
     slug: 'yamaha-fascino-125',
-    name: 'Yamaha Fascino 125 Fi',
+    name: 'Yamaha Fascino (Drum)',
     category: 'SCOOTERS',
     tagline: 'Classic European Elegance',
     description: 'Signature chrome accents, quiet start generator, and hybrid assist technology.',
@@ -241,9 +241,9 @@ const DEFAULT_CATALOG_BIKES: Bike[] = [
     fuel_capacity: '5.2 L',
     mileage: '60 kmpl',
     curb_weight: '99 kg',
-    image_url: '/assets/bikes/bike_fascino.webp',
+    image_url: '/bikes/fascino-drum.png',
     variants: [
-      { id: 'var_fascino_drum', bike_id: 'bike_fascino', name: 'Fascino (Drum)', ex_showroom_price: 80980, color_name: 'Vivid Red', color_hex: '#D71920', image_url: '/assets/bikes/clean/fascino_vived_red_drum.webp', in_stock: 1 },
+      { id: 'var_fascino_drum', bike_id: 'bike_fascino', name: 'Fascino (Drum)', ex_showroom_price: 80980, color_name: 'Vivid Red', color_hex: '#D71920', image_url: '/bikes/fascino-drum.png', in_stock: 1 },
     ],
   },
   {

@@ -169,11 +169,11 @@ export function seedDatabase(passedDb?: any) {
   insertVariant.run('var_rayzr_drum', 'bike_rayzr', 'Ray ZR (Drum)', 82880, 'Metallic Black', '#111111', '/assets/bikes/bike_rayzr.webp', 1, 1);
   insertVariant.run('var_rayzr_rally', 'bike_rayzr', 'Ray ZR (Street Rally)', 96930, 'Matte Copper / Black', '#A55D35', '/assets/bikes/bike_rayzr.webp', 1, 2);
 
-  // Bike 6: Scooters - Fascino 125 Fi
+  // Bike 6: Scooters - Fascino (Drum)
   insertBike.run(
     'bike_fascino',
     'yamaha-fascino-125',
-    'Yamaha Fascino 125',
+    'Yamaha Fascino (Drum)',
     'SCOOTERS',
     'Classic European Elegance',
     'Rich curves, signature chrome accents, quiet start motor generator, hybrid assist technology, and plush comfortable ride for discerning city commuters.',
@@ -183,12 +183,12 @@ export function seedDatabase(passedDb?: any) {
     '5.2 L',
     '60 kmpl',
     '99 kg',
-    '/assets/bikes/bike_fascino.webp',
+    '/bikes/fascino-drum.png',
     0,
     6
   );
 
-  insertVariant.run('var_fascino_drum', 'bike_fascino', 'Fascino (Drum)', 80980, 'Vivid Red', '#D71920', '/assets/bikes/bike_fascino.webp', 1, 1);
+  insertVariant.run('var_fascino_drum', 'bike_fascino', 'Fascino (Drum)', 80980, 'Vivid Red', '#D71920', '/bikes/fascino-drum.png', 1, 1);
 
   // Bike 7: Aerox S (Maxi Sports Scooter) - 4th Hero Bike!
   insertBike.run(
