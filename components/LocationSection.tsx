@@ -9,10 +9,10 @@ interface LocationSectionProps {
 
 export default function LocationSection({ onOpenVisitModal }: LocationSectionProps) {
   const mapUrl =
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3618.342442436151!2d87.2789123!3d25.0210214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f0464f89d98949%3A0x2a9a7a6bbd924610!2sHira%20Motors%20Mahagama!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin';
+    'https://maps.google.com/maps?q=25.005528,87.328531&hl=en&z=16&output=embed';
 
   const directionsUrl =
-    'https://www.google.com/maps/dir/?api=1&destination=25.0210214,87.2789123&destination_place_id=ChIJSYnZik9G8DkREUaSvWp6mio';
+    'https://maps.app.goo.gl/Xxq87L5mDxNnx3BPA?g_st=ac';
 
   return (
     <section id="location" className="relative py-24 bg-[#06080C] text-white border-t border-white/5 overflow-hidden">
@@ -95,15 +95,11 @@ export default function LocationSection({ onOpenVisitModal }: LocationSectionPro
                 </div>
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-0.5">
-                    Direct Phone Lines
+                    Direct Phone Line
                   </span>
                   <div className="flex flex-wrap items-center gap-3">
-                    <a href="tel:8210582308" className="text-xs font-bold text-white hover:text-[#00E5FF] transition-colors">
-                      8210582308
-                    </a>
-                    <span className="text-gray-500">•</span>
-                    <a href="tel:8340408847" className="text-xs font-bold text-white hover:text-[#00E5FF] transition-colors">
-                      8340408847
+                    <a href="tel:+916201238401" className="text-xs font-bold text-white hover:text-[#00E5FF] transition-colors">
+                      +91 62012 38401
                     </a>
                   </div>
                 </div>
@@ -153,7 +149,7 @@ export default function LocationSection({ onOpenVisitModal }: LocationSectionPro
               </a>
 
               <a
-                href="tel:8210582308"
+                href="tel:+916201238401"
                 className="flex-1 py-2.5 px-3 rounded-xl border border-emerald-500/60 bg-emerald-950/40 hover:bg-emerald-500/20 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all"
               >
                 <Phone className="w-3.5 h-3.5 text-emerald-400" />

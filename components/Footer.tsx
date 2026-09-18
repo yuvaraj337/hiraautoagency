@@ -91,7 +91,7 @@ export default function Footer({ onOpenVisitModal }: FooterProps) {
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
-                <a href="tel:8210582308" className="hover:text-white font-bold text-white">8210582308</a>
+                <a href="tel:+916201238401" className="hover:text-white font-bold text-white">+91 62012 38401</a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-blue-400 shrink-0" />
