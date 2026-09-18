@@ -204,12 +204,12 @@ export function seedDatabase(passedDb?: any) {
     '5.5 L',
     '42 kmpl',
     '126 kg',
-    '/assets/bikes/hero_aerox_s.jpg',
+    '/bikes/aerox-s.png',
     1,
     7
   );
 
-  insertVariant.run('var_aerox_s', 'bike_aerox', 'Aerox (S)', 150350, 'Racing Blue (Version S Smart Key)', '#0020B2', '/assets/bikes/hero_aerox_s.jpg', 1, 1);
+  insertVariant.run('var_aerox_s', 'bike_aerox', 'Aerox (S)', 150350, 'Racing Blue (Version S Smart Key)', '#0020B2', '/bikes/aerox-s.png', 1, 1);
 
   // 3. WhatsApp Templates
   const insertTemplate = db.prepare(`

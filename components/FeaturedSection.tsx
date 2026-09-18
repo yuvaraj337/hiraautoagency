@@ -259,9 +259,9 @@ const DEFAULT_CATALOG_BIKES: Bike[] = [
     fuel_capacity: '5.5 L',
     mileage: '40 kmpl',
     curb_weight: '126 kg',
-    image_url: '/assets/bikes/bike_aerox.webp',
+    image_url: '/bikes/aerox-s.png',
     variants: [
-      { id: 'var_aerox_s', bike_id: 'bike_aerox', name: 'Aerox S', ex_showroom_price: 150350, color_name: 'Racing Blue', color_hex: '#0020B2', image_url: '/assets/bikes/clean/aerox_versions_Racing-Blue.webp', in_stock: 1 },
+      { id: 'var_aerox_s', bike_id: 'bike_aerox', name: 'Aerox S', ex_showroom_price: 150350, color_name: 'Racing Blue', color_hex: '#0020B2', image_url: '/bikes/aerox-s.png', in_stock: 1 },
     ],
   },
 ];

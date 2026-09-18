@@ -33,7 +33,7 @@ export default function Navbar({ onOpenVisitModal, onOpenBookingModal }: NavbarP
     { name: 'Yamaha R15 V4', category: 'Supersport', image: '/assets/bikes/hero_r15_v4.jpg', price: 'From ₹1,75,650' },
     { name: 'Yamaha MT-15 V2', category: 'Hyper Naked', image: '/assets/bikes/hero_mt15_v2.jpg', price: 'From ₹1,66,710' },
     { name: 'Yamaha FZ-S V4', category: 'Street Fighter', image: '/assets/bikes/hero_fzs_v4.jpg', price: 'From ₹1,17,560' },
-    { name: 'Yamaha Aerox S', category: 'Maxi Sports', image: '/assets/bikes/hero_aerox_s.jpg', price: '₹1,50,350' },
+    { name: 'Yamaha Aerox S', category: 'Maxi Sports', image: '/bikes/aerox-s.png', price: '₹1,50,350' },
   ];
 
   return (

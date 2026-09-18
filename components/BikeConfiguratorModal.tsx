@@ -91,12 +91,14 @@ const MODEL_COLOR_ASSETS: Record<string, Record<string, string>> = {
     'Metallic Black': '/assets/bikes/clean/rayzr_rally_matte_black_lcd.webp',
   },
   'yamaha-aerox-155': {
-    'Racing Blue': '/assets/bikes/clean/aerox_versions_Racing-Blue.webp',
-    'Metallic Black': '/assets/bikes/hero_aerox_s.jpg',
+    'Racing Blue': '/bikes/aerox-s.png',
+    'Racing Blue (Version S Smart Key)': '/bikes/aerox-s.png',
+    'Metallic Black': '/bikes/aerox-s.png',
   },
   'yamaha-aerox-s': {
-    'Racing Blue': '/assets/bikes/clean/aerox_versions_Racing-Blue.webp',
-    'Metallic Black': '/assets/bikes/hero_aerox_s.jpg',
+    'Racing Blue': '/bikes/aerox-s.png',
+    'Racing Blue (Version S Smart Key)': '/bikes/aerox-s.png',
+    'Metallic Black': '/bikes/aerox-s.png',
   },
 };
 
