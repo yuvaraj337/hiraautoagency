@@ -162,7 +162,7 @@ export default function AdminWhatsAppPage() {
             visit_date: 'Tomorrow',
             visit_time: '11:00 AM',
             dealership_name: 'Hira Auto Agency Yamaha',
-            dealership_phone: '8210582308'
+            dealership_phone: '+91 62012 38401'
           }
         })
       });

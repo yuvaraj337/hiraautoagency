@@ -131,7 +131,7 @@ export default function AdminSettingsPage() {
                 </label>
                 <input
                   type="text"
-                  value={settings['dealership_phone'] || '8210582308 / 8340408847'}
+                  value={settings['dealership_phone'] || '+91 62012 38401'}
                   onChange={(e) => handleChange('dealership_phone', e.target.value)}
                   className="w-full bg-[#121722] border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-yamaha-cyan text-sm"
                 />

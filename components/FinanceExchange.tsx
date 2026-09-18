@@ -273,11 +273,11 @@ export default function FinanceExchange({ onOpenVisitModal }: FinanceExchangePro
             <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-gray-400">
               <span>Need immediate assistance?</span>
               <a
-                href="tel:8210582308"
+                href="tel:+916201238401"
                 className="text-yamaha-cyan font-bold flex items-center gap-1 hover:underline"
               >
                 <PhoneCall className="w-3.5 h-3.5" />
-                <span>Talk to Exchange Desk: 8210582308</span>
+                <span>Talk to Exchange Desk: +91 62012 38401</span>
               </a>
             </div>
           </div>

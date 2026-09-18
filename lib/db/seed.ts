@@ -254,8 +254,8 @@ export function seedDatabase(passedDb?: any) {
   insertSetting.run('dealership_name', 'Hira Auto Agency', 'general');
   insertSetting.run('dealership_tagline', 'Authorized Yamaha Dealership | Mahagama, Godda', 'general');
   insertSetting.run('dealership_address', 'Opp. Honda Showroom, Mahagama Main Road, Kechua Chowk, Mahagama, Godda, Jharkhand 814154', 'contact');
-  insertSetting.run('dealership_phone', '8210582308', 'contact');
-  insertSetting.run('dealership_phone_alt', '8340408847', 'contact');
+  insertSetting.run('dealership_phone', '+91 62012 38401', 'contact');
+  insertSetting.run('dealership_phone_alt', '+91 62012 38401', 'contact');
   insertSetting.run('dealership_email', 'hiramotors007@gmail.com', 'contact');
   insertSetting.run('advance_booking_fixed_amount', '5000', 'booking');
   insertSetting.run('advance_booking_type', 'FIXED', 'booking'); // FIXED or PERCENTAGE
@@ -263,7 +263,7 @@ export function seedDatabase(passedDb?: any) {
   insertSetting.run('whatsapp_enabled_default', '1', 'whatsapp');
   insertSetting.run('whatsapp_reminder_24h', '1', 'whatsapp');
   insertSetting.run('whatsapp_reminder_2h', '1', 'whatsapp');
-  insertSetting.run('whatsapp_business_phone', '918210582308', 'whatsapp');
+  insertSetting.run('whatsapp_business_phone', '916201238401', 'whatsapp');
   insertSetting.run('business_hours', 'Monday - Sunday: 9:00 AM - 7:30 PM', 'general');
   insertSetting.run('ticker_text', '🏁 FESTIVE OFFER: ₹5,000 EXCHANGE BONUS ON R15 V4 & MT-15 • ZERO DOWN PAYMENT FINANCE SCHEMES AVAILABLE • 100% GENUINE YAMAHA SPARE PARTS & CERTIFIED SERVICE BAYS • VISIT HIRA AUTO AGENCY MAHAGAMA TODAY', 'general');
 

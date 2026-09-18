@@ -66,10 +66,10 @@ export default function WhyChooseUs({ onOpenVisitModal }: WhyChooseUsProps) {
                 <ChevronRight className="w-4 h-4" />
               </button>
               <a
-                href="tel:8210582308"
+                href="tel:+916201238401"
                 className="px-6 py-3 rounded-full glass-panel hover:bg-white/10 text-white font-semibold text-xs uppercase tracking-wider text-center transition-colors"
               >
-                Call: 8210582308
+                Call: +91 62012 38401
               </a>
             </div>
           </div>

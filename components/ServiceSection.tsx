@@ -62,11 +62,11 @@ export default function ServiceSection() {
 
             <div className="mt-8 flex items-center gap-4">
               <a
-                href="tel:8210582308"
+                href="tel:+916201238401"
                 className="inline-flex items-center gap-2 text-xs font-bold text-yamaha-cyan hover:underline"
               >
                 <Phone className="w-4 h-4" />
-                <span>Service Helpdesk: 8210582308 / 8340408847</span>
+                <span>Service Helpdesk: +91 62012 38401</span>
               </a>
             </div>
           </div>

@@ -39,7 +39,7 @@ export async function sendWhatsAppMessage(params: {
 
   const mergedVars: TemplateVariables = {
     dealership_name: settingsMap['dealership_name'] || 'Hira Auto Agency',
-    dealership_phone: settingsMap['dealership_phone'] || '8210582308',
+    dealership_phone: settingsMap['dealership_phone'] || '+91 62012 38401',
     dealership_address: settingsMap['dealership_address'] || 'Opp. Honda Showroom, Kechua Chowk, Mahagama',
     ...params.variables
   };

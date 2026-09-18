@@ -585,7 +585,7 @@ export default function AdminBookingsPage() {
                   Kechua Chowk, Mahagama Main Road, Godda, Jharkhand 814154
                 </p>
                 <p className="text-xs text-zinc-600 font-semibold">
-                  Phone: +91 8210582308 / 8340408847
+                  Phone: +91 62012 38401
                 </p>
               </div>
               <div className="text-right">
