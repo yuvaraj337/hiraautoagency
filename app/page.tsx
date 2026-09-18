@@ -10,10 +10,12 @@ import BookingModal from '@/components/BookingModal';
 import VisitModal from '@/components/VisitModal';
 import LocationSection from '@/components/LocationSection';
 import Footer from '@/components/Footer';
+import InitialLoader from '@/components/InitialLoader';
 
 export default function HomePage() {
   const [bikes, setBikes] = useState<Bike[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isSiteLoaded, setIsSiteLoaded] = useState(false);
 
   // Modals state
   const [isVisitModalOpen, setIsVisitModalOpen] = useState(false);
@@ -67,6 +69,11 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-[#06080C] text-white">
+      {/* 0. INITIAL ASSET-DRIVEN LOADER */}
+      {!isSiteLoaded && (
+        <InitialLoader onLoaded={() => setIsSiteLoaded(true)} />
+      )}
+
       {/* 1. TOP NAVBAR */}
       <Navbar
         onOpenVisitModal={handleOpenVisitModal}

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { MapPin, Calendar, Mouse, Search, SlidersHorizontal, Eye, ArrowRight } from 'lucide-react';
+import { MapPin, Calendar, Mouse, Search, SlidersHorizontal, Eye, ArrowRight, Check } from 'lucide-react';
 import { Bike } from './BikeConfiguratorModal';
 
 export interface FeaturedSectionProps {
@@ -27,7 +27,7 @@ interface ShowcaseBikeData {
   catalogPrice: string;
 }
 
-// EXACT FOUR MOTORCYCLES MATCHING 6-PANEL STORYBOARD (NO AEROX IN CINEMATIC SHOWCASE)
+// EXACT FOUR MOTORCYCLES (NO AEROX IN CINEMATIC SHOWCASE)
 const FOUR_SHOWCASE_BIKES: ShowcaseBikeData[] = [
   {
     id: 'bike_r15',
@@ -120,6 +120,152 @@ const CATEGORIES = [
   { label: 'SCOOTERS & AEROX', value: 'SCOOTERS' },
 ];
 
+// VERIFIED CLIENT CATALOG DATA (ALL 7 MODELS & 23 VARIANTS WITH EXACT CLIENT PRICES)
+const DEFAULT_CATALOG_BIKES: Bike[] = [
+  {
+    id: 'bike_r15',
+    slug: 'yamaha-r15-v4',
+    name: 'Yamaha R15 V4',
+    category: 'R15',
+    tagline: 'Born of Racing DNA',
+    description: 'MotoGP inspired design. Pure adrenaline. Built for the streets.',
+    engine_cc: '155 cc',
+    max_power: '18.4 PS @ 10,000 RPM',
+    max_torque: '14.2 Nm @ 7,500 RPM',
+    fuel_capacity: '11 L',
+    mileage: '45 kmpl',
+    curb_weight: '141 kg',
+    image_url: '/bikes/r15-v4.png',
+    variants: [
+      { id: 'var_r15_std', bike_id: 'bike_r15', name: 'R15 V4', ex_showroom_price: 175650, color_name: 'Metallic Red', color_hex: '#D41427', image_url: '/assets/bikes/r15_red.png', in_stock: 1 },
+      { id: 'var_r15_m_carbon', bike_id: 'bike_r15', name: 'R-15 V4 (M) Carbon', ex_showroom_price: 201340, color_name: 'Carbon Edition', color_hex: '#1C1D21', image_url: '/assets/bikes/r15_black.png', in_stock: 1 },
+      { id: 'var_r15_m_silver', bike_id: 'bike_r15', name: 'R-15 (M) Silver', ex_showroom_price: 191130, color_name: 'Metallic Silver', color_hex: '#C0C0C0', image_url: '/bikes/r15-v4.png', in_stock: 1 },
+      { id: 'var_r15_qs', bike_id: 'bike_r15', name: 'R-15 V4 (Quick Shifter)', ex_showroom_price: 180300, color_name: 'Racing Blue', color_hex: '#0020B2', image_url: '/assets/bikes/r15_blue.png', in_stock: 1 },
+      { id: 'var_r15_monster', bike_id: 'bike_r15', name: 'R-15 V4 (Monster)', ex_showroom_price: 176850, color_name: 'Monster Energy Edition', color_hex: '#111111', image_url: '/assets/bikes/r15_cyan.png', in_stock: 1 },
+      { id: 'var_r15_v3_s', bike_id: 'bike_r15', name: 'R-15 V3 (S)', ex_showroom_price: 159970, color_name: 'Matte Black', color_hex: '#222222', image_url: '/assets/bikes/r15_black.png', in_stock: 1 },
+    ],
+  },
+  {
+    id: 'bike_mt15',
+    slug: 'yamaha-mt-15-v2',
+    name: 'Yamaha MT-15 V2',
+    category: 'MT',
+    tagline: 'The Dark Side of Japan',
+    description: 'Aggressive. Agile. Unstoppable. Built for those who break limits.',
+    engine_cc: '155 cc',
+    max_power: '18.4 PS @ 10,000 RPM',
+    max_torque: '14.1 Nm @ 7,500 RPM',
+    fuel_capacity: '10 L',
+    mileage: '48 kmpl',
+    curb_weight: '139 kg',
+    image_url: '/bikes/mt-15-v2.png',
+    variants: [
+      { id: 'var_mt15_std_cyan', bike_id: 'bike_mt15', name: 'MT-15 (STD) Cyan Blue', ex_showroom_price: 167610, color_name: 'Cyan Storm', color_hex: '#00E5FF', image_url: '/bikes/mt-15-v2.png', in_stock: 1 },
+      { id: 'var_mt15_dlx_tft', bike_id: 'bike_mt15', name: 'MT-15 V2 (DLX TFT)', ex_showroom_price: 176930, color_name: 'Ice Fluo-Vermillion', color_hex: '#EAEAEA', image_url: '/assets/bikes/mt15.jpg', in_stock: 1 },
+      { id: 'var_mt15_monster', bike_id: 'bike_mt15', name: 'MT-15 (Monster)', ex_showroom_price: 169110, color_name: 'Monster Energy MotoGP', color_hex: '#0A0E1A', image_url: '/bikes/mt-15-v2.png', in_stock: 1 },
+      { id: 'var_mt15_std_black', bike_id: 'bike_mt15', name: 'MT-15 (STD) Black', ex_showroom_price: 166710, color_name: 'Metallic Black', color_hex: '#151515', image_url: '/assets/bikes/hero_mt15_v2.jpg', in_stock: 1 },
+    ],
+  },
+  {
+    id: 'bike_fzs',
+    slug: 'yamaha-fzs-v4-hybrid',
+    name: 'Yamaha FZ-S V4 Hybrid',
+    category: 'FZ',
+    tagline: 'Lord of the Streets',
+    description: 'Refined performance. Unmatched style. Everyday thrill.',
+    engine_cc: '149 cc',
+    max_power: '12.4 PS @ 7,250 RPM',
+    max_torque: '13.3 Nm @ 5,500 RPM',
+    fuel_capacity: '13 L',
+    mileage: '50 kmpl',
+    curb_weight: '136 kg',
+    image_url: '/bikes/fz-s-v4-hybrid.png',
+    variants: [
+      { id: 'var_fzs_v4_hybrid', bike_id: 'bike_fzs', name: 'FZ-S V4 Hybrid', ex_showroom_price: 142000, color_name: 'Metallic Grey / Chrome', color_hex: '#646D7E', image_url: '/bikes/fz-s-v4-hybrid.png', in_stock: 1 },
+      { id: 'var_fzs_v3_std', bike_id: 'bike_fzs', name: 'FZ-S V3 (STD)', ex_showroom_price: 131680, color_name: 'Matte Red', color_hex: '#B32428', image_url: '/assets/bikes/hero_fzs_v4.jpg', in_stock: 1 },
+      { id: 'var_fz_rave', bike_id: 'bike_fzs', name: 'F-Z Rave', ex_showroom_price: 125880, color_name: 'Rave Matte Grey', color_hex: '#3E424B', image_url: '/bikes/fz-s-v4-hybrid.png', in_stock: 1 },
+      { id: 'var_fz_v3', bike_id: 'bike_fzs', name: 'F-Z V3', ex_showroom_price: 117560, color_name: 'Metallic Black', color_hex: '#1A1A1A', image_url: '/assets/bikes/fzs.jpg', in_stock: 1 },
+    ],
+  },
+  {
+    id: 'bike_xsr',
+    slug: 'yamaha-xsr-155',
+    name: 'Yamaha XSR 155',
+    category: 'XSR',
+    tagline: 'Pure Japanese Character',
+    description: 'Timeless design. Modern performance. Born to be timeless.',
+    engine_cc: '155 cc',
+    max_power: '19.3 PS @ 10,000 RPM',
+    max_torque: '14.7 Nm @ 8,500 RPM',
+    fuel_capacity: '10.4 L',
+    mileage: '46 kmpl',
+    curb_weight: '134 kg',
+    image_url: '/bikes/xsr.png',
+    variants: [
+      { id: 'var_xsr_black', bike_id: 'bike_xsr', name: 'XSR Black', ex_showroom_price: 163900, color_name: 'Heritage Black', color_hex: '#181818', image_url: '/bikes/xsr.png', in_stock: 1 },
+      { id: 'var_xsr_green', bike_id: 'bike_xsr', name: 'XSR Green', ex_showroom_price: 163900, color_name: 'Military Green', color_hex: '#354B3E', image_url: '/bikes/xsr.png', in_stock: 1 },
+      { id: 'var_xsr_silver', bike_id: 'bike_xsr', name: 'XSR Silver', ex_showroom_price: 161900, color_name: 'Timeless Silver', color_hex: '#D8D8D8', image_url: '/bikes/xsr.png', in_stock: 1 },
+      { id: 'var_xsr_red', bike_id: 'bike_xsr', name: 'XSR Red', ex_showroom_price: 157900, color_name: 'Vintage Red', color_hex: '#C82333', image_url: '/assets/bikes/clean/xsr155_xsr_red-pc.webp', in_stock: 1 },
+      { id: 'var_xsr_blue', bike_id: 'bike_xsr', name: 'XSR Blue', ex_showroom_price: 157090, color_name: 'Classic Blue', color_hex: '#0047AB', image_url: '/assets/bikes/clean/xsr155_blue.webp', in_stock: 1 },
+    ],
+  },
+  {
+    id: 'bike_rayzr',
+    slug: 'yamaha-ray-zr-125',
+    name: 'Yamaha Ray ZR 125 Fi',
+    category: 'SCOOTERS',
+    tagline: 'The Armoured Street Fighter',
+    description: 'Tough, aggressive scooter styling with hybrid assist and ultra-light 99 kg kerb weight.',
+    engine_cc: '125 cc',
+    max_power: '8.2 PS @ 6,500 RPM',
+    max_torque: '10.3 Nm @ 5,000 RPM',
+    fuel_capacity: '5.2 L',
+    mileage: '58 kmpl',
+    curb_weight: '99 kg',
+    image_url: '/assets/bikes/bike_rayzr.webp',
+    variants: [
+      { id: 'var_rayzr_drum', bike_id: 'bike_rayzr', name: 'Ray ZR (Drum)', ex_showroom_price: 82880, color_name: 'Metallic Black', color_hex: '#111111', image_url: '/assets/bikes/clean/rayzr_rally_matte_black_lcd.webp', in_stock: 1 },
+      { id: 'var_rayzr_rally', bike_id: 'bike_rayzr', name: 'Ray ZR (Street Rally)', ex_showroom_price: 96930, color_name: 'Matte Copper / Black', color_hex: '#A55D35', image_url: '/assets/bikes/clean/rayzr_rally_matte_titan_tft.webp', in_stock: 1 },
+    ],
+  },
+  {
+    id: 'bike_fascino',
+    slug: 'yamaha-fascino-125',
+    name: 'Yamaha Fascino 125 Fi',
+    category: 'SCOOTERS',
+    tagline: 'Classic European Elegance',
+    description: 'Signature chrome accents, quiet start generator, and hybrid assist technology.',
+    engine_cc: '125 cc',
+    max_power: '8.2 PS @ 6,500 RPM',
+    max_torque: '10.3 Nm @ 5,000 RPM',
+    fuel_capacity: '5.2 L',
+    mileage: '60 kmpl',
+    curb_weight: '99 kg',
+    image_url: '/assets/bikes/bike_fascino.webp',
+    variants: [
+      { id: 'var_fascino_drum', bike_id: 'bike_fascino', name: 'Fascino (Drum)', ex_showroom_price: 80980, color_name: 'Vivid Red', color_hex: '#D71920', image_url: '/assets/bikes/clean/fascino_vived_red_drum.webp', in_stock: 1 },
+    ],
+  },
+  {
+    id: 'bike_aerox',
+    slug: 'yamaha-aerox-s',
+    name: 'Yamaha Aerox S',
+    category: 'SCOOTERS',
+    tagline: 'The Maxi-Sports Scooter with Smart Key',
+    description: 'Maxi-sports scooter with 155cc liquid-cooled VVA engine and Smart Key keyless system.',
+    engine_cc: '155 cc',
+    max_power: '15.0 PS @ 8,000 RPM',
+    max_torque: '13.9 Nm @ 6,500 RPM',
+    fuel_capacity: '5.5 L',
+    mileage: '40 kmpl',
+    curb_weight: '126 kg',
+    image_url: '/assets/bikes/bike_aerox.webp',
+    variants: [
+      { id: 'var_aerox_s', bike_id: 'bike_aerox', name: 'Aerox S', ex_showroom_price: 150350, color_name: 'Racing Blue', color_hex: '#0020B2', image_url: '/assets/bikes/clean/aerox_versions_Racing-Blue.webp', in_stock: 1 },
+    ],
+  },
+];
+
 export default function FeaturedSection({
   bikes = [],
   onSelectBike,
@@ -128,12 +274,11 @@ export default function FeaturedSection({
 }: FeaturedSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const card4TargetRef = useRef<HTMLDivElement>(null);
-  const showcaseStageRef = useRef<HTMLDivElement>(null);
 
-  // Normalized scroll progress 0..1 across the pinned showcase container
+  // Normalized scroll progress across pinned showcase
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Dynamic geometry destination for XSR transition into Card 4
+  // Real destination coordinates for XSR shared-element landing
   const [targetOffset, setTargetOffset] = useState({ dx: 0, dy: 0, scale: 0.44 });
 
   // Catalog search and filter state
@@ -141,15 +286,15 @@ export default function FeaturedSection({
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'featured' | 'price_low' | 'price_high'>('featured');
 
-  // Preload all four motorcycle PNGs on mount
+  // Preload all 4 PNGs on component mount
   useEffect(() => {
-    FOUR_SHOWCASE_BIKES.forEach((bike) => {
+    FOUR_SHOWCASE_BIKES.forEach((b) => {
       const img = new Image();
-      img.src = bike.image;
+      img.src = b.image;
     });
   }, []);
 
-  // Update real shared-element destination coordinates using getBoundingClientRect()
+  // Update dynamic XSR landing target using getBoundingClientRect()
   const updateTargetGeometry = useCallback(() => {
     if (!card4TargetRef.current) return;
     const rect = card4TargetRef.current.getBoundingClientRect();
@@ -164,14 +309,13 @@ export default function FeaturedSection({
     const dx = targetCenterX - viewportCenterX;
     const dy = targetCenterY - viewportCenterY;
 
-    // Determine scale so XSR matches the target card image container dimensions
     const showcaseHeight = Math.min(window.innerHeight * (isMobile ? 0.42 : 0.65), 480);
     const scale = Math.max(0.32, Math.min(0.58, rect.height / showcaseHeight));
 
     setTargetOffset({ dx, dy, scale });
   }, []);
 
-  // High performance scroll engine with single requestAnimationFrame loop
+  // Scroll Engine with single requestAnimationFrame loop
   useEffect(() => {
     let rafId: number;
 
@@ -206,37 +350,37 @@ export default function FeaturedSection({
   }, [updateTargetGeometry]);
 
   // =========================================================================
-  // SCROLL TIMELINE WITH REAL XSR HOLD & DEDICATED TRANSITION
+  // 5-PHASE STATE MACHINE WITH GENEROUS SPACING & DEDICATED XSR HOLD
   // =========================================================================
-  // 0.00 - 0.20: R15 V4 dominant (State 01)
-  // 0.20 - 0.40: MT-15 dominant (State 02)
-  // 0.40 - 0.60: FZ-S V4 dominant (State 03)
-  // 0.60 - 0.74: XSR entrance
-  // 0.74 - 0.85: XSR HOLD PHASE (State 04 stable hold - NEVER SKIPPED)
-  // 0.85 - 1.00: XSR -> Catalog Card Transition
+  // Phase 1: 0.00 - 0.22 -> R15 V4 (State 01)
+  // Phase 2: 0.22 - 0.44 -> MT-15 (State 02)
+  // Phase 3: 0.44 - 0.66 -> FZ-S V4 HYBRID (State 03 - GUARANTEED DOMINANT)
+  // Phase 4: 0.66 - 0.74 -> XSR entrance into dominance
+  // Phase 5: 0.74 - 0.88 -> XSR HOLD PHASE (State 04 - CLEAR STABLE HOLD)
+  // Phase 6: 0.88 - 1.00 -> XSR -> Catalog Card Transition
   const activeBikeIndex = useMemo(() => {
-    if (scrollProgress >= 0.60) return 3; // XSR
-    if (scrollProgress >= 0.40) return 2; // FZ-S V4
-    if (scrollProgress >= 0.20) return 1; // MT-15
-    return 0; // R15 V4
+    if (scrollProgress >= 0.66) return 3; // XSR (Phases 4 & 5)
+    if (scrollProgress >= 0.44) return 2; // FZ-S V4 (Phase 3)
+    if (scrollProgress >= 0.22) return 1; // MT-15 (Phase 2)
+    return 0; // R15 V4 (Phase 1)
   }, [scrollProgress]);
 
   const currentBike = FOUR_SHOWCASE_BIKES[activeBikeIndex];
 
-  // Check if XSR has officially landed in Card 4 (progress >= 0.98)
+  // XSR has physically landed in Card 4 once progress >= 0.98
   const isXsrLanded = scrollProgress >= 0.98;
 
-  // Jump to specific bike via selector
+  // Jump smoothly to a specific bike state via selector
   const handleSelectModel = (index: number) => {
     if (!containerRef.current) return;
     const totalDist = containerRef.current.offsetHeight - window.innerHeight;
-    // Map indices to generous center points: 0.10, 0.30, 0.50, 0.78 (XSR hold)
-    const targetProgress = index === 3 ? 0.78 : index * 0.20 + 0.10;
+    // Map index to generous centers: 0.10, 0.32, 0.54, 0.80 (XSR hold)
+    const targetProgress = index === 3 ? 0.80 : index === 2 ? 0.54 : index === 1 ? 0.32 : 0.10;
     const targetScroll = containerRef.current.offsetTop + targetProgress * totalDist;
     window.scrollTo({ top: targetScroll, behavior: 'smooth' });
   };
 
-  // Helper to open booking with pre-selected bike & default variant
+  // Open booking modal with pre-selected bike
   const handleBookBikeAction = (slugOrId: string) => {
     const found = bikes.find((b) => b.slug === slugOrId || b.id === slugOrId);
     if (found && found.variants?.[0]) {
@@ -246,18 +390,23 @@ export default function FeaturedSection({
     }
   };
 
+  // Open visit modal
+  const handleOpenVisitAction = (slugOrId: string) => {
+    onOpenVisitModal();
+  };
+
   // =========================================================================
   // GPU-OPTIMIZED TRANSFORM & OPACITY CALCULATIONS FOR 4 PERSISTENT PNGs
-  // (NO DYNAMIC BLUR / NO DYNAMIC DROP-SHADOW TO PREVENT ANY LAG)
+  // (NO DYNAMIC BLUR / NO DYNAMIC DROP-SHADOW TO GUARANTEE 60/120 FPS)
   // =========================================================================
   const getBikeLayerStyle = (index: number) => {
-    const isTransitionPhase = scrollProgress >= 0.85;
+    const isTransitionPhase = scrollProgress >= 0.88;
 
-    // Bike 3 (XSR) shared element transition
+    // Bike 3 (XSR) shared-element transition into Card 4
     if (index === 3) {
       if (isTransitionPhase) {
-        // Transition progress 0..1 between 0.85 and 0.97
-        const t = Math.max(0, Math.min(1, (scrollProgress - 0.85) / (0.97 - 0.85)));
+        // Transition progress 0..1 between 0.88 and 0.97
+        const t = Math.max(0, Math.min(1, (scrollProgress - 0.88) / (0.97 - 0.88)));
         const easedT = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
         const currX = targetOffset.dx * easedT;
@@ -283,9 +432,9 @@ export default function FeaturedSection({
       }
     }
 
-    // In transition phase, ghost bikes fade away quickly
+    // In transition phase, non-XSR bikes fade away smoothly
     if (isTransitionPhase) {
-      const fadeOut = Math.max(0, 1 - (scrollProgress - 0.85) / 0.05);
+      const fadeOut = Math.max(0, 1 - (scrollProgress - 0.88) / 0.04);
       return {
         opacity: fadeOut * 0.16,
         transform: `translate3d(${index === 0 ? -160 : index === 1 ? 140 : -120}px, 0, 0) scale(0.68)`,
@@ -294,13 +443,13 @@ export default function FeaturedSection({
       };
     }
 
-    // Normal 4-bike showcase progression (progress 0.00..0.85)
-    // Bike centers: R15=0.10, MT15=0.30, FZS=0.50, XSR=0.78
-    const center = index === 3 ? 0.78 : 0.10 + index * 0.20;
+    // Normal 4-bike showcase progression (progress 0.00..0.88)
+    // Centers: R15=0.10, MT15=0.32, FZS=0.54, XSR=0.80
+    const center = index === 3 ? 0.80 : index === 2 ? 0.54 : index === 1 ? 0.32 : 0.10;
     const diff = scrollProgress - center;
 
     // Active dominant bike
-    if (Math.abs(diff) <= 0.07) {
+    if (Math.abs(diff) <= 0.08) {
       const sway = diff * 50;
       return {
         opacity: 1,
@@ -311,8 +460,8 @@ export default function FeaturedSection({
     }
 
     // Bike transitioning away (receding to ghost)
-    if (diff > 0.07 && diff < 0.20) {
-      const exitP = (diff - 0.07) / 0.13;
+    if (diff > 0.08 && diff < 0.22) {
+      const exitP = (diff - 0.08) / 0.14;
       return {
         opacity: 1.0 - exitP * 0.84, // down to 0.16
         transform: `translate3d(${-exitP * 140}px, 0, 0) scale(${1.0 - exitP * 0.30})`,
@@ -322,8 +471,8 @@ export default function FeaturedSection({
     }
 
     // Bike transitioning in (coming forward into center)
-    if (diff < -0.07 && diff > -0.20) {
-      const enterP = (-diff - 0.07) / 0.13;
+    if (diff < -0.08 && diff > -0.22) {
+      const enterP = (-diff - 0.08) / 0.14;
       return {
         opacity: 1.0 - enterP * 0.84, // down to 0.16
         transform: `translate3d(${enterP * 120}px, 0, 0) scale(${1.0 - enterP * 0.28})`,
@@ -349,15 +498,16 @@ export default function FeaturedSection({
     };
   };
 
-  // Showcase UI HUD Opacity (fades out as XSR begins traveling toward catalog)
-  const showcaseUiOpacity = Math.max(0, 1 - Math.max(0, scrollProgress - 0.85) / 0.04);
+  // Showcase UI HUD Opacity (fades out only after XSR hold completes at 0.88)
+  const showcaseUiOpacity = Math.max(0, 1 - Math.max(0, scrollProgress - 0.88) / 0.04);
 
   // Catalog Preview Opacity (fades in as XSR flies into Card 4 slot)
-  const catalogPreviewOpacity = Math.min(1, Math.max(0, (scrollProgress - 0.87) / 0.08));
+  const catalogPreviewOpacity = Math.min(1, Math.max(0, (scrollProgress - 0.90) / 0.07));
 
   // Filter & Sort for the full client catalog
   const filteredBikes = useMemo(() => {
-    let list = [...bikes];
+    const sourceList = bikes && bikes.length > 0 ? bikes : DEFAULT_CATALOG_BIKES;
+    let list = [...sourceList];
     if (selectedCategory !== 'ALL') {
       list = list.filter((b) => b.category === selectedCategory);
     }
@@ -372,14 +522,14 @@ export default function FeaturedSection({
     }
     if (sortBy === 'price_low') {
       list.sort((a, b) => {
-        const pA = a.variants?.[0]?.ex_showroom_price || 0;
-        const pB = b.variants?.[0]?.ex_showroom_price || 0;
+        const pA = Math.min(...(a.variants?.map((v) => v.ex_showroom_price) || [0]));
+        const pB = Math.min(...(b.variants?.map((v) => v.ex_showroom_price) || [0]));
         return pA - pB;
       });
     } else if (sortBy === 'price_high') {
       list.sort((a, b) => {
-        const pA = a.variants?.[0]?.ex_showroom_price || 0;
-        const pB = b.variants?.[0]?.ex_showroom_price || 0;
+        const pA = Math.min(...(a.variants?.map((v) => v.ex_showroom_price) || [0]));
+        const pB = Math.min(...(b.variants?.map((v) => v.ex_showroom_price) || [0]));
         return pB - pA;
       });
     }
@@ -389,9 +539,9 @@ export default function FeaturedSection({
   return (
     <section id="showcase-catalog-section" ref={containerRef} className="relative w-full bg-[#06080C] select-none">
       {/* ========================================================================= */}
-      {/* 1. SCROLL-PINNED SHOWCASE VIEWPORT (650vh SCROLL DISTANCE)                */}
+      {/* 1. SCROLL-PINNED SHOWCASE VIEWPORT (800vh SCROLL DISTANCE)                */}
       {/* ========================================================================= */}
-      <div className="relative w-full h-[650vh]">
+      <div className="relative w-full h-[800vh]">
         <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#06080C] flex flex-col justify-between">
           {/* DARK CORNERS RADIAL VIGNETTE (Center: Bright Showroom / Corners: Deep Black) */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_48%,transparent_30%,rgba(6,8,14,0.65)_70%,rgba(2,3,6,0.98)_100%)] pointer-events-none z-10" />
@@ -418,12 +568,9 @@ export default function FeaturedSection({
 
           {/* ========================================================================= */}
           {/* FOUR PERSISTENT MOTORCYCLE PNG OBJECTS SIMULTANEOUSLY IN DOM              */}
-          {/* (NO SRC SWAPPING • GPU TRANSFORM COMPOSITING • NO STUTTER)                */}
+          {/* (NO SRC SWAPPING • GPU TRANSFORM COMPOSITING • NO LAG)                    */}
           {/* ========================================================================= */}
-          <div
-            ref={showcaseStageRef}
-            className="absolute inset-0 flex items-center justify-center pointer-events-none z-20 px-4"
-          >
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20 px-4">
             {/* 1. R15 V4 */}
             <div
               className="bike-layer bike-r15 absolute inset-0 flex items-center justify-center will-change-transform"
@@ -448,7 +595,7 @@ export default function FeaturedSection({
               />
             </div>
 
-            {/* 3. FZ-S V4 HYBRID */}
+            {/* 3. FZ-S V4 HYBRID (ACTUAL DOMINANT STATE 03) */}
             <div
               className="bike-layer bike-fzs absolute inset-0 flex items-center justify-center will-change-transform"
               style={getBikeLayerStyle(2)}
@@ -460,7 +607,7 @@ export default function FeaturedSection({
               />
             </div>
 
-            {/* 4. XSR (Hold phase, then transitions physically into Card 4 empty slot) */}
+            {/* 4. XSR (ACTUAL DOMINANT STATE 04 + DEDICATED HOLD + SHARED-ELEMENT FLIGHT) */}
             <div
               className="bike-layer bike-xsr absolute inset-0 flex items-center justify-center will-change-transform"
               style={getBikeLayerStyle(3)}
@@ -507,7 +654,7 @@ export default function FeaturedSection({
               {/* Action Buttons: SHOWROOM VISIT & BOOK NOW */}
               <div className="flex flex-row items-center gap-2.5">
                 <button
-                  onClick={onOpenVisitModal}
+                  onClick={() => handleOpenVisitAction(currentBike.slug)}
                   className="px-5 py-2.5 rounded-xl border border-[#0066FF]/60 hover:border-[#00E5FF] bg-black/40 hover:bg-[#0066FF]/20 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
                 >
                   <MapPin className="w-3.5 h-3.5 text-[#00E5FF]" />
@@ -642,7 +789,7 @@ export default function FeaturedSection({
               ))}
             </div>
 
-            {/* Spacer for Floating Motorcycle stage in middle */}
+            {/* Middle Spacer for Floating Motorcycle */}
             <div className="h-[36vh] w-full pointer-events-none" />
 
             {/* Dedicated Mobile Text & Actions Area (Strictly Below Motorcycle) */}
@@ -663,7 +810,7 @@ export default function FeaturedSection({
               {/* Action Buttons */}
               <div className="grid grid-cols-2 gap-2 mt-3">
                 <button
-                  onClick={onOpenVisitModal}
+                  onClick={() => handleOpenVisitAction(currentBike.slug)}
                   className="py-2 px-2 rounded-xl border border-[#0066FF]/60 bg-black/40 text-white font-bold text-[10px] uppercase tracking-wider flex items-center justify-center gap-1.5"
                 >
                   <MapPin className="w-3 h-3 text-[#00E5FF]" />
@@ -702,7 +849,7 @@ export default function FeaturedSection({
 
           {/* ========================================================================= */}
           {/* PINNED TRANSITION OVERLAY: REVEALING CATALOG CARDS AS XSR FLIES IN         */}
-          {/* (Fades in during scroll progress 0.87..0.98. Card 4 image slot is EMPTY)  */}
+          {/* (Fades in during scroll progress 0.90..0.98. Card 4 image slot is EMPTY!)  */}
           {/* ========================================================================= */}
           <div
             className="absolute inset-0 z-25 flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pointer-events-none"
@@ -728,20 +875,20 @@ export default function FeaturedSection({
             </div>
 
             {/* 4 Cards Row matching Reference B */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 lg:gap-6">
               {FOUR_SHOWCASE_BIKES.map((bike, idx) => {
                 const isCard4Xsr = idx === 3;
                 return (
                   <div
                     key={bike.id}
-                    className="relative rounded-2xl bg-gradient-to-b from-[#0a1020]/90 to-[#050811]/95 border border-[#0055ff]/40 p-4 flex flex-col justify-between shadow-[0_10px_30px_rgba(0,0,0,0.8)] overflow-hidden"
+                    className="relative rounded-2xl bg-gradient-to-b from-[#0a1020]/90 to-[#050811]/95 border border-[#0055ff]/40 p-3 sm:p-4 flex flex-col justify-between shadow-[0_10px_30px_rgba(0,0,0,0.8)] overflow-hidden"
                   >
                     {/* Large Bike Image Container with Blue Floor Reflection */}
                     <div
                       ref={isCard4Xsr ? card4TargetRef : undefined}
-                      className="relative h-44 sm:h-48 w-full flex items-center justify-center overflow-hidden mb-3"
+                      className="relative h-28 sm:h-44 md:h-48 w-full flex items-center justify-center overflow-hidden mb-2 sm:mb-3"
                     >
-                      <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-4/5 h-5 bg-[#0066FF]/25 rounded-full blur-md" />
+                      <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-4/5 h-4 sm:h-5 bg-[#0066FF]/25 rounded-full blur-md" />
 
                       {/* CRITICAL: Card 4 Image Slot is COMPLETELY EMPTY before XSR lands! */}
                       {isCard4Xsr ? (
@@ -763,37 +910,37 @@ export default function FeaturedSection({
 
                     {/* Content below Image */}
                     <div>
-                      <h3 className="text-xl font-black text-white font-display leading-tight">
+                      <h3 className="text-sm sm:text-xl font-black text-white font-display leading-tight">
                         {bike.name}
                       </h3>
-                      <p className="text-xs text-gray-400 mb-3 font-medium">
+                      <p className="text-[10px] sm:text-xs text-gray-400 mb-2 sm:mb-3 font-medium truncate">
                         {bike.catalogSubtitle}
                       </p>
 
-                      <div className="mb-4">
-                        <div className="text-xl font-black text-white font-display">
+                      <div className="mb-2 sm:mb-4">
+                        <div className="text-sm sm:text-xl font-black text-white font-display">
                           {bike.catalogPrice}
                         </div>
-                        <div className="text-[10px] text-gray-400 uppercase font-semibold">
+                        <div className="text-[9px] sm:text-[10px] text-gray-400 uppercase font-semibold">
                           Ex-Showroom Price
                         </div>
                       </div>
 
-                      {/* Stacked Action Buttons */}
-                      <div className="space-y-2">
+                      {/* Stacked Action Buttons (Inactive until XSR lands) */}
+                      <div className="space-y-1.5 sm:space-y-2">
                         <button
-                          onClick={onOpenVisitModal}
-                          className={`w-full py-2 px-3 rounded-xl border border-[#0066FF]/60 bg-[#0c1427]/60 text-white font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all ${
-                            isXsrLanded ? 'pointer-events-auto cursor-pointer hover:bg-[#0066FF]/20' : 'pointer-events-none opacity-60'
+                          onClick={() => isXsrLanded && handleOpenVisitAction(bike.slug)}
+                          className={`w-full py-1.5 sm:py-2 px-2 sm:px-3 rounded-xl border border-[#0066FF]/60 bg-[#0c1427]/60 text-white font-bold text-[9px] sm:text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all ${
+                            isXsrLanded ? 'pointer-events-auto cursor-pointer hover:bg-[#0066FF]/20' : 'pointer-events-none opacity-50'
                           }`}
                         >
                           <MapPin className="w-3 h-3 text-[#00E5FF]" />
                           <span>SHOWROOM VISIT</span>
                         </button>
                         <button
-                          onClick={() => handleBookBikeAction(bike.slug)}
-                          className={`w-full py-2 px-3 rounded-xl bg-[#0066FF] text-white font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md shadow-blue-600/30 transition-all ${
-                            isXsrLanded ? 'pointer-events-auto cursor-pointer hover:bg-[#0052cc]' : 'pointer-events-none opacity-60'
+                          onClick={() => isXsrLanded && handleBookBikeAction(bike.slug)}
+                          className={`w-full py-1.5 sm:py-2 px-2 sm:px-3 rounded-xl bg-[#0066FF] text-white font-bold text-[9px] sm:text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md shadow-blue-600/30 transition-all ${
+                            isXsrLanded ? 'pointer-events-auto cursor-pointer hover:bg-[#0052cc]' : 'pointer-events-none opacity-50'
                           }`}
                         >
                           <Calendar className="w-3 h-3 text-white" />
@@ -815,7 +962,7 @@ export default function FeaturedSection({
       <div id="catalog" className="relative py-20 bg-[#06080C] border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header with Search and Sort (Matching Reference B) */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#00E5FF] mb-1">
                 EXPLORE THE RANGE
@@ -824,7 +971,7 @@ export default function FeaturedSection({
                 YAMAHA MOTORCYCLES
               </h2>
               <p className="text-xs sm:text-sm text-gray-400 mt-1">
-                Find the perfect Yamaha for your journey.
+                Find the perfect Yamaha for your journey. Official Mahagama lineup.
               </p>
             </div>
 
@@ -856,90 +1003,13 @@ export default function FeaturedSection({
             </div>
           </div>
 
-          {/* ======================================================================= */}
-          {/* THE 4 FEATURED CARDS (1:1 MATCHING REFERENCE B)                        */}
-          {/* ======================================================================= */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 mb-16">
-            {FOUR_SHOWCASE_BIKES.map((bike) => {
-              const matchedBike = bikes.find((b) => b.slug === bike.slug);
-              return (
-                <div
-                  key={bike.id}
-                  className="group relative rounded-2xl bg-gradient-to-b from-[#0a1020]/90 to-[#050811]/95 border border-[#0055ff]/40 hover:border-[#0088ff] p-5 flex flex-col justify-between shadow-[0_10px_30px_rgba(0,0,0,0.8)] hover:shadow-[0_15px_40px_rgba(0,102,255,0.25)] transition-all duration-300 hover:-translate-y-1"
-                >
-                  {/* Large Bike Image Container with Showroom Blue Reflection */}
-                  <div
-                    onClick={() => matchedBike && onSelectBike(matchedBike)}
-                    className="relative h-48 sm:h-52 w-full flex items-center justify-center overflow-hidden mb-3 cursor-pointer group-hover:scale-105 transition-transform duration-500"
-                  >
-                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-4/5 h-6 bg-[#0066FF]/25 rounded-full blur-md" />
-                    <img
-                      src={bike.image}
-                      alt={bike.name}
-                      className="max-h-full max-w-full object-contain filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.9)]"
-                    />
-                  </div>
-
-                  {/* Content Below Image (Price is strictly BELOW image) */}
-                  <div>
-                    <h3 className="text-2xl font-black text-white font-display tracking-tight leading-none mb-1">
-                      {bike.name}
-                    </h3>
-                    <p className="text-xs text-gray-400 mb-4 font-medium">
-                      {bike.catalogSubtitle}
-                    </p>
-
-                    <div className="mb-5">
-                      <div className="text-2xl font-black text-white font-display">
-                        {bike.catalogPrice}
-                      </div>
-                      <div className="text-[11px] text-gray-400 uppercase font-semibold mt-0.5">
-                        Ex-Showroom Price
-                      </div>
-                    </div>
-
-                    {/* Stacked Action Buttons */}
-                    <div className="space-y-2.5">
-                      <button
-                        onClick={onOpenVisitModal}
-                        className="w-full py-2.5 rounded-xl border border-[#0066FF]/60 hover:border-[#00E5FF] bg-[#0c1427]/60 hover:bg-[#0066FF]/20 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
-                      >
-                        <MapPin className="w-3.5 h-3.5 text-[#00E5FF]" />
-                        <span>SHOWROOM VISIT</span>
-                      </button>
-
-                      <button
-                        onClick={() => handleBookBikeAction(bike.slug)}
-                        className="w-full py-2.5 rounded-xl bg-[#0066FF] hover:bg-[#0052cc] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 transition-all cursor-pointer active:scale-98"
-                      >
-                        <Calendar className="w-3.5 h-3.5 text-white" />
-                        <span>BOOK NOW</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* ======================================================================= */}
-          {/* GLOWING DIVIDER: DISCOVER MORE AT HIRA AUTO AGENCY                     */}
-          {/* ======================================================================= */}
-          <div className="flex items-center justify-center gap-4 my-14">
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#0066FF]/40 to-transparent" />
-            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-gray-400 whitespace-nowrap">
-              DISCOVER MORE AT HIRA AUTO AGENCY
-            </span>
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#0066FF]/40 to-transparent" />
-          </div>
-
-          {/* Category Filter Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">
+          {/* Category Filter Pills (Directly below header) */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-10 scrollbar-none">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.value}
                 onClick={() => setSelectedCategory(cat.value)}
-                className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all ${
+                className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer ${
                   selectedCategory === cat.value
                     ? 'bg-[#0066FF] text-white shadow-lg shadow-blue-600/40 scale-105'
                     : 'glass-card text-gray-400 hover:text-white hover:bg-white/10'
@@ -950,8 +1020,8 @@ export default function FeaturedSection({
             ))}
           </div>
 
-          {/* Complete Catalog Grid (All Models, Variants, Scooters from verified database) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* ONE Complete Catalog Grid (All Models, Variants, Scooters from verified database) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredBikes.map((bike) => {
               const minPrice = Math.min(...(bike.variants?.map((v) => v.ex_showroom_price) || [0]));
               const defaultVariant = bike.variants?.[0];
@@ -959,81 +1029,95 @@ export default function FeaturedSection({
               return (
                 <div
                   key={bike.id}
-                  className="group rounded-2xl glass-card border border-white/10 overflow-hidden flex flex-col justify-between hover:border-[#0088ff]/40 transition-all duration-300 hover:-translate-y-1 shadow-xl"
+                  className="group rounded-2xl bg-gradient-to-b from-[#0a1020]/90 to-[#050811]/95 border border-[#0055ff]/35 hover:border-[#0088ff] p-5 flex flex-col justify-between shadow-[0_10px_30px_rgba(0,0,0,0.8)] hover:shadow-[0_15px_40px_rgba(0,102,255,0.25)] transition-all duration-300 hover:-translate-y-1 overflow-hidden"
                 >
-                  <div className="p-5 pb-0">
+                  <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="px-2.5 py-0.5 rounded-full bg-white/10 text-[#00E5FF] text-[10px] font-bold uppercase tracking-wider">
                         {bike.category}
                       </span>
-                      <span className="text-[11px] text-gray-400 font-semibold">
-                        {bike.variants?.length} Variants
-                      </span>
-                    </div>
-
-                    <h3 className="text-xl font-black text-white uppercase font-display leading-tight">
-                      {bike.name}
-                    </h3>
-                    <p className="text-xs text-gray-400 mt-0.5">{bike.tagline}</p>
-                  </div>
-
-                  {/* Image Stage */}
-                  <div
-                    onClick={() => onSelectBike(bike)}
-                    className="relative h-52 w-full p-4 flex items-center justify-center cursor-pointer overflow-hidden group-hover:scale-105 transition-transform duration-500"
-                  >
-                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-48 h-8 bg-[#0066FF]/20 rounded-full blur-xl pointer-events-none" />
-                    <img
-                      src={bike.image_url}
-                      alt={bike.name}
-                      className="max-h-full max-w-full object-contain filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.8)]"
-                    />
-                  </div>
-
-                  {/* Card Bottom: Variants, Price, CTAs */}
-                  <div className="p-5 pt-3 bg-black/30 border-t border-white/5">
-                    {/* Variants preview */}
-                    <div className="mb-4">
-                      <div className="flex items-center justify-between text-[11px] text-gray-400 mb-1.5 font-medium">
-                        <span>Available Variants:</span>
-                        <span className="text-[#00E5FF] font-bold text-[10px]">Ex-Showroom</span>
-                      </div>
-                      <div className="space-y-1 max-h-20 overflow-y-auto pr-1 text-xs">
-                        {bike.variants?.slice(0, 3).map((v) => (
-                          <div key={v.id} className="flex items-center justify-between text-[11px]">
-                            <span className="text-gray-300 truncate max-w-[180px]">• {v.name}</span>
-                            <span className="font-bold text-white font-display">
-                              ₹{v.ex_showroom_price.toLocaleString('en-IN')}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Price strictly below image */}
-                    <div className="flex items-baseline justify-between pt-3 border-t border-white/10 mb-4">
-                      <span className="text-[11px] uppercase font-bold text-gray-400">Starting At</span>
-                      <span className="text-xl font-black text-white font-display">
-                        ₹{minPrice.toLocaleString('en-IN')}*
-                      </span>
-                    </div>
-
-                    {/* Dual Action Buttons */}
-                    <div className="grid grid-cols-2 gap-2">
                       <button
                         onClick={() => onSelectBike(bike)}
-                        className="py-2 px-3 rounded-xl glass-panel hover:bg-white/10 text-white font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors"
+                        className="text-[11px] text-[#00E5FF] hover:underline font-semibold flex items-center gap-1 cursor-pointer"
                       >
-                        <Eye className="w-3.5 h-3.5 text-[#00E5FF]" />
-                        <span>Configure</span>
+                        <Eye className="w-3 h-3" />
+                        <span>{bike.variants?.length || 1} Colors</span>
+                      </button>
+                    </div>
+
+                    {/* 1. LARGE IMAGE (Click opens Color Configurator) */}
+                    <div
+                      onClick={() => onSelectBike(bike)}
+                      className="relative h-48 sm:h-52 w-full flex items-center justify-center overflow-hidden mb-3 cursor-pointer group-hover:scale-105 transition-transform duration-500"
+                    >
+                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-4/5 h-6 bg-[#0066FF]/25 rounded-full blur-md" />
+                      <img
+                        src={bike.image_url}
+                        alt={bike.name}
+                        className="max-h-full max-w-full object-contain filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.9)]"
+                      />
+                    </div>
+
+                    {/* 2. MODEL */}
+                    <h3
+                      onClick={() => onSelectBike(bike)}
+                      className="text-xl sm:text-2xl font-black text-white font-display tracking-tight leading-none mb-1 cursor-pointer hover:text-[#00E5FF] transition-colors"
+                    >
+                      {bike.name}
+                    </h3>
+
+                    {/* 3. VARIANT/DESCRIPTION */}
+                    <p className="text-xs text-gray-400 mb-3 font-medium line-clamp-2">
+                      {bike.tagline || bike.description}
+                    </p>
+
+                    {/* Color Swatches Preview */}
+                    {bike.variants && bike.variants.length > 0 && (
+                      <div className="flex items-center gap-1.5 mb-3">
+                        {bike.variants.slice(0, 5).map((v) => (
+                          <span
+                            key={v.id}
+                            className="w-2.5 h-2.5 rounded-full border border-white/40 shadow-sm"
+                            style={{ backgroundColor: v.color_hex || '#0066FF' }}
+                            title={v.color_name}
+                          />
+                        ))}
+                        {bike.variants.length > 5 && (
+                          <span className="text-[10px] text-gray-400 font-bold ml-1">
+                            +{bike.variants.length - 5}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  <div>
+                    {/* 4. PRICE & 5. EX-SHOWROOM PRICE (Strictly Below Image) */}
+                    <div className="mb-4 pt-3 border-t border-white/10">
+                      <div className="text-2xl font-black text-white font-display">
+                        ₹{minPrice.toLocaleString('en-IN')}*
+                      </div>
+                      <div className="text-[10px] text-gray-400 uppercase font-semibold mt-0.5">
+                        Ex-Showroom Price
+                      </div>
+                    </div>
+
+                    {/* 6. SHOWROOM VISIT & 7. BOOK NOW */}
+                    <div className="space-y-2">
+                      <button
+                        onClick={() => handleOpenVisitAction(bike.slug || bike.id)}
+                        className="w-full py-2.5 rounded-xl border border-[#0066FF]/60 hover:border-[#00E5FF] bg-[#0c1427]/60 hover:bg-[#0066FF]/20 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
+                      >
+                        <MapPin className="w-3.5 h-3.5 text-[#00E5FF]" />
+                        <span>SHOWROOM VISIT</span>
                       </button>
 
                       <button
-                        onClick={() => defaultVariant && onOpenBookingModal(bike.id, defaultVariant.id)}
-                        className="py-2 px-3 rounded-xl bg-[#0066FF] hover:bg-blue-700 text-white font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md shadow-blue-600/30 transition-transform active:scale-95"
+                        onClick={() => handleBookBikeAction(bike.slug || bike.id)}
+                        className="w-full py-2.5 rounded-xl bg-[#0066FF] hover:bg-[#0052cc] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 transition-all cursor-pointer active:scale-98"
                       >
-                        <span>Book Bike</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
+                        <Calendar className="w-3.5 h-3.5 text-white" />
+                        <span>BOOK NOW</span>
                       </button>
                     </div>
                   </div>
@@ -1053,7 +1137,7 @@ export default function FeaturedSection({
                   setSearchQuery('');
                   setSelectedCategory('ALL');
                 }}
-                className="mt-4 px-4 py-2 rounded-xl bg-[#0066FF] text-white text-xs font-bold uppercase"
+                className="mt-4 px-4 py-2 rounded-xl bg-[#0066FF] text-white text-xs font-bold uppercase cursor-pointer"
               >
                 Reset Filters
               </button>
