@@ -114,8 +114,8 @@ export default function LocationSection({ onOpenVisitModal }: LocationSectionPro
                   <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-0.5">
                     Official Email
                   </span>
-                  <a href="mailto:hiramotors007@gmail.com" className="text-xs font-bold text-white hover:text-[#00E5FF] transition-colors">
-                    hiramotors007@gmail.com
+                  <a href="mailto:Sachinbhagat1655@gmail.com" className="text-xs font-bold text-white hover:text-[#00E5FF] transition-colors">
+                    Sachinbhagat1655@gmail.com
                   </a>
                 </div>
               </div>

@@ -256,7 +256,7 @@ export function seedDatabase(passedDb?: any) {
   insertSetting.run('dealership_address', 'Ekchari Road, Mohanpur, Godda, Jharkhand 814154', 'contact');
   insertSetting.run('dealership_phone', '+91 62012 38401', 'contact');
   insertSetting.run('dealership_phone_alt', '+91 62012 38401', 'contact');
-  insertSetting.run('dealership_email', 'hiramotors007@gmail.com', 'contact');
+  insertSetting.run('dealership_email', 'Sachinbhagat1655@gmail.com', 'contact');
   insertSetting.run('advance_booking_fixed_amount', '5000', 'booking');
   insertSetting.run('advance_booking_type', 'FIXED', 'booking'); // FIXED or PERCENTAGE
   insertSetting.run('advance_booking_percentage', '10', 'booking');

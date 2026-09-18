@@ -95,7 +95,7 @@ export default function Footer({ onOpenVisitModal }: FooterProps) {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-blue-400 shrink-0" />
-                <a href="mailto:hiramotors007@gmail.com" className="hover:text-white">hiramotors007@gmail.com</a>
+                <a href="mailto:Sachinbhagat1655@gmail.com" className="hover:text-white">Sachinbhagat1655@gmail.com</a>
               </div>
             </div>
           </div>
