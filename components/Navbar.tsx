@@ -200,11 +200,11 @@ export default function Navbar({ onOpenVisitModal, onOpenBookingModal }: NavbarP
             </button>
 
             <a
-              href="tel:8210582308"
+              href="tel:+916201238401"
               className="w-full py-3 rounded-xl glass-panel text-white font-semibold text-sm flex items-center justify-center gap-2 hover:bg-white/10 transition-colors"
             >
               <Phone className="w-4 h-4 text-emerald-400" />
-              <span>Call Dealership: 8210582308</span>
+              <span>Call Dealership: +91 62012 38401</span>
             </a>
           </div>
         </div>
