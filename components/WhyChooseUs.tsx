@@ -12,7 +12,7 @@ const PILLARS = [
     icon: ShieldCheck,
     title: 'Authorized Yamaha Dealership',
     description:
-      'Official Yamaha franchise serving Mahagama, Godda, and surrounding Jharkhand regions with authentic factory warranties and direct manufacturer support.',
+      'Official Yamaha franchise serving Mohanpur, Godda, and surrounding Jharkhand regions with authentic factory warranties and direct manufacturer support.',
     color: '#00E5FF'
   },
   {
@@ -54,7 +54,7 @@ export default function WhyChooseUs({ onOpenVisitModal }: WhyChooseUsProps) {
               <span className="text-gradient-yamaha">POWERED BY TRUST.</span>
             </h2>
             <p className="mt-4 text-xs sm:text-sm text-gray-300 leading-relaxed font-medium">
-              At Hira Auto Agency, Mahagama, we are committed to delivering the pure thrill of Yamaha engineering with complete transparency and certified customer support.
+              At Hira Auto Agency, Mohanpur, we are committed to delivering the pure thrill of Yamaha engineering with complete transparency and certified customer support.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -100,7 +100,7 @@ export default function WhyChooseUs({ onOpenVisitModal }: WhyChooseUsProps) {
 
                   <div className="mt-4 pt-3 border-t border-white/5 flex items-center gap-1.5 text-[10px] font-semibold text-gray-400">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>Verified at Mahagama Branch</span>
+                    <span>Verified at Mohanpur Branch</span>
                   </div>
                 </div>
               );

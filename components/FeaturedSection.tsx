@@ -971,7 +971,7 @@ export default function FeaturedSection({
                 YAMAHA MOTORCYCLES
               </h2>
               <p className="text-xs sm:text-sm text-gray-400 mt-1">
-                Find the perfect Yamaha for your journey. Official Mahagama lineup.
+                Find the perfect Yamaha for your journey. Official Mohanpur lineup.
               </p>
             </div>
 
@@ -1147,7 +1147,7 @@ export default function FeaturedSection({
           {/* Mandatory Ex-Showroom Disclaimer Notice */}
           <div className="mt-12 p-4 rounded-xl glass-panel border border-white/10 text-center">
             <p className="text-xs text-gray-400">
-              <strong className="text-white">Price Policy:</strong> All listed prices are official Ex-Showroom Mahagama. On-road price will vary based on location, statutory registration, compulsory third-party insurance, road taxes, and applicable local charges. Zero hidden fees at Hira Auto Agency.
+              <strong className="text-white">Price Policy:</strong> All listed prices are official Ex-Showroom Mohanpur. On-road price will vary based on location, statutory registration, compulsory third-party insurance, road taxes, and applicable local charges. Zero hidden fees at Hira Auto Agency.
             </p>
           </div>
         </div>

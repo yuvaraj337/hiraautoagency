@@ -77,7 +77,7 @@ export default function CatalogSection({
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2.5 h-2.5 rounded-full bg-yamaha-cyan" />
               <p className="text-xs uppercase font-bold tracking-widest text-yamaha-cyan">
-                Official 2026 Price List • Mahagama Showroom
+                Official 2026 Price List • Mohanpur Showroom
               </p>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase text-white font-display tracking-tight leading-tight">
@@ -255,7 +255,7 @@ export default function CatalogSection({
         {/* Mandatory Ex-Showroom Disclaimer Notice */}
         <div className="mt-12 p-4 rounded-xl glass-panel border border-white/10 text-center">
           <p className="text-xs text-gray-400">
-            <strong className="text-white">Price Policy:</strong> All listed prices are official Ex-Showroom Mahagama. On-road price will vary based on location, statutory registration, compulsory third-party insurance, road taxes, and applicable local charges. Zero hidden fees at Hira Auto Agency.
+            <strong className="text-white">Price Policy:</strong> All listed prices are official Ex-Showroom Mohanpur. On-road price will vary based on location, statutory registration, compulsory third-party insurance, road taxes, and applicable local charges. Zero hidden fees at Hira Auto Agency.
           </p>
         </div>
       </div>

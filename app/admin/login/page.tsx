@@ -61,7 +61,7 @@ export default function AdminLoginPage() {
           <p className="text-xs font-bold uppercase tracking-widest text-yamaha-cyan mt-0.5">
             Yamaha Dealership Operations CRM
           </p>
-          <span className="text-[11px] text-gray-400">Mahagama, Godda • Secure Portal</span>
+          <span className="text-[11px] text-gray-400">Mohanpur, Godda • Secure Portal</span>
         </div>
 
         {/* Login Card */}

@@ -194,7 +194,7 @@ export default function FinanceExchange({ onOpenVisitModal }: FinanceExchangePro
                   <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto mb-3" />
                   <h4 className="text-base font-bold text-white uppercase">Valuation Request Received!</h4>
                   <p className="text-xs text-gray-300 mt-1 max-w-sm mx-auto">
-                    Our exchange specialist at Hira Auto Agency Mahagama will inspect your vehicle and provide maximum trade-in valuation.
+                    Our exchange specialist at Hira Auto Agency Mohanpur will inspect your vehicle and provide maximum trade-in valuation.
                   </p>
                   <button
                     onClick={() => setExchangeSubmitted(false)}

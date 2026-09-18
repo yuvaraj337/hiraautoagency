@@ -100,7 +100,7 @@ async function runVerification() {
         variant_id: 'var_r15_m_carbon',
         visit_date: '2026-09-26',
         visit_time: '11:00 AM - 12:00 PM',
-        notes: 'Interested in R15 Carbon edition test drive at Mahagama',
+        notes: 'Interested in R15 Carbon edition test drive at Mohanpur',
       }
     );
     const data = res.json();

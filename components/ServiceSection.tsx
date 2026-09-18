@@ -31,7 +31,7 @@ export default function ServiceSection() {
               <span className="text-gradient-yamaha">FOR YOUR MACHINE</span>
             </h2>
             <p className="mt-4 text-xs sm:text-sm text-gray-300 leading-relaxed font-medium">
-              Keep your Yamaha operating at peak performance. Our specialized Mahagama workshop features authorized diagnostic tools, automated oil dispensers, and genuine Yamalube lubricants.
+              Keep your Yamaha operating at peak performance. Our specialized Mohanpur workshop features authorized diagnostic tools, automated oil dispensers, and genuine Yamalube lubricants.
             </p>
 
             <div className="mt-8 space-y-3.5">

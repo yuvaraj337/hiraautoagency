@@ -235,7 +235,7 @@ export default function AdminOffersPage() {
               <input
                 type="text"
                 required
-                placeholder="e.g. Mahagama Festive Dhamaka: ₹5,000 Exchange Bonus"
+                placeholder="e.g. Mohanpur Festive Dhamaka: ₹5,000 Exchange Bonus"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="w-full bg-[#141A29] border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-yamaha-cyan text-sm"

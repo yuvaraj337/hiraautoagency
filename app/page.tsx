@@ -102,7 +102,7 @@ export default function HomePage() {
         }}
       />
 
-      {/* 5. VERIFIED MAHAGAMA LOCATION & MAP */}
+      {/* 5. VERIFIED MOHANPUR LOCATION & MAP */}
       <LocationSection onOpenVisitModal={handleOpenVisitModal} />
 
       {/* 6. FINAL CTA & FOOTER */}

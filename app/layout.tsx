@@ -2,22 +2,22 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Hira Auto Agency | Authorized Yamaha Dealership Mahagama, Godda",
-  description: "Experience Yamaha motorcycles & scooters at Hira Auto Agency, Mahagama, Godda. Official dealer for R15 V4, MT-15 V2, FZ-S V4 Hybrid, Aerox S, XSR 155, Ray ZR & Fascino (Drum). Book showroom test rides and genuine service.",
+  title: "Hira Auto Agency | Authorized Yamaha Dealership Mohanpur, Godda",
+  description: "Experience Yamaha motorcycles & scooters at Hira Auto Agency, Mohanpur, Godda. Official dealer for R15 V4, MT-15 V2, FZ-S V4 Hybrid, Aerox S, XSR 155, Ray ZR & Fascino (Drum). Book showroom test rides and genuine service.",
   keywords: [
-    "Yamaha showroom Mahagama",
-    "Yamaha bikes Mahagama",
+    "Yamaha showroom Mohanpur",
+    "Yamaha bikes Mohanpur",
     "Yamaha dealer Godda",
-    "Yamaha R15 Mahagama",
-    "Yamaha MT-15 Mahagama",
+    "Yamaha R15 Mohanpur",
+    "Yamaha MT-15 Mohanpur",
     "Hira Auto Agency",
-    "Hira Motors Mahagama",
+    "Hira Motors Mohanpur",
     "Yamaha Jharkhand",
-    "Yamaha Aerox Mahagama"
+    "Yamaha Aerox Mohanpur"
   ],
   openGraph: {
-    title: "Hira Auto Agency | Authorized Yamaha Dealership Mahagama",
-    description: "Discover genuine Yamaha performance, racing technology and book test rides at Hira Auto Agency, Mahagama, Godda.",
+    title: "Hira Auto Agency | Authorized Yamaha Dealership Mohanpur",
+    description: "Discover genuine Yamaha performance, racing technology and book test rides at Hira Auto Agency, Mohanpur, Godda.",
     siteName: "Hira Auto Agency Yamaha",
     images: [
       {

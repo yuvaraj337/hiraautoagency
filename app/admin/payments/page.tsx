@@ -287,7 +287,7 @@ export default function AdminPaymentsPage() {
                 HIRA AUTO AGENCY
               </h2>
               <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-600">
-                Yamaha Dealership • Mahagama, Godda, Jharkhand
+                Yamaha Dealership • Mohanpur, Godda, Jharkhand
               </p>
               <div className="inline-block mt-2 px-2.5 py-0.5 bg-zinc-900 text-white text-[10px] font-black uppercase tracking-widest rounded">
                 Official Payment Receipt

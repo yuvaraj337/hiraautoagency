@@ -52,7 +52,7 @@ export default function AdminDashboardPage() {
             Dealership Operations Dashboard
           </h1>
           <p className="text-xs text-gray-400">
-            Real-time performance metrics for Hira Auto Agency, Mahagama.
+            Real-time performance metrics for Hira Auto Agency, Mohanpur.
           </p>
         </div>
 

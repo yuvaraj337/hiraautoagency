@@ -195,7 +195,7 @@ export default function AdminCatalogPage() {
           <div className="h-8 w-px bg-white/10 hidden sm:block" />
           <div className="hidden sm:block">
             <span className="text-xs uppercase font-bold text-white/40 block">Price Base</span>
-            <span className="text-xs font-semibold text-emerald-400">Ex-Showroom Mahagama, Godda</span>
+            <span className="text-xs font-semibold text-emerald-400">Ex-Showroom Mohanpur, Godda</span>
           </div>
         </div>
 
@@ -407,7 +407,7 @@ export default function AdminCatalogPage() {
                   className="rounded border-white/20 bg-[#141A29] text-yamaha-cyan focus:ring-yamaha-cyan"
                 />
                 <label htmlFor="inStockCheck" className="text-xs text-white/80 select-none cursor-pointer">
-                  Variant currently physically available in Mahagama showroom stock
+                  Variant currently physically available in Mohanpur showroom stock
                 </label>
               </div>
             </div>

@@ -17,8 +17,8 @@ export function seedDatabase(passedDb?: any) {
       `);
 
       insertAdmin.run('usr_super_admin', 'Hira Agency Admin', 'admin@hiraauto.com', adminPasswordHash, 'Super Admin', 'active');
-      insertAdmin.run('usr_sales_manager', 'Sales Manager Mahagama', 'sales@hiraauto.com', adminPasswordHash, 'Sales', 'active');
-      insertAdmin.run('usr_service_lead', 'Service Head Mahagama', 'service@hiraauto.com', adminPasswordHash, 'Service', 'active');
+      insertAdmin.run('usr_sales_manager', 'Sales Manager Mohanpur', 'sales@hiraauto.com', adminPasswordHash, 'Sales', 'active');
+      insertAdmin.run('usr_service_lead', 'Service Head Mohanpur', 'service@hiraauto.com', adminPasswordHash, 'Service', 'active');
     }
   } catch (e) {
     console.warn('Error checking admin users:', e);
@@ -235,7 +235,7 @@ export function seedDatabase(passedDb?: any) {
     'tpl_reminder_2h',
     '2-Hour Visit Reminder',
     'Sent 2 hours prior to scheduled showroom visit',
-    'Hi {{customer_name}}, our team at {{dealership_name}} has prepared the {{bike}} for your visit today at *{{visit_time}}*! 🏁\n\nShowroom Location: Kechua Chowk, Mahagama Main Road.\nCall: {{dealership_phone}} if you need directions.'
+    'Hi {{customer_name}}, our team at {{dealership_name}} has prepared the {{bike}} for your visit today at *{{visit_time}}*! 🏁\n\nShowroom Location: Kechua Chowk, Mohanpur.\nCall: {{dealership_phone}} if you need directions.'
   );
 
   insertTemplate.run(
@@ -252,8 +252,8 @@ export function seedDatabase(passedDb?: any) {
   `);
 
   insertSetting.run('dealership_name', 'Hira Auto Agency', 'general');
-  insertSetting.run('dealership_tagline', 'Authorized Yamaha Dealership | Mahagama, Godda', 'general');
-  insertSetting.run('dealership_address', 'Opp. Honda Showroom, Mahagama Main Road, Kechua Chowk, Mahagama, Godda, Jharkhand 814154', 'contact');
+  insertSetting.run('dealership_tagline', 'Authorized Yamaha Dealership | Mohanpur, Godda', 'general');
+  insertSetting.run('dealership_address', 'Opp. Honda Showroom, Kechua Chowk, Mohanpur, Godda, Jharkhand 814154', 'contact');
   insertSetting.run('dealership_phone', '+91 62012 38401', 'contact');
   insertSetting.run('dealership_phone_alt', '+91 62012 38401', 'contact');
   insertSetting.run('dealership_email', 'hiramotors007@gmail.com', 'contact');
@@ -265,7 +265,7 @@ export function seedDatabase(passedDb?: any) {
   insertSetting.run('whatsapp_reminder_2h', '1', 'whatsapp');
   insertSetting.run('whatsapp_business_phone', '916201238401', 'whatsapp');
   insertSetting.run('business_hours', 'Monday - Sunday: 9:00 AM - 7:30 PM', 'general');
-  insertSetting.run('ticker_text', '🏁 FESTIVE OFFER: ₹5,000 EXCHANGE BONUS ON R15 V4 & MT-15 • ZERO DOWN PAYMENT FINANCE SCHEMES AVAILABLE • 100% GENUINE YAMAHA SPARE PARTS & CERTIFIED SERVICE BAYS • VISIT HIRA AUTO AGENCY MAHAGAMA TODAY', 'general');
+  insertSetting.run('ticker_text', '🏁 FESTIVE OFFER: ₹5,000 EXCHANGE BONUS ON R15 V4 & MT-15 • ZERO DOWN PAYMENT FINANCE SCHEMES AVAILABLE • 100% GENUINE YAMAHA SPARE PARTS & CERTIFIED SERVICE BAYS • VISIT HIRA AUTO AGENCY MOHANPUR TODAY', 'general');
 
   // 5. Seed Initial Real Customer Operations & Activity
   const insertCustomer = db.prepare(`

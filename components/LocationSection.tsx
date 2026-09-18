@@ -29,7 +29,7 @@ export default function LocationSection({ onOpenVisitModal }: LocationSectionPro
             HIRA AUTO AGENCY
           </h2>
           <p className="text-sm text-gray-400 font-medium">
-            Mahagama, Godda, Jharkhand • Official Authorized Yamaha Dealership
+            Mohanpur, Godda, Jharkhand • Official Authorized Yamaha Dealership
           </p>
           <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-[#0066FF] to-transparent mx-auto mt-4" />
         </div>
@@ -40,7 +40,7 @@ export default function LocationSection({ onOpenVisitModal }: LocationSectionPro
           <div className="lg:col-span-7 rounded-2xl bg-[#0a1020]/80 border border-[#0055ff]/30 p-2 overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.7)] flex flex-col justify-between min-h-[380px] sm:min-h-[440px]">
             <div className="relative w-full h-full min-h-[340px] rounded-xl overflow-hidden">
               <iframe
-                title="Hira Auto Agency Mahagama Map"
+                title="Hira Auto Agency Mohanpur Map"
                 src={mapUrl}
                 width="100%"
                 height="100%"
@@ -65,7 +65,7 @@ export default function LocationSection({ onOpenVisitModal }: LocationSectionPro
             <div className="space-y-6">
               <div>
                 <h3 className="text-xl font-black text-white uppercase font-display tracking-wide mb-1">
-                  Mahagama Showroom & Service
+                  Mohanpur Showroom & Service
                 </h3>
                 <p className="text-xs text-gray-400">
                   Flagship Yamaha 3S facility serving Godda and Santhal Pargana.
@@ -83,7 +83,7 @@ export default function LocationSection({ onOpenVisitModal }: LocationSectionPro
                   </span>
                   <p className="text-xs text-white leading-relaxed font-medium">
                     Opp. Honda Showroom, Kechua Chowk,<br />
-                    Mahagama Main Road, Godda, Jharkhand 814154
+                    Mohanpur, Godda, Jharkhand 814154
                   </p>
                 </div>
               </div>

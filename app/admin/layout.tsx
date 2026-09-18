@@ -222,7 +222,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 Yamaha Dealership Operations
               </span>
               <h2 className="text-xs font-bold text-gray-300">
-                Mahagama Branch, Godda, Jharkhand
+                Mohanpur Branch, Godda, Jharkhand
               </h2>
             </div>
           </div>

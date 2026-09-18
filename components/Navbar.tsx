@@ -93,7 +93,7 @@ export default function Navbar({ onOpenVisitModal, onOpenBookingModal }: NavbarP
                 HIRA AUTO AGENCY
               </span>
               <span className="text-[9px] font-medium text-gray-400">
-                Mahagama, Godda
+                Mohanpur, Godda
               </span>
             </div>
 
@@ -135,7 +135,7 @@ export default function Navbar({ onOpenVisitModal, onOpenBookingModal }: NavbarP
             </div>
             <div className="flex items-center gap-1.5 text-xs text-gray-400">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>Mahagama</span>
+              <span>Mohanpur</span>
             </div>
           </div>
 

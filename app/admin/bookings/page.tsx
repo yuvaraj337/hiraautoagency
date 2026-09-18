@@ -347,7 +347,7 @@ export default function AdminBookingsPage() {
 
                         {/* WhatsApp */}
                         <a
-                          href={`https://wa.me/91${b.customer_phone}?text=Namaste%20${encodeURIComponent(b.customer_name)},%20greetings%20from%20Hira%20Auto%20Agency%20Yamaha%20Mahagama.%20Regarding%20your%20booking%20${b.booking_code}%20for%20Yamaha%20${encodeURIComponent(b.bike_name)}...`}
+                          href={`https://wa.me/91${b.customer_phone}?text=Namaste%20${encodeURIComponent(b.customer_name)},%20greetings%20from%20Hira%20Auto%20Agency%20Yamaha%20Mohanpur.%20Regarding%20your%20booking%20${b.booking_code}%20for%20Yamaha%20${encodeURIComponent(b.bike_name)}...`}
                           target="_blank"
                           rel="noopener noreferrer"
                           title="Send WhatsApp"
@@ -582,7 +582,7 @@ export default function AdminBookingsPage() {
                   Authorised Yamaha Two-Wheeler Dealership
                 </p>
                 <p className="text-xs text-zinc-600 mt-1">
-                  Kechua Chowk, Mahagama Main Road, Godda, Jharkhand 814154
+                  Kechua Chowk, Mohanpur, Godda, Jharkhand 814154
                 </p>
                 <p className="text-xs text-zinc-600 font-semibold">
                   Phone: +91 62012 38401
@@ -612,7 +612,7 @@ export default function AdminBookingsPage() {
                 {selectedBooking.customer_email && (
                   <p className="text-zinc-600 text-xs">Email: {selectedBooking.customer_email}</p>
                 )}
-                <p className="text-zinc-500 text-xs">Place: Godda / Mahagama, Jharkhand</p>
+                <p className="text-zinc-500 text-xs">Place: Godda / Mohanpur, Jharkhand</p>
               </div>
 
               <div className="border border-zinc-200 p-4 rounded-xl space-y-1">
@@ -676,7 +676,7 @@ export default function AdminBookingsPage() {
                 <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-700">
                   Authorised Signatory / Seal
                 </span>
-                <p className="text-[9px] text-zinc-500">Hira Auto Agency, Mahagama</p>
+                <p className="text-[9px] text-zinc-500">Hira Auto Agency, Mohanpur</p>
               </div>
             </div>
 

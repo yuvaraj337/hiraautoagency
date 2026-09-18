@@ -205,7 +205,7 @@ export default function BookingModal({
                 BOOK YOUR MOTORCYCLE
               </h2>
               <p className="text-xs text-gray-400">
-                Reserve your ride online at Hira Auto Agency, Mahagama.
+                Reserve your ride online at Hira Auto Agency, Mohanpur.
               </p>
             </div>
 

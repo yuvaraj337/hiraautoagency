@@ -93,7 +93,7 @@ export default function InitialLoader({ onLoaded }: InitialLoaderProps) {
           YAMAHA
         </h1>
         <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#00E5FF] mb-8">
-          HIRA AUTO AGENCY • MAHAGAMA
+          HIRA AUTO AGENCY • MOHANPUR
         </p>
 
         {/* Sleek Progress Bar */}

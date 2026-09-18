@@ -30,10 +30,10 @@ export default function Footer({ onOpenVisitModal }: FooterProps) {
             </div>
 
             <p className="text-xs font-bold text-white uppercase tracking-wider">
-              HIRA AUTO AGENCY (Hira Motors – Mahagama)
+              HIRA AUTO AGENCY (Hira Motors – Mohanpur)
             </p>
             <p className="text-xs text-gray-400 leading-relaxed max-w-sm font-normal">
-              Official Authorized Yamaha Dealership serving Mahagama, Godda, and Santhal Pargana, Jharkhand. Offering the complete lineup of genuine Yamaha motorcycles, scooters, Yamalube spare parts, and certified technician care.
+              Official Authorized Yamaha Dealership serving Mohanpur, Godda, and Santhal Pargana, Jharkhand. Offering the complete lineup of genuine Yamaha motorcycles, scooters, Yamalube spare parts, and certified technician care.
             </p>
 
             <div className="pt-2">
@@ -87,7 +87,7 @@ export default function Footer({ onOpenVisitModal }: FooterProps) {
             <div className="space-y-3 text-xs text-gray-400">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-[#00E5FF] shrink-0 mt-0.5" />
-                <span>Opp. Honda Showroom, Kechua Chowk, Mahagama Main Road, Godda 814154</span>
+                <span>Opp. Honda Showroom, Kechua Chowk, Mohanpur, Godda 814154</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
@@ -103,11 +103,11 @@ export default function Footer({ onOpenVisitModal }: FooterProps) {
 
         {/* Bottom Legal Copyright */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
-          <p>© {new Date().getFullYear()} Hira Auto Agency. All Rights Reserved. Authorized Yamaha Dealership Mahagama.</p>
+          <p>© {new Date().getFullYear()} Hira Auto Agency. All Rights Reserved. Authorized Yamaha Dealership Mohanpur.</p>
           <div className="flex items-center gap-6">
             <span className="hover:text-gray-400 cursor-pointer">Privacy Policy</span>
             <span className="hover:text-gray-400 cursor-pointer">Terms & Conditions</span>
-            <span className="hover:text-gray-400 cursor-pointer">Mahagama, Jharkhand</span>
+            <span className="hover:text-gray-400 cursor-pointer">Mohanpur, Jharkhand</span>
           </div>
         </div>
       </div>

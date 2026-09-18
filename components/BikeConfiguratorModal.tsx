@@ -218,7 +218,7 @@ export default function BikeConfiguratorModal({
               <div className="flex items-baseline justify-between mb-3">
                 <div>
                   <p className="text-[10px] uppercase font-bold tracking-wider text-gray-400">
-                    Ex-Showroom Mahagama
+                    Ex-Showroom Mohanpur
                   </p>
                   <p className="text-2xl sm:text-3xl font-black text-white font-display">
                     ₹{currentVariant?.ex_showroom_price.toLocaleString('en-IN')}
@@ -227,7 +227,7 @@ export default function BikeConfiguratorModal({
                 <div className="text-right">
                   <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-400">
                     <Check className="w-3.5 h-3.5" />
-                    In Stock at Mahagama
+                    In Stock at Mohanpur
                   </span>
                 </div>
               </div>

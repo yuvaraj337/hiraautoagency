@@ -167,7 +167,7 @@ export default function AdminVisitsPage() {
             Showroom Visits & Test Drives
           </h1>
           <p className="text-sm text-white/50">
-            Track scheduled test rides, showroom appointments, and customer visits at Mahagama dealership.
+            Track scheduled test rides, showroom appointments, and customer visits at Mohanpur dealership.
           </p>
         </div>
 
@@ -326,7 +326,7 @@ export default function AdminVisitsPage() {
                       <td className="py-4 px-4 text-right">
                         <div className="flex items-center justify-end gap-2">
                           <a
-                            href={`https://wa.me/91${v.customer_phone}?text=Hello%20${encodeURIComponent(v.customer_name)},%20greetings%20from%20Hira%20Auto%20Agency%20Yamaha%20Mahagama.%20Regarding%20your%20showroom%20visit%20${v.visit_code}...`}
+                            href={`https://wa.me/91${v.customer_phone}?text=Hello%20${encodeURIComponent(v.customer_name)},%20greetings%20from%20Hira%20Auto%20Agency%20Yamaha%20Mohanpur.%20Regarding%20your%20showroom%20visit%20${v.visit_code}...`}
                             target="_blank"
                             rel="noopener noreferrer"
                             title="Send WhatsApp"

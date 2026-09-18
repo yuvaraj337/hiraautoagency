@@ -2,14 +2,14 @@
 
 > **Official Digital Dealership Website, Online Reservation System & Full Relational CRM Suite**  
 > **Client**: Hira Auto Agency — Authorised Yamaha Two-Wheeler Dealership  
-> **Location**: Kechua Chowk, Mahagama Main Road, Godda, Jharkhand 814154  
+> **Location**: Kechua Chowk, Mohanpur, Godda, Jharkhand 814154  
 > **Contact**: +91 62012 38401  
 
 ---
 
 ## Overview
 
-A modern, cinematic web application and enterprise-grade CRM engineered specifically for **Hira Auto Agency Yamaha** in Mahagama, Jharkhand. The platform features a deterministic scroll-driven 30-FPS frame engine, progressive motorcycle disassembly, authentic 23-variant catalog pricing, split-view 3D configurator modal, test ride booking, and a comprehensive relational CRM dashboard.
+A modern, cinematic web application and enterprise-grade CRM engineered specifically for **Hira Auto Agency Yamaha** in Mohanpur, Jharkhand. The platform features a deterministic scroll-driven 30-FPS frame engine, progressive motorcycle disassembly, authentic 23-variant catalog pricing, split-view 3D configurator modal, test ride booking, and a comprehensive relational CRM dashboard.
 
 ---
 
@@ -29,7 +29,7 @@ A modern, cinematic web application and enterprise-grade CRM engineered specific
 
 ## Authentic 23-Variant Catalog & Verified Pricing
 
-All 23 variants and ex-showroom Mahagama prices are strictly derived from the official dealership price list:
+All 23 variants and ex-showroom Mohanpur prices are strictly derived from the official dealership price list:
 
 ### 1. R15 Series
 - **R-15 V4 (M) Carbon**: ₹2,01,340

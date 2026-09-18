@@ -103,7 +103,7 @@ export default function VisitModal({
               WE ARE READY FOR YOU!
             </h3>
             <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto mt-1">
-              Your showroom visit at Hira Auto Agency, Mahagama has been reserved.
+              Your showroom visit at Hira Auto Agency, Mohanpur has been reserved.
             </p>
 
             <div className="mt-6 p-5 rounded-2xl bg-black/40 border border-white/10 text-left space-y-2 max-w-md mx-auto text-xs">
@@ -153,7 +153,7 @@ export default function VisitModal({
                 BOOK A SHOWROOM VISIT
               </h2>
               <p className="text-xs text-gray-400">
-                Experience test rides and personalized consultations at Kechua Chowk, Mahagama.
+                Experience test rides and personalized consultations at Kechua Chowk, Mohanpur.
               </p>
             </div>
 
