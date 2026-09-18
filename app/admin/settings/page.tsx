@@ -13,7 +13,9 @@ import {
   Phone,
   Mail,
   MapPin,
-  CheckCircle
+  CheckCircle,
+  Trash2,
+  AlertTriangle
 } from 'lucide-react';
 
 export default function AdminSettingsPage() {
@@ -21,6 +23,31 @@ export default function AdminSettingsPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [clearing, setClearing] = useState(false);
+  const [clearStatus, setClearStatus] = useState<string | null>(null);
+
+  const handleClearCrmData = async () => {
+    const confirmed = window.confirm(
+      "⚠️ ARE YOU SURE?\n\nThis will permanently delete all customer leads, showroom visits, test rides, bike bookings, payments, and WhatsApp logs.\n\nYour Bike Catalog, Pricing, Settings, and Admin Accounts will NOT be deleted.\n\nClick OK to proceed."
+    );
+    if (!confirmed) return;
+
+    try {
+      setClearing(true);
+      setClearStatus(null);
+      const res = await fetch('/api/admin/clear-crm', { method: 'POST' });
+      const data = await res.json();
+      if (data.success) {
+        setClearStatus('✅ All CRM data cleared successfully! The dashboard has been reset.');
+      } else {
+        setClearStatus('❌ Error: ' + (data.error || 'Failed to clear data'));
+      }
+    } catch (err: any) {
+      setClearStatus('❌ Error: ' + err.message);
+    } finally {
+      setClearing(false);
+    }
+  };
 
   const fetchSettings = async () => {
     try {
@@ -155,7 +182,7 @@ export default function AdminSettingsPage() {
                 </label>
                 <input
                   type="email"
-                  value={settings['dealership_email'] || 'contact@hiraauto.com'}
+                  value={settings['dealership_email'] || 'Sachinbhagat1655@gmail.com'}
                   onChange={(e) => handleChange('dealership_email', e.target.value)}
                   className="w-full bg-[#121722] border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-yamaha-cyan text-sm"
                 />
@@ -329,6 +356,44 @@ export default function AdminSettingsPage() {
               <Save className="w-4 h-4" />
               {saving ? 'Saving Settings...' : 'Save Dealership Settings'}
             </button>
+          </div>
+
+          {/* DANGER ZONE: CLEAR CRM DATA */}
+          <div className="mt-12 bg-red-950/20 border border-red-500/30 rounded-2xl p-6 shadow-xl space-y-4">
+            <div className="flex items-start justify-between flex-wrap gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center shrink-0">
+                  <AlertTriangle className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-sm font-black uppercase text-red-400 tracking-wide flex items-center gap-2">
+                    Danger Zone: Reset / Clear CRM Data
+                  </h2>
+                  <p className="text-xs text-gray-400 mt-0.5">
+                    Permanently wipe all leads, test ride appointments, customer records, bike bookings, and payments.
+                  </p>
+                  <p className="text-[11px] text-gray-500 mt-1">
+                    ✓ Preserves Bike Models & Specs &nbsp;|&nbsp; ✓ Preserves Admin Logins &nbsp;|&nbsp; ✓ Preserves Dealership Settings
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleClearCrmData}
+                disabled={clearing}
+                className="px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider bg-red-600/80 hover:bg-red-600 text-white border border-red-500/50 shadow-lg shadow-red-900/30 transition-all flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+              >
+                <Trash2 className="w-4 h-4" />
+                {clearing ? 'Clearing Data...' : 'Clear All CRM Data'}
+              </button>
+            </div>
+
+            {clearStatus && (
+              <div className="p-3 rounded-xl bg-[#121722] border border-white/10 text-xs font-mono">
+                {clearStatus}
+              </div>
+            )}
           </div>
         </form>
       )}

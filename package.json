@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "seed": "tsx scripts/run_seed.ts",
+    "clear-crm": "node scripts/clear_crm_data.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
