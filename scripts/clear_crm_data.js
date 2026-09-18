@@ -31,7 +31,7 @@ function clearCrmData() {
     db.prepare('DELETE FROM whatsapp_messages').run();
     db.prepare('DELETE FROM showroom_visits').run();
     db.prepare('DELETE FROM customers').run();
-    db.prepare('DELETE FROM activity_logs WHERE entity_type != "DATABASE"').run();
+    db.prepare("DELETE FROM activity_logs WHERE entity_type != 'DATABASE'").run();
 
     // Log the clear action into activity_logs
     db.prepare(`
