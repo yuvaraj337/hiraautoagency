@@ -153,7 +153,7 @@ export default function VisitModal({
                 BOOK A SHOWROOM VISIT
               </h2>
               <p className="text-xs text-gray-400">
-                Experience test rides and personalized consultations at Kechua Chowk, Mohanpur.
+                Experience test rides and personalized consultations at Ekchari Road, Mohanpur, Godda.
               </p>
             </div>
 

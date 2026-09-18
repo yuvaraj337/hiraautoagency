@@ -2,7 +2,7 @@
 
 > **Official Digital Dealership Website, Online Reservation System & Full Relational CRM Suite**  
 > **Client**: Hira Auto Agency — Authorised Yamaha Two-Wheeler Dealership  
-> **Location**: Kechua Chowk, Mohanpur, Godda, Jharkhand 814154  
+> **Location**: Ekchari Road, Mohanpur, Godda, Jharkhand 814154  
 > **Contact**: +91 62012 38401  
 
 ---

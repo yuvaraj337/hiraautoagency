@@ -235,7 +235,7 @@ export function seedDatabase(passedDb?: any) {
     'tpl_reminder_2h',
     '2-Hour Visit Reminder',
     'Sent 2 hours prior to scheduled showroom visit',
-    'Hi {{customer_name}}, our team at {{dealership_name}} has prepared the {{bike}} for your visit today at *{{visit_time}}*! 🏁\n\nShowroom Location: Kechua Chowk, Mohanpur.\nCall: {{dealership_phone}} if you need directions.'
+    'Hi {{customer_name}}, our team at {{dealership_name}} has prepared the {{bike}} for your visit today at *{{visit_time}}*! 🏁\n\nShowroom Location: Ekchari Road, Mohanpur, Godda.\nCall: {{dealership_phone}} if you need directions.'
   );
 
   insertTemplate.run(
@@ -253,7 +253,7 @@ export function seedDatabase(passedDb?: any) {
 
   insertSetting.run('dealership_name', 'Hira Auto Agency', 'general');
   insertSetting.run('dealership_tagline', 'Authorized Yamaha Dealership | Mohanpur, Godda', 'general');
-  insertSetting.run('dealership_address', 'Opp. Honda Showroom, Kechua Chowk, Mohanpur, Godda, Jharkhand 814154', 'contact');
+  insertSetting.run('dealership_address', 'Ekchari Road, Mohanpur, Godda, Jharkhand 814154', 'contact');
   insertSetting.run('dealership_phone', '+91 62012 38401', 'contact');
   insertSetting.run('dealership_phone_alt', '+91 62012 38401', 'contact');
   insertSetting.run('dealership_email', 'hiramotors007@gmail.com', 'contact');

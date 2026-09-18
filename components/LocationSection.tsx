@@ -29,7 +29,7 @@ export default function LocationSection({ onOpenVisitModal }: LocationSectionPro
             HIRA AUTO AGENCY
           </h2>
           <p className="text-sm text-gray-400 font-medium">
-            Mohanpur, Godda, Jharkhand • Official Authorized Yamaha Dealership
+            MohanPur Godda, Ekchari Road • Official Authorized Yamaha Dealership
           </p>
           <div className="w-16 h-[2px] bg-gradient-to-r from-transparent via-[#0066FF] to-transparent mx-auto mt-4" />
         </div>
@@ -82,8 +82,8 @@ export default function LocationSection({ onOpenVisitModal }: LocationSectionPro
                     Address
                   </span>
                   <p className="text-xs text-white leading-relaxed font-medium">
-                    Opp. Honda Showroom, Kechua Chowk,<br />
-                    Mohanpur, Godda, Jharkhand 814154
+                    Ekchari Road, Mohanpur,<br />
+                    Godda, Jharkhand 814154
                   </p>
                 </div>
               </div>

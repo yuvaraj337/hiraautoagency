@@ -254,7 +254,7 @@ export default function FinanceExchange({ onOpenVisitModal }: FinanceExchangePro
                       <span>Hira Auto Agency Exchange Advantages:</span>
                     </div>
                     <p className="text-[11px] text-gray-400 leading-normal">
-                      • Instant paperless inspection at Kechua Chowk showroom.
+                      • Instant paperless inspection at Ekchari Road, Mohanpur showroom.
                       <br />• Additional festive exchange bonus up to ₹5,000 applicable on R15 and MT-15.
                     </p>
                   </div>

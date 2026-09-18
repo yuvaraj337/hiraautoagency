@@ -143,7 +143,7 @@ export default function AdminSettingsPage() {
                 </label>
                 <input
                   type="text"
-                  value={settings['dealership_address'] || 'Opp. Honda Showroom, Kechua Chowk, Mohanpur, Godda, Jharkhand 814154'}
+                  value={settings['dealership_address'] || 'Ekchari Road, Mohanpur, Godda, Jharkhand 814154'}
                   onChange={(e) => handleChange('dealership_address', e.target.value)}
                   className="w-full bg-[#121722] border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-yamaha-cyan text-sm"
                 />

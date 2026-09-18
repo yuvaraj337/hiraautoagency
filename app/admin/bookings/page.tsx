@@ -582,7 +582,7 @@ export default function AdminBookingsPage() {
                   Authorised Yamaha Two-Wheeler Dealership
                 </p>
                 <p className="text-xs text-zinc-600 mt-1">
-                  Kechua Chowk, Mohanpur, Godda, Jharkhand 814154
+                  Ekchari Road, Mohanpur, Godda, Jharkhand 814154
                 </p>
                 <p className="text-xs text-zinc-600 font-semibold">
                   Phone: +91 62012 38401

@@ -87,7 +87,7 @@ export default function Footer({ onOpenVisitModal }: FooterProps) {
             <div className="space-y-3 text-xs text-gray-400">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-[#00E5FF] shrink-0 mt-0.5" />
-                <span>Opp. Honda Showroom, Kechua Chowk, Mohanpur, Godda 814154</span>
+                <span>Ekchari Road, Mohanpur, Godda 814154</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
