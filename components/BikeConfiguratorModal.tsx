@@ -81,20 +81,30 @@ const MODEL_COLOR_ASSETS: Record<string, Record<string, string>> = {
     'Metallic Black': '/bikes/fascino-drum.png',
   },
   'yamaha-rayzr-125': {
-    'Matte Black': '/assets/bikes/clean/rayzr_rally_matte_black_lcd.webp',
-    'Matte Titan': '/assets/bikes/clean/rayzr_rally_matte_titan_tft.webp',
-    'Matte Copper / Black': '/assets/bikes/clean/rayzr_rally_matte_titan_tft.webp',
-    'Dark Matte Blue': '/assets/bikes/clean/rayzr_std_dark_matte_blue_disc.webp',
-    'Vermillion': '/assets/bikes/clean/rayzr_std_vermillion_disc.webp',
-    'Metallic Black': '/assets/bikes/clean/rayzr_rally_matte_black_lcd.webp',
+    'Drum': '/bikes/ray-zr-drum.png',
+    'Street Rally': '/bikes/ray-zr-street-rally.png',
+    'Ray ZR (Drum)': '/bikes/ray-zr-drum.png',
+    'Ray ZR (Street Rally)': '/bikes/ray-zr-street-rally.png',
+    'Matte Black': '/bikes/ray-zr-drum.png',
+    'Matte Titan': '/bikes/ray-zr-street-rally.png',
+    'Matte Copper / Black': '/bikes/ray-zr-street-rally.png',
+    'Matte Copper': '/bikes/ray-zr-street-rally.png',
+    'Dark Matte Blue': '/bikes/ray-zr-street-rally.png',
+    'Vermillion': '/bikes/ray-zr-street-rally.png',
+    'Metallic Black': '/bikes/ray-zr-drum.png',
   },
   'yamaha-ray-zr-125': {
-    'Matte Black': '/assets/bikes/clean/rayzr_rally_matte_black_lcd.webp',
-    'Matte Titan': '/assets/bikes/clean/rayzr_rally_matte_titan_tft.webp',
-    'Matte Copper / Black': '/assets/bikes/clean/rayzr_rally_matte_titan_tft.webp',
-    'Dark Matte Blue': '/assets/bikes/clean/rayzr_std_dark_matte_blue_disc.webp',
-    'Vermillion': '/assets/bikes/clean/rayzr_std_vermillion_disc.webp',
-    'Metallic Black': '/assets/bikes/clean/rayzr_rally_matte_black_lcd.webp',
+    'Drum': '/bikes/ray-zr-drum.png',
+    'Street Rally': '/bikes/ray-zr-street-rally.png',
+    'Ray ZR (Drum)': '/bikes/ray-zr-drum.png',
+    'Ray ZR (Street Rally)': '/bikes/ray-zr-street-rally.png',
+    'Matte Black': '/bikes/ray-zr-drum.png',
+    'Matte Titan': '/bikes/ray-zr-street-rally.png',
+    'Matte Copper / Black': '/bikes/ray-zr-street-rally.png',
+    'Matte Copper': '/bikes/ray-zr-street-rally.png',
+    'Dark Matte Blue': '/bikes/ray-zr-street-rally.png',
+    'Vermillion': '/bikes/ray-zr-street-rally.png',
+    'Metallic Black': '/bikes/ray-zr-drum.png',
   },
   'yamaha-aerox-155': {
     'Racing Blue': '/bikes/aerox-s.png',
@@ -255,6 +265,7 @@ export default function BikeConfiguratorModal({
                   <div className="flex flex-wrap items-center gap-3">
                     {availableColors.map((col) => {
                       const isSelected = selectedColorName.toLowerCase() === col.name.toLowerCase();
+                      const isTrim = col.name === 'Drum' || col.name === 'Street Rally';
                       return (
                         <button
                           key={col.name}
@@ -266,10 +277,12 @@ export default function BikeConfiguratorModal({
                               : 'bg-white/5 border-white/10 hover:border-white/30 text-gray-400'
                           }`}
                         >
-                          <span
-                            className="w-4 h-4 rounded-full border border-white/40 shrink-0 shadow-inner"
-                            style={{ backgroundColor: col.hex }}
-                          />
+                          {!isTrim && col.hex && (
+                            <span
+                              className="w-4 h-4 rounded-full border border-white/40 shrink-0 shadow-inner"
+                              style={{ backgroundColor: col.hex }}
+                            />
+                          )}
                           <span className="text-xs font-bold">{col.name}</span>
                         </button>
                       );
@@ -298,10 +311,6 @@ export default function BikeConfiguratorModal({
                         }`}
                       >
                         <div className="flex items-center gap-3">
-                          <span
-                            className="w-3.5 h-3.5 rounded-full border border-white/30 shrink-0"
-                            style={{ backgroundColor: v.color_hex || '#0066FF' }}
-                          />
                           <div>
                             <p className="text-xs font-bold text-white leading-tight">
                               {v.name}

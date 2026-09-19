@@ -161,13 +161,13 @@ export function seedDatabase(passedDb?: any) {
     '5.2 L',
     '58 kmpl',
     '99 kg',
-    '/assets/bikes/bike_rayzr.webp',
+    '/bikes/ray-zr-drum.png',
     0,
     5
   );
 
-  insertVariant.run('var_rayzr_drum', 'bike_rayzr', 'Ray ZR (Drum)', 82880, 'Metallic Black', '#111111', '/assets/bikes/bike_rayzr.webp', 1, 1);
-  insertVariant.run('var_rayzr_rally', 'bike_rayzr', 'Ray ZR (Street Rally)', 96930, 'Matte Copper / Black', '#A55D35', '/assets/bikes/bike_rayzr.webp', 1, 2);
+  insertVariant.run('var_rayzr_drum', 'bike_rayzr', 'Ray ZR (Drum)', 82880, 'Drum', '#111111', '/bikes/ray-zr-drum.png', 1, 1);
+  insertVariant.run('var_rayzr_rally', 'bike_rayzr', 'Ray ZR (Street Rally)', 96930, 'Street Rally', '#A55D35', '/bikes/ray-zr-street-rally.png', 1, 2);
 
   // Bike 6: Scooters - Fascino (Drum)
   insertBike.run(

@@ -222,10 +222,10 @@ const DEFAULT_CATALOG_BIKES: Bike[] = [
     fuel_capacity: '5.2 L',
     mileage: '58 kmpl',
     curb_weight: '99 kg',
-    image_url: '/assets/bikes/bike_rayzr.webp',
+    image_url: '/bikes/ray-zr-drum.png',
     variants: [
-      { id: 'var_rayzr_drum', bike_id: 'bike_rayzr', name: 'Ray ZR (Drum)', ex_showroom_price: 82880, color_name: 'Metallic Black', color_hex: '#111111', image_url: '/assets/bikes/clean/rayzr_rally_matte_black_lcd.webp', in_stock: 1 },
-      { id: 'var_rayzr_rally', bike_id: 'bike_rayzr', name: 'Ray ZR (Street Rally)', ex_showroom_price: 96930, color_name: 'Matte Copper / Black', color_hex: '#A55D35', image_url: '/assets/bikes/clean/rayzr_rally_matte_titan_tft.webp', in_stock: 1 },
+      { id: 'var_rayzr_drum', bike_id: 'bike_rayzr', name: 'Ray ZR (Drum)', ex_showroom_price: 82880, color_name: 'Drum', color_hex: '#111111', image_url: '/bikes/ray-zr-drum.png', in_stock: 1 },
+      { id: 'var_rayzr_rally', bike_id: 'bike_rayzr', name: 'Ray ZR (Street Rally)', ex_showroom_price: 96930, color_name: 'Street Rally', color_hex: '#A55D35', image_url: '/bikes/ray-zr-street-rally.png', in_stock: 1 },
     ],
   },
   {
