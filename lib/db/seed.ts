@@ -85,16 +85,16 @@ export function seedDatabase(passedDb?: any) {
     '10 L',
     '48 kmpl',
     '139 kg',
-    '/assets/bikes/hero_mt15_v2.jpg',
+    '/bikes/mt-15-dlx-tft.png',
     1,
     2
   );
 
   // 4 MT-15 Variants from client catalog:
-  insertVariant.run('var_mt15_dlx_tft', 'bike_mt15', 'MT-15 V2 (DLX TFT)', 176930, 'Ice Fluo-Vermillion', '#EAEAEA', '/assets/bikes/hero_mt15_v2.jpg', 1, 1);
-  insertVariant.run('var_mt15_std_black', 'bike_mt15', 'MT-15 (STD) Black', 166710, 'Metallic Black', '#151515', '/assets/bikes/hero_mt15_v2.jpg', 1, 2);
-  insertVariant.run('var_mt15_monster', 'bike_mt15', 'MT-15 (Monster)', 169110, 'Monster Energy MotoGP', '#0A0E1A', '/assets/bikes/hero_mt15_v2.jpg', 1, 3);
-  insertVariant.run('var_mt15_cyan_blue', 'bike_mt15', 'MT-15 (STD) Cyan Blue', 167610, 'Cyan Storm', '#00E5FF', '/assets/bikes/hero_mt15_v2.jpg', 1, 4);
+  insertVariant.run('var_mt15_dlx_tft', 'bike_mt15', 'MT-15 V2 (DLX TFT)', 176930, 'Ice Fluo-Vermillion', '#EAEAEA', '/bikes/mt-15-dlx-tft.png', 1, 1);
+  insertVariant.run('var_mt15_std_black', 'bike_mt15', 'MT-15 (STD) Black', 166710, 'Metallic Black', '#151515', '/bikes/mt-15-std-black.png', 1, 2);
+  insertVariant.run('var_mt15_monster', 'bike_mt15', 'MT-15 (Monster)', 169110, 'Monster Energy MotoGP', '#0A0E1A', '/bikes/mt-15-monster.png', 1, 3);
+  insertVariant.run('var_mt15_cyan_blue', 'bike_mt15', 'MT-15 (STD) Cyan Blue', 167610, 'Cyan Storm', '#00E5FF', '/bikes/mt-15-cyan-blue.png', 1, 4);
 
   // Bike 3: FZ Series
   insertBike.run(

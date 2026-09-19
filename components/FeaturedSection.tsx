@@ -158,12 +158,12 @@ const DEFAULT_CATALOG_BIKES: Bike[] = [
     fuel_capacity: '10 L',
     mileage: '48 kmpl',
     curb_weight: '139 kg',
-    image_url: '/bikes/mt-15-v2.png',
+    image_url: '/bikes/mt-15-dlx-tft.png',
     variants: [
-      { id: 'var_mt15_std_cyan', bike_id: 'bike_mt15', name: 'MT-15 (STD) Cyan Blue', ex_showroom_price: 167610, color_name: 'Cyan Storm', color_hex: '#00E5FF', image_url: '/bikes/mt-15-v2.png', in_stock: 1 },
-      { id: 'var_mt15_dlx_tft', bike_id: 'bike_mt15', name: 'MT-15 V2 (DLX TFT)', ex_showroom_price: 176930, color_name: 'Ice Fluo-Vermillion', color_hex: '#EAEAEA', image_url: '/assets/bikes/mt15.jpg', in_stock: 1 },
-      { id: 'var_mt15_monster', bike_id: 'bike_mt15', name: 'MT-15 (Monster)', ex_showroom_price: 169110, color_name: 'Monster Energy MotoGP', color_hex: '#0A0E1A', image_url: '/bikes/mt-15-v2.png', in_stock: 1 },
-      { id: 'var_mt15_std_black', bike_id: 'bike_mt15', name: 'MT-15 (STD) Black', ex_showroom_price: 166710, color_name: 'Metallic Black', color_hex: '#151515', image_url: '/assets/bikes/hero_mt15_v2.jpg', in_stock: 1 },
+      { id: 'var_mt15_dlx_tft', bike_id: 'bike_mt15', name: 'MT-15 V2 (DLX TFT)', ex_showroom_price: 176930, color_name: 'Ice Fluo-Vermillion', color_hex: '#EAEAEA', image_url: '/bikes/mt-15-dlx-tft.png', in_stock: 1 },
+      { id: 'var_mt15_std_black', bike_id: 'bike_mt15', name: 'MT-15 (STD) Black', ex_showroom_price: 166710, color_name: 'Metallic Black', color_hex: '#151515', image_url: '/bikes/mt-15-std-black.png', in_stock: 1 },
+      { id: 'var_mt15_monster', bike_id: 'bike_mt15', name: 'MT-15 (Monster)', ex_showroom_price: 169110, color_name: 'Monster Energy MotoGP', color_hex: '#0A0E1A', image_url: '/bikes/mt-15-monster.png', in_stock: 1 },
+      { id: 'var_mt15_std_cyan', bike_id: 'bike_mt15', name: 'MT-15 (STD) Cyan Blue', ex_showroom_price: 167610, color_name: 'Cyan Storm', color_hex: '#00E5FF', image_url: '/bikes/mt-15-cyan-blue.png', in_stock: 1 },
     ],
   },
   {
