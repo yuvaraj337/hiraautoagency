@@ -58,18 +58,18 @@ export function seedDatabase(passedDb?: any) {
     '11 L',
     '45 kmpl',
     '141 kg',
-    '/assets/bikes/hero_r15_v4.jpg',
+    '/bikes/r15-v4-m-carbon.png',
     1,
     1
   );
 
   // 6 R15 Variants from client catalog:
-  insertVariant.run('var_r15_m_carbon', 'bike_r15', 'R-15 V4 (M) Carbon', 201340, 'Carbon Edition', '#1C1D21', '/assets/bikes/hero_r15_v4.jpg', 1, 1);
-  insertVariant.run('var_r15_m_silver', 'bike_r15', 'R-15 (M) Silver', 191130, 'Metallic Silver', '#C0C0C0', '/assets/bikes/hero_r15_v4.jpg', 1, 2);
-  insertVariant.run('var_r15_v4_qs', 'bike_r15', 'R-15 V4 (Quick Shifter)', 180300, 'Racing Blue', '#0020B2', '/assets/bikes/hero_r15_v4.jpg', 1, 3);
-  insertVariant.run('var_r15_v4_std', 'bike_r15', 'R-15 V4', 175650, 'Metallic Red', '#D41427', '/assets/bikes/hero_r15_v4.jpg', 1, 4);
-  insertVariant.run('var_r15_v3_s', 'bike_r15', 'R-15 V3 (S)', 159970, 'Matte Black', '#222222', '/assets/bikes/hero_r15_v4.jpg', 1, 5);
-  insertVariant.run('var_r15_v4_monster', 'bike_r15', 'R-15 V4 (Monster)', 176850, 'Monster Energy Edition', '#111111', '/assets/bikes/hero_r15_v4.jpg', 1, 6);
+  insertVariant.run('var_r15_m_carbon', 'bike_r15', 'R-15 V4 (M) Carbon', 201340, 'Carbon Edition', '#1C1D21', '/bikes/r15-v4-m-carbon.png', 1, 1);
+  insertVariant.run('var_r15_m_silver', 'bike_r15', 'R-15 (M) Silver', 191130, 'Metallic Silver', '#C0C0C0', '/bikes/r15-m-silver.png', 1, 2);
+  insertVariant.run('var_r15_v4_qs', 'bike_r15', 'R-15 V4 (Quick Shifter)', 180300, 'Racing Blue', '#0020B2', '/bikes/r15-v4-quick-shifter.png', 1, 3);
+  insertVariant.run('var_r15_v4_std', 'bike_r15', 'R-15 V4', 175650, 'Metallic Red', '#D41427', '/bikes/r15-v4.png', 1, 4);
+  insertVariant.run('var_r15_v3_s', 'bike_r15', 'R-15 V3 (S)', 159970, 'Matte Black', '#222222', '/bikes/r15-v3-s.png', 1, 5);
+  insertVariant.run('var_r15_v4_monster', 'bike_r15', 'R-15 V4 (Monster)', 176850, 'Monster Energy Edition', '#111111', '/bikes/r15-v4-monster.png', 1, 6);
 
   // Bike 2: MT-15 V2 Series
   insertBike.run(
