@@ -135,17 +135,17 @@ export function seedDatabase(passedDb?: any) {
     '10.4 L',
     '46 kmpl',
     '134 kg',
-    '/assets/bikes/bike_xsr155.webp',
+    '/bikes/xsr-black.png',
     0,
     4
   );
 
   // 5 XSR Variants from client catalog:
-  insertVariant.run('var_xsr_black', 'bike_xsr', 'XSR Black', 163900, 'Heritage Black', '#181818', '/assets/bikes/bike_xsr155.webp', 1, 1);
-  insertVariant.run('var_xsr_silver', 'bike_xsr', 'XSR Silver', 161900, 'Timeless Silver', '#D8D8D8', '/assets/bikes/bike_xsr155.webp', 1, 2);
-  insertVariant.run('var_xsr_red', 'bike_xsr', 'XSR Red', 157900, 'Vintage Red', '#C82333', '/assets/bikes/bike_xsr155.webp', 1, 3);
-  insertVariant.run('var_xsr_blue', 'bike_xsr', 'XSR Blue', 157090, 'Classic Blue', '#0047AB', '/assets/bikes/bike_xsr155.webp', 1, 4);
-  insertVariant.run('var_xsr_green', 'bike_xsr', 'XSR Green', 163900, 'Military Green', '#354B3E', '/assets/bikes/bike_xsr155.webp', 1, 5);
+  insertVariant.run('var_xsr_black', 'bike_xsr', 'XSR Black', 163900, 'Heritage Black', '#181818', '/bikes/xsr-black.png', 1, 1);
+  insertVariant.run('var_xsr_silver', 'bike_xsr', 'XSR Silver', 161900, 'Timeless Silver', '#D8D8D8', '/bikes/xsr-silver.png', 1, 2);
+  insertVariant.run('var_xsr_red', 'bike_xsr', 'XSR Red', 157900, 'Vintage Red', '#C82333', '/bikes/xsr-red.png', 1, 3);
+  insertVariant.run('var_xsr_blue', 'bike_xsr', 'XSR Blue', 157090, 'Classic Blue', '#0047AB', '/bikes/xsr-blue.png', 1, 4);
+  insertVariant.run('var_xsr_green', 'bike_xsr', 'XSR Green', 163900, 'Military Green', '#354B3E', '/bikes/xsr-green.png', 1, 5);
 
   // Bike 5: Scooters - Ray ZR 125 Fi
   insertBike.run(
