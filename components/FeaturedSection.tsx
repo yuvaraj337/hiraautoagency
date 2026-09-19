@@ -181,10 +181,10 @@ const DEFAULT_CATALOG_BIKES: Bike[] = [
     curb_weight: '136 kg',
     image_url: '/bikes/fz-s-v4-hybrid.png',
     variants: [
+      { id: 'var_fz_v3', bike_id: 'bike_fzs', name: 'F-Z V3', ex_showroom_price: 117560, color_name: 'Metallic Black', color_hex: '#1A1A1A', image_url: '/bikes/fz-v3.png', in_stock: 1 },
+      { id: 'var_fz_rave', bike_id: 'bike_fzs', name: 'F-Z Rave', ex_showroom_price: 125880, color_name: 'Rave Matte Grey', color_hex: '#3E424B', image_url: '/bikes/fz-rave.png', in_stock: 1 },
+      { id: 'var_fzs_v3_std', bike_id: 'bike_fzs', name: 'FZ-S V3 (STD)', ex_showroom_price: 131680, color_name: 'Matte Red', color_hex: '#B32428', image_url: '/bikes/fzs-v3-std.png', in_stock: 1 },
       { id: 'var_fzs_v4_hybrid', bike_id: 'bike_fzs', name: 'FZ-S V4 Hybrid', ex_showroom_price: 142000, color_name: 'Metallic Grey / Chrome', color_hex: '#646D7E', image_url: '/bikes/fz-s-v4-hybrid.png', in_stock: 1 },
-      { id: 'var_fzs_v3_std', bike_id: 'bike_fzs', name: 'FZ-S V3 (STD)', ex_showroom_price: 131680, color_name: 'Matte Red', color_hex: '#B32428', image_url: '/assets/bikes/hero_fzs_v4.jpg', in_stock: 1 },
-      { id: 'var_fz_rave', bike_id: 'bike_fzs', name: 'F-Z Rave', ex_showroom_price: 125880, color_name: 'Rave Matte Grey', color_hex: '#3E424B', image_url: '/bikes/fz-s-v4-hybrid.png', in_stock: 1 },
-      { id: 'var_fz_v3', bike_id: 'bike_fzs', name: 'F-Z V3', ex_showroom_price: 117560, color_name: 'Metallic Black', color_hex: '#1A1A1A', image_url: '/assets/bikes/fzs.jpg', in_stock: 1 },
     ],
   },
   {

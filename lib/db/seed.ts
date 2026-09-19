@@ -110,16 +110,16 @@ export function seedDatabase(passedDb?: any) {
     '13 L',
     '50 kmpl',
     '136 kg',
-    '/assets/bikes/hero_fzs_v4.jpg',
+    '/bikes/fz-s-v4-hybrid.png',
     1,
     3
   );
 
   // 4 FZ Variants from client catalog:
-  insertVariant.run('var_fz_v3', 'bike_fzs', 'F-Z V3', 117560, 'Metallic Black', '#1A1A1A', '/assets/bikes/hero_fzs_v4.jpg', 1, 1);
-  insertVariant.run('var_fz_rave', 'bike_fzs', 'F-Z Rave', 125880, 'Rave Matte Grey', '#3E424B', '/assets/bikes/hero_fzs_v4.jpg', 1, 2);
-  insertVariant.run('var_fzs_v3_std', 'bike_fzs', 'FZ-S V3 (STD)', 131680, 'Matte Red', '#B32428', '/assets/bikes/hero_fzs_v4.jpg', 1, 3);
-  insertVariant.run('var_fzs_v4_hybrid', 'bike_fzs', 'FZ-S V4 Hybrid', 142000, 'Metallic Grey / Chrome', '#646D7E', '/assets/bikes/hero_fzs_v4.jpg', 1, 4);
+  insertVariant.run('var_fz_v3', 'bike_fzs', 'F-Z V3', 117560, 'Metallic Black', '#1A1A1A', '/bikes/fz-v3.png', 1, 1);
+  insertVariant.run('var_fz_rave', 'bike_fzs', 'F-Z Rave', 125880, 'Rave Matte Grey', '#3E424B', '/bikes/fz-rave.png', 1, 2);
+  insertVariant.run('var_fzs_v3_std', 'bike_fzs', 'FZ-S V3 (STD)', 131680, 'Matte Red', '#B32428', '/bikes/fzs-v3-std.png', 1, 3);
+  insertVariant.run('var_fzs_v4_hybrid', 'bike_fzs', 'FZ-S V4 Hybrid', 142000, 'Metallic Grey / Chrome', '#646D7E', '/bikes/fz-s-v4-hybrid.png', 1, 4);
 
   // Bike 4: XSR Series (Heritage)
   insertBike.run(
