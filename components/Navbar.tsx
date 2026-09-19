@@ -41,85 +41,66 @@ export default function Navbar({ onOpenVisitModal, onOpenBookingModal }: NavbarP
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'glass-nav py-3'
-            : 'bg-gradient-to-b from-black/80 via-black/40 to-transparent py-4'
+            ? 'glass-nav py-3 bg-black/80'
+            : 'bg-gradient-to-b from-black/75 via-black/30 to-transparent py-4 sm:py-5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* LEFT: Yamaha Brand Logo */}
-          <Link href="/" className="flex items-center gap-3 group focus:outline-none">
-            <div className="flex items-center gap-2">
-              {/* Yamaha Tuning Forks Crest Symbol */}
-              <div className="w-8 h-8 rounded-full bg-yamaha-racing flex items-center justify-center shadow-lg shadow-yamaha-blue/50 group-hover:scale-105 transition-transform">
-                <svg viewBox="0 0 100 100" className="w-5 h-5 fill-white">
+          {/* LEFT: Yamaha Brand Logo + Dealership Tag (1:1 Reference Match) */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            <Link href="/" className="flex items-center gap-2.5 group focus:outline-none">
+              {/* Yamaha Tuning Forks Circular Crest */}
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/10 border border-white/30 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+                <svg viewBox="0 0 100 100" className="w-5 h-5 sm:w-5.5 sm:h-5.5 fill-white">
                   <circle cx="50" cy="50" r="46" fill="none" stroke="white" strokeWidth="6" />
                   <path d="M50 16 L50 84 M16 50 L84 50 M26 26 L74 74 M74 26 L26 74" stroke="white" strokeWidth="4" />
                 </svg>
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-black tracking-widest text-white uppercase leading-none font-display">
+                <span className="text-xl sm:text-2xl font-black tracking-widest text-white uppercase leading-none font-display">
                   YAMAHA
                 </span>
-                <span className="text-[9px] font-bold tracking-wider text-yamaha-cyan uppercase leading-tight">
+                <span className="text-[9px] sm:text-[10px] font-medium tracking-wider text-white/90 italic leading-tight">
                   Revs Your Heart
                 </span>
               </div>
+            </Link>
+
+            {/* Dealership Identifier (Reference Images 2 & 3) */}
+            <div className="hidden sm:flex items-center gap-2 pl-3 sm:pl-4 border-l border-white/20">
+              <span className="w-2 h-2 rounded-full bg-yamaha-cyan animate-pulse" />
+              <div className="flex flex-col">
+                <span className="text-[11px] sm:text-xs font-bold text-white uppercase tracking-wider leading-none">
+                  HIRA AUTO AGENCY
+                </span>
+                <span className="text-[9px] sm:text-[10px] font-medium text-gray-300 leading-tight">
+                  Mohanpur, Godda
+                </span>
+              </div>
             </div>
-          </Link>
-
-          {/* CENTER: Navigation Links (Desktop) */}
-          <nav className="hidden md:flex items-center gap-7">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => {
-                  if (link.onClick) {
-                    e.preventDefault();
-                    link.onClick();
-                  }
-                }}
-                className="text-xs font-semibold uppercase tracking-wider text-gray-300 hover:text-white transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-yamaha-cyan hover:after:w-full after:transition-all"
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
-
-          {/* RIGHT: Hira Auto Agency & Action Button */}
-          <div className="hidden lg:flex items-center gap-4">
-            <div className="flex flex-col items-end pr-2 border-r border-white/10">
-              <span className="text-[11px] font-bold text-white uppercase tracking-wider">
-                HIRA AUTO AGENCY
-              </span>
-              <span className="text-[9px] font-medium text-gray-400">
-                Mohanpur, Godda
-              </span>
-            </div>
-
-            <button
-              onClick={onOpenVisitModal}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-yamaha-racing hover:bg-blue-700 text-white text-xs font-bold uppercase tracking-wider transition-all transform hover:scale-105 shadow-md shadow-yamaha-blue/30 focus:outline-none active:scale-95"
-            >
-              <Calendar className="w-3.5 h-3.5 text-yamaha-cyan" />
-              <span>Book Showroom Visit</span>
-            </button>
           </div>
 
-          {/* MOBILE: Hamburger & Quick Action */}
-          <div className="flex items-center gap-2 md:hidden">
+          {/* RIGHT: Blue Pill Action Button "VISIT" + Hamburger Menu (1:1 Reference Match) */}
+          <div className="flex items-center gap-3 sm:gap-4">
             <button
               onClick={onOpenVisitModal}
-              className="px-3 py-1.5 rounded-full bg-yamaha-racing text-white text-[11px] font-bold uppercase tracking-wide"
+              className="flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-full bg-[#0057FF] hover:bg-[#0047DB] text-white text-xs sm:text-sm font-black tracking-wider uppercase transition-all shadow-[0_0_16px_rgba(0,87,255,0.45)] transform hover:scale-105 active:scale-95"
             >
-              Visit
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-none stroke-current stroke-2">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg>
+              <span>VISIT</span>
             </button>
+
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 focus:outline-none"
+              className="w-10 h-10 rounded-full flex flex-col items-center justify-center gap-1.5 hover:bg-white/10 transition-colors focus:outline-none"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              <span className={`w-5 h-[2px] bg-white rounded-full transition-transform ${mobileMenuOpen ? 'rotate-45 translate-y-[5px]' : ''}`} />
+              <span className={`w-5 h-[2px] bg-white rounded-full transition-opacity ${mobileMenuOpen ? 'opacity-0' : ''}`} />
+              <span className={`w-5 h-[2px] bg-white rounded-full transition-transform ${mobileMenuOpen ? '-rotate-45 -translate-y-[5px]' : ''}`} />
             </button>
           </div>
         </div>
