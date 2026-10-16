@@ -284,10 +284,9 @@ export default function HeroSection({ onOpenVisitModal, onExploreBikes }: HeroSe
               WELCOME TO HIRA AUTO AGENCY
             </p>
 
-            {/* Giant Slanted Headline */}
+            {/* Giant Slanted Headline — Clean Crisp Metallic White, No Blue Fog */}
             <h1 className="font-hero-headline text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] tracking-[-0.015em] leading-[0.95] mb-3 sm:mb-4">
-              <span className="hero-text-metallic-white">READY TO </span>
-              <span className="hero-text-electric-blue hero-text-glow-blue">RIDE?</span>
+              <span className="hero-text-metallic-white">READY TO RIDE?</span>
             </h1>
 
             {/* Supporting Copy */}
@@ -333,9 +332,9 @@ export default function HeroSection({ onOpenVisitModal, onExploreBikes }: HeroSe
             display: state2Opacity <= 0.005 ? 'none' : 'block',
           }}
         >
-          {/* Main Title Block — Lower Screen Placement over Floor Reflection */}
+          {/* Main Title Block — Safely positioned above bottom controls to prevent overlap */}
           <div
-            className="absolute left-1/2 top-[64%] sm:top-[66%] md:top-[68%] -translate-x-1/2 text-center w-full max-w-4xl px-4"
+            className="absolute left-1/2 bottom-20 sm:bottom-24 md:bottom-28 -translate-x-1/2 text-center w-full max-w-4xl px-4"
             style={{ transform: `translate(-50%, ${(1 - state2Opacity) * 15}px)` }}
           >
             {/* Small Eyebrow Label */}
@@ -343,14 +342,9 @@ export default function HeroSection({ onOpenVisitModal, onExploreBikes }: HeroSe
               WELCOME TO HIRA AUTO AGENCY
             </p>
 
-            {/* Giant Slanted Headline with Speed-Streak Blur on "RIDE" */}
+            {/* Giant Slanted Headline — Clean Crisp Metallic White, No Blue Fog */}
             <h2 className="font-hero-headline text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] tracking-[-0.015em] leading-[0.95] mb-3">
-              <span className="hero-text-metallic-white">FEEL THE </span>
-              <span className="relative inline-block">
-                <span className="hero-text-electric-blue hero-text-glow-blue relative z-10">RIDE</span>
-                {/* Speed-Streak Motion Blur Trail (1:1 Reference Match) */}
-                <span className="absolute -inset-y-1 left-2 sm:left-4 -right-8 sm:-right-14 bg-gradient-to-r from-[#00A3FF]/75 via-[#0080FF]/40 to-transparent blur-md pointer-events-none" />
-              </span>
+              <span className="hero-text-metallic-white">FEEL THE RIDE</span>
             </h2>
 
             {/* Supporting Copy */}
@@ -419,9 +413,9 @@ export default function HeroSection({ onOpenVisitModal, onExploreBikes }: HeroSe
             display: state3Opacity <= 0.005 ? 'none' : 'block',
           }}
         >
-          {/* Main Title Block — Lower Screen Placement over Reflection */}
+          {/* Main Title Block — Safely positioned above bottom controls to prevent overlap */}
           <div
-            className="absolute left-1/2 top-[64%] sm:top-[66%] md:top-[68%] -translate-x-1/2 text-center w-full max-w-4xl px-4"
+            className="absolute left-1/2 bottom-20 sm:bottom-24 md:bottom-28 -translate-x-1/2 text-center w-full max-w-4xl px-4"
             style={{ transform: `translate(-50%, ${(1 - state3Opacity) * 15}px)` }}
           >
             {/* Small Eyebrow Label */}
@@ -429,13 +423,10 @@ export default function HeroSection({ onOpenVisitModal, onExploreBikes }: HeroSe
               WELCOME TO HIRA AUTO AGENCY
             </p>
 
-            {/* Giant Slanted Headline: Two Lines */}
+            {/* Giant Slanted Headline: Two Lines — Clean Crisp Metallic White, No Blue Fog */}
             <h2 className="font-hero-headline text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] tracking-[-0.015em] leading-[0.92] mb-3 sm:mb-4">
               <span className="block hero-text-metallic-white">YOUR RIDE</span>
-              <span className="block">
-                <span className="hero-text-metallic-white">STARTS </span>
-                <span className="hero-text-electric-blue hero-text-glow-blue">HERE</span>
-              </span>
+              <span className="block hero-text-metallic-white">STARTS HERE</span>
             </h2>
 
             {/* Supporting Copy */}
