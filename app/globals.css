@@ -22,7 +22,7 @@
 }
 
 .hero-text-glow-blue {
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 0 10px rgba(0, 180, 255, 0.35), 0 3px 8px rgba(0, 0, 0, 0.85);
 }
 
 .hero-text-metallic-white {
@@ -33,10 +33,10 @@
 }
 
 .hero-text-electric-blue {
-  background: linear-gradient(180deg, #FFFFFF 0%, #E0F2FE 60%, #BAE6FD 100%);
+  background: linear-gradient(180deg, #00D5FF 0%, #00AAFF 32%, #0070FF 68%, #003CE8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.85));
+  filter: drop-shadow(0 0 7px rgba(0, 180, 255, 0.4)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.85));
 }
 
 :root {

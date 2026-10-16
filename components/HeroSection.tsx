@@ -284,9 +284,10 @@ export default function HeroSection({ onOpenVisitModal, onExploreBikes }: HeroSe
               WELCOME TO HIRA AUTO AGENCY
             </p>
 
-            {/* Giant Slanted Headline — Clean Crisp Metallic White, No Blue Fog */}
+            {/* Giant Slanted Headline — Electric Blue RIDE? */}
             <h1 className="font-hero-headline text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] tracking-[-0.015em] leading-[0.95] mb-3 sm:mb-4">
-              <span className="hero-text-metallic-white">READY TO RIDE?</span>
+              <span className="hero-text-metallic-white">READY TO </span>
+              <span className="hero-text-electric-blue">RIDE?</span>
             </h1>
 
             {/* Supporting Copy */}
@@ -342,9 +343,14 @@ export default function HeroSection({ onOpenVisitModal, onExploreBikes }: HeroSe
               WELCOME TO HIRA AUTO AGENCY
             </p>
 
-            {/* Giant Slanted Headline — Clean Crisp Metallic White, No Blue Fog */}
+            {/* Giant Slanted Headline with Speed-Streak Blur on "RIDE" */}
             <h2 className="font-hero-headline text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] tracking-[-0.015em] leading-[0.95] mb-3">
-              <span className="hero-text-metallic-white">FEEL THE RIDE</span>
+              <span className="hero-text-metallic-white">FEEL THE </span>
+              <span className="relative inline-block">
+                <span className="hero-text-electric-blue relative z-10">RIDE</span>
+                {/* Speed-Streak Motion Blur Trail */}
+                <span className="absolute -inset-y-1 left-2 sm:left-4 -right-8 sm:-right-14 bg-gradient-to-r from-[#00A3FF]/75 via-[#0080FF]/40 to-transparent blur-md pointer-events-none" />
+              </span>
             </h2>
 
             {/* Supporting Copy */}
@@ -423,10 +429,14 @@ export default function HeroSection({ onOpenVisitModal, onExploreBikes }: HeroSe
               WELCOME TO HIRA AUTO AGENCY
             </p>
 
-            {/* Giant Slanted Headline: Two Lines — Clean Crisp Metallic White, No Blue Fog */}
+            {/* Giant Slanted Headline: Two Lines */}
             <h2 className="font-hero-headline text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] tracking-[-0.015em] leading-[0.92] mb-3 sm:mb-4">
               <span className="block hero-text-metallic-white">YOUR RIDE</span>
-              <span className="block hero-text-metallic-white">STARTS HERE</span>
+              <span className="block">
+                <span className="hero-text-metallic-white">ST</span>
+                <span className="hero-text-electric-blue">ARTS</span>{' '}
+                <span className="hero-text-electric-blue">HERE</span>
+              </span>
             </h2>
 
             {/* Supporting Copy */}
